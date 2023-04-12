@@ -10,7 +10,7 @@ This is a template repo for a FastAPI project.
 - Microservice
 - Template
 - CI/CD
-- Docker and docker-compose
+- Docker and docker compose
 
 ---
 
@@ -26,7 +26,7 @@ For **standalone** environment:
 
 For **docker** environment:
 
-- Install **docker** and **docker-compose** - <https://docs.docker.com/engine/install>
+- Install **docker** and **docker compose** - <https://docs.docker.com/engine/install>
 
 For **development** environment:
 
@@ -182,12 +182,12 @@ cp -v .env.example .env
 # Edit environment variables:
 nano .env
 
-# Run docker-compose:
-docker-compose up -d && \
-    docker-compose logs -f --tail 100
+# Run docker compose:
+docker compose up -d && \
+    docker compose logs -f --tail 100
 
-# Stop docker-compose:
-docker-compose down
+# Stop docker compose:
+docker compose down
 ```
 
 :thumbsup: :sparkles:
