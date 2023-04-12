@@ -1,0 +1,116 @@
+# Build and publish docker image
+
+## 1. Set image namespace
+
+```sh
+export IMG_NAMESCAPE=[IMG_NAMESPACE]
+# For example:
+export IMG_NAMESCAPE=username
+```
+
+## 2. Build and push image
+
+**A.** **[RECOMMENDED]** Run **`build.sh`** script to build images:
+
+```sh
+# Run build script:
+./scripts/build.sh
+
+# -p=PLATFORM, --platform=PLATFORM          Build image type [amd64 | arm64]. Default is current platform.
+# -u, --push-images                         Enable pushing built images to Docker Registry.
+# -c, --clean-images                        Enable clearning leftover images.
+# -x, --cross-compile                       Enable cross compiling.
+# -b=BASE_IMAGE, --base-image=BASE_IMAGE    Base image name. Default is "debian:11.6-slim".
+# -n=NAMESPACE, --namespace=NAMESPACE       Docker image namespace.
+# -r=REPO, --repo=REPO                      Docker image repository. Default is "fastapi-template".
+# -v=VERSION, --version=VERSION             Docker image version. Default is "$(cat version.txt)".
+# -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".
+
+
+# For example:
+./scripts/build.sh -p=arm64 -u -c
+
+# Or:
+./scripts/build.sh -x
+
+# Or:
+./scripts/build.sh -p=arm64 -b=debian:11.6-slim -n=${IMG_NAMESCAPE} -r=fastapi-template -v=1.0.0 -s=-arm64 -u -c
+```
+
+**B.** Or docker build command:
+
+```sh
+# Build image:
+docker build \
+    [IMG_ARGS] \
+    --progress plain \
+    --platform [PLATFORM] \
+    -t $[IMG_FULLNAME] \
+    .
+# For example:
+docker build \
+    --progress plain \
+    -t ${IMG_NAMESCAPE}/fastapi-template:latest \
+    .
+
+# Push image to Docker Registry:
+docker push [IMG_FULLNAME]
+# For example:
+docker push ${IMG_NAMESCAPE}/fastapi-template:latest
+```
+
+**C.** Or docker buildx command (**cross-compile**):
+
+```sh
+# Create new builder:
+docker buildx create --driver docker-container --bootstrap --use --name new_builder
+
+# Build images and push to Docker Registry:
+docker buildx build \
+    [IMG_ARGS] \
+    --progress plain \
+    --platform linux/amd64,linux/arm64 \
+    --cache-from=type=registry,ref=[IMG_NAME]:cache-latest \
+    --cache-to=type=registry,ref=[IMG_NAME]:cache-latest,mode=max \
+    -t [IMG_FULLNAME] \
+    --push \
+    .
+# For example:
+docker buildx build \
+    --progress plain \
+    --platform linux/amd64,linux/arm64 \
+    --cache-from=type=registry,ref=${IMG_NAMESCAPE}/fastapi-template:cache-latest \
+    --cache-to=type=registry,ref=${IMG_NAMESCAPE}/fastapi-template:cache-latest,mode=max \
+    -t ${IMG_NAMESCAPE}/fastapi-template:latest \
+    --push \
+    .
+
+# Remove builder:
+docker buildx rm -f new_builder
+```
+
+**D.** Or docker-compose build command:
+
+```sh
+# Build image:
+docker-compose build
+
+# Push image to Docker Registry:
+docker-compose push
+```
+
+:thumbsup: :sparkles:
+
+---
+
+## References
+
+- <https://docs.docker.com/engine/reference/commandline/build>
+- <https://docs.docker.com/get-started/02_our_app>
+- <https://docs.docker.com/develop/develop-images/dockerfile_best-practices>
+- <https://docs.docker.com/language/python/build-images>
+- <https://codefresh.io/docker-tutorial/build-docker-image-dockerfiles>
+- <https://learnk8s.io/blog/smaller-docker-images>
+- <https://phoenixnap.com/kb/docker-image-size>
+- <https://semaphoreci.com/blog/2016/12/13/lightweight-docker-images-in-5-steps.html>
+- <https://medium.com/@gdiener/how-to-build-a-smaller-docker-image-76779e18d48a>

@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  fastapi:
+    image: ${IMG_NAMESCAPE}/fastapi-template:latest-gpu
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+    # env_file:
+    #   - .env
+    volumes:
+      - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
+      - "./app:/app/fastapi"
+      - "./volumes/.vscode-server:/home/fastapi/.vscode-server"
+    # deploy:
+    #   replicas: 0
+    #   resources:
+    #     limits:
+    #       cpus: "0.5"
+    #       memory: 512M
+    # command: ["/bin/bash"]

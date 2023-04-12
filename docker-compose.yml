@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  fastapi:
+    image: ${IMG_NAMESCAPE}/fastapi-template:latest
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      - TERM=${TERM:-xterm}
+      - TZ=${TZ:-Asia/Seoul}
+    volumes:
+      - "./volumes/storage/fastapi/data:/var/lib/fastapi"
+      - "./volumes/storage/fastapi/logs:/var/log/fastapi"
+    ports:
+      - "${FASTAPI_PORT:-8000}:${FASTAPI_PORT:-8000}"
+    tty: true

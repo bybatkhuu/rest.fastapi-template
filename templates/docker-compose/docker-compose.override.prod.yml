@@ -1,0 +1,13 @@
+version: "3.8"
+
+# services:
+#   fastapi:
+#     env_file:
+#       - .env
+#     deploy:
+#       replicas: 0
+#       resources:
+#         limits:
+#           cpus: "0.5"
+#           memory: 512M
+#     command: ["/bin/bash"]
