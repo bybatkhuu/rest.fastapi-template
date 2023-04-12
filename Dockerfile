@@ -83,10 +83,7 @@ ENV UID=${UID} \
 	DATA_DIR=${DATA_DIR} \
 	LOGS_DIR=${LOGS_DIR}
 
-ENV	LANG=en_US.UTF-8 \
-	LANGUAGE=en_US.UTF-8 \
-	LC_ALL=en_US.UTF-8 \
-	PYTHONIOENCODING=utf-8 \
+ENV	PYTHONIOENCODING=utf-8 \
 	PATH=/opt/conda/bin:${PATH}
 
 # Set the SHELL to bash with pipefail option
@@ -130,6 +127,10 @@ RUN rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/*
 	find ${LOGS_DIR} -type d -exec chmod -c 775 {} + && \
 	find ${LOGS_DIR} -type d -exec chmod -c +s {} + && \
 	rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/* /home/${USER}/.cache/*
+
+ENV LANG=en_US.UTF-8 \
+	LANGUAGE=en_US.UTF-8 \
+	LC_ALL=en_US.UTF-8
 
 COPY --from=builder --chown=${UID}:${GID} /opt /opt
 
