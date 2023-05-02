@@ -21,6 +21,7 @@ main()
 	find "${LOGS_DIR}" -type d -exec chmod +s {} + || exit 2
 	chmod ug+x "${APP_DIR}/main.py" || exit 2
 	echo "${USER} ALL=(ALL) ALL" | sudo tee -a "/etc/sudoers.d/${USER}" > /dev/null || exit 2
+	echo ""
 
 	## Parsing input:
 	case ${1:-} in

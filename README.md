@@ -111,8 +111,10 @@ Follow the one of below instructions based on your environment (A is recommended
 
 **IMPORTANT:** Please, check **[environment variables](#environment-variables)**!
 
+**A.** For **standalone** environment **[5.A ~ 5.D]**:
+
 ```sh
-# Copy .env.example file into .env file:
+# Copy `.env.example file` into `.env` file:
 cp -v .env.example app/.env
 
 # Edit environment variables to fit in your environment:
@@ -120,6 +122,16 @@ nano ./app/.env
 
 # Enter into app directory:
 cd app
+```
+
+**B.** For **docker** environment **[5.E]**:
+
+```sh
+# Copy `.env.example` file to `.env`:
+cp -v .env.example .env
+
+# Edit environment variables to fit in your environment:
+nano .env
 ```
 
 ### 5. Run the server
@@ -158,35 +170,55 @@ gunicorn -w=4 -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000 --reload
 **D.** **[RECOMMENDED]** Or run with **PM2**:
 
 ```bash
+## 1. Back to project directory:
 cd ..
 
+
+## 2. Configure PM2 configuration file.
+# TIP: Skip this step, if you've already configured.
 # Copy example PM2 configuration file:
 cp -v pm2-process.json.example pm2-process.json
 
-# Start PM2 process:
+# Edit PM2 configuration file to fit in your environment:
+nano pm2-process.json
+
+
+## 2. Start PM2 process:
 pm2 start ./pm2-process.json && \
     pm2 logs --lines 50
 
-# Stop PM2 process:
+
+## 3. Stop PM2 process:
 pm2 stop ./pm2-process.json && \
     pm2 delete ./pm2-process.json
 ```
 
 **E.** **[RECOMMENDED]** Or run with **Docker Compose**:
 
+**IMPORTANT:** Please, check **[arguments](#arguments)**!
+
 ```bash
-cd ..
+## 1. Configure `docker-compose.override.yml` file.
+# TIP: Skip this step, if you've already configured.
 
-# Copy .env.example file to .env:
-cp -v .env.example .env
-# Edit environment variables:
-nano .env
+# Set environment:
+export _ENV=[ENV]
+# For example for development environment:
+export _ENV=dev
 
-# Run docker compose:
+# Copy docker-compose.override.[ENV].yml into `docker-compose.override.yml` file:
+cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml docker-compose.override.yml
+
+# Edit `docker-compose.override.yml` file to fit in your environment:
+nano docker-compose.override.yml
+
+
+## 2. Run docker compose:
 docker compose up -d && \
     docker compose logs -f --tail 100
 
-# Stop docker compose:
+
+## 3. Stop docker compose:
 docker compose down
 ```
 
@@ -206,6 +238,27 @@ IMG_NAMESCAPE=username
 
 ## FastAPI port:
 FASTAPI_PORT=8000
+
+
+## Docker build arguments:
+# HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
+# IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
+```
+
+## Arguments
+
+You can use the following arguments to configure:
+
+```txt
+-b, --bash, bash, /bin/bash
+    Run only bash shell.
+```
+
+For example as in [**`docker-compose.override.yml`**](templates/docker-compose/docker-compose.override.dev.gpu.yml) file:
+
+```yml
+    command: ["/bin/bash"]
+    command: ["-b", "pwd && ls -al && /bin/bash"]
 ```
 
 ## Documentation
