@@ -176,6 +176,7 @@ cd ..
 
 ## 2. Configure PM2 configuration file.
 # TIP: Skip this step, if you've already configured.
+
 # Copy example PM2 configuration file:
 cp -v pm2-process.json.example pm2-process.json
 
@@ -183,12 +184,12 @@ cp -v pm2-process.json.example pm2-process.json
 nano pm2-process.json
 
 
-## 2. Start PM2 process:
+## 3. Start PM2 process:
 pm2 start ./pm2-process.json && \
     pm2 logs --lines 50
 
 
-## 3. Stop PM2 process:
+## 4. Stop PM2 process:
 pm2 stop ./pm2-process.json && \
     pm2 delete ./pm2-process.json
 ```
