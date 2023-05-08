@@ -16,7 +16,7 @@ This is a template repo for a FastAPI project.
 
 ## Getting started
 
-### Prerequisites
+### 1. Prerequisites
 
 For **standalone** environment:
 
