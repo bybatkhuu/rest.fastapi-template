@@ -22,18 +22,24 @@ fi
 ## --- Variables --- ##
 # Load from envrionment variables:
 BACKUPS_DIR="${BACKUPS_DIR:-./volumes/backups}"
+VERSION_FILENAME="${VERSION_FILENAME:-app/__version__.py}"
 ## --- Variables --- ##
 
 
 ## --- Main --- ##
 main()
 {
-	echoInfo "Creating backups of 'stack.nginx'..."
+	echoInfo "Creating backups of 'rest.fastapi'..."
 	if [ ! -d "${BACKUPS_DIR}" ]; then
 		mkdir -pv "${BACKUPS_DIR}" || exit 2
 	fi
 
-	tar -czpvf "${BACKUPS_DIR}/fastapi.$(date -u '+%y%m%d_%H%M%S').tar.gz" -C ./volumes ./storage || exit 2
+	_old_version="0.0.0-000000"
+	if [ -n "${VERSION_FILENAME}" ] && [ -f "${VERSION_FILENAME}" ]; then
+		_old_version=$(< "${VERSION_FILENAME}" grep "__version__ = " | awk -F' = ' '{print $2}' | tr -d '"') || exit 2
+	fi
+
+	tar -czpvf "${BACKUPS_DIR}/fastapi.v${_old_version}.$(date -u '+%y%m%d_%H%M%S').tar.gz" -C ./volumes ./storage || exit 2
 	echoOk "Done."
 }
 
