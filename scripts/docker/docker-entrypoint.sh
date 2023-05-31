@@ -12,7 +12,7 @@ _runFastAPI()
 
 main()
 {
-	chown -Rc "${USER}:${GROUP}" "${APP_DIR}" "${DATA_DIR}" "${LOGS_DIR}" || exit 2
+	sudo chown -Rc "${USER}:${GROUP}" "${APP_DIR}" "${DATA_DIR}" "${LOGS_DIR}" || exit 2
 	find "${APP_DIR}" "${DATA_DIR}" -type d -exec chmod 770 {} + || exit 2
 	find "${APP_DIR}" "${DATA_DIR}" -type f -exec chmod 660 {} + || exit 2
 	find "${APP_DIR}" "${DATA_DIR}" -type d -exec chmod ug+s {} + || exit 2
