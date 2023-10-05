@@ -1,19 +1,21 @@
 name: 2. Build and Publish
 
 on:
+  workflow_run:
+    workflows: ["1. Bump Version"]
+    types:
+      - completed
   push:
     tags:
-      - "v*.*.*-*"
-  pull_request:
-    tags:
-      - "v*.*.*-*"
-  workflow_dispatch:
+      - "v*.*.*"
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
   build_publish:
     name: Build and Publish
     runs-on: ubuntu-22.04
-    if: ${{ github.ref_type == 'tag' }}
     permissions:
       contents: read
       actions: write
@@ -40,7 +42,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Set version
-        run: echo "_VERSION=${GITHUB_REF_NAME#v}" >> ${GITHUB_ENV}
+        run: echo "_VERSION=$(./scripts/get-version.sh)" >> ${GITHUB_ENV}
       -
         name: Build and export
         uses: docker/build-push-action@v4
@@ -71,4 +73,4 @@ jobs:
         name: Trigger release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run 3.create-release.yml -r ${GITHUB_REF_NAME}
+        run: gh workflow run 3.create-release.yml -r v$(./scripts/get-version.sh)
