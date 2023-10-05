@@ -34,7 +34,8 @@ export COMPOSE_HTTP_TIMEOUT=43200
 ## --- Functions --- ##
 _doBuild()
 {
-	docker compose build || exit 2
+	./scripts/build.sh || exit 2
+	# docker compose build || exit 2
 }
 
 _doValidate()

@@ -254,8 +254,8 @@ You can use the following environment variables to configure:
 [**`.env.example`**](.env.example)
 
 ```sh
-ENV=development
-DEBUG=true
+ENV=local
+DEBUG=false
 
 # CHANGEME: Change project name with env variables prefix:
 ## FastAPI template settings:
