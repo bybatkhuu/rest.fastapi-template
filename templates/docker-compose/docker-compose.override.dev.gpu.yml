@@ -1,17 +1,18 @@
 version: "3.8"
 
 services:
-  fastapi:
-    image: ${IMG_NAMESCAPE}/fastapi-template:latest-gpu
+  fastapi-template: # CHANGEME: Change service name
+    image: ${IMG_NAMESCAPE}/fastapi-template:latest-gpu # CHANGEME: Change image name
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-all}
     # env_file:
     #   - .env
     volumes:
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
-      - "./app:/app/fastapi"
-      - "./volumes/.vscode-server:/home/fastapi/.vscode-server"
+      - "./fastapi_template:/app/fastapi_template" # CHANGEME: Change project directory
+      - "./volumes/.vscode-server:/home/fat-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:

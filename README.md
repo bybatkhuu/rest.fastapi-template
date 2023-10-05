@@ -18,15 +18,15 @@ This is a template repo for a FastAPI project.
 
 ### 1. Prerequisites
 
+For **docker** environment:
+
+- Install **docker** and **docker compose** - <https://docs.docker.com/engine/install>
+
 For **standalone** environment:
 
 - Install **Python (>= v3.9)**:
     - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/en/latest/miniconda.html>
     - *[OPTIONAL] venv* - <https://docs.python.org/3/library/venv.html>
-
-For **docker** environment:
-
-- Install **docker** and **docker compose** - <https://docs.docker.com/engine/install>
 
 For **development** environment:
 
@@ -52,35 +52,22 @@ export _REPO_OWNER=username
 
 **2.2.** Follow one of the below options **[A]** or **[B]**:
 
-**A.** Download source code from releases page:
-
-- Releases - <https://github.com/[REPO_OWNER]/rest.fastapi_template/releases>
+**A.** Or clone the repository (for development: git + ssh key):
 
 ```sh
-# Set to downloaded version:
-export _VERSION=[VERSION]
-# For example:
-export _VERSION=1.0.0
-
-mv -v ~/Downloads/rest.fastapi_template-${_VERSION}.zip . && \
-    unzip rest.fastapi_template-${_VERSION}.zip && \
-    rm -v rest.fastapi_template-${_VERSION}.zip && \
-    mv -v rest.fastapi_template-${_VERSION} rest.fastapi_template && \
-    cd rest.fastapi_template
+git clone git@github.com:${_REPO_OWNER}/rest.fastapi-template.git && cd rest.fastapi-template
 ```
 
-**B.** Or clone the repository (for development: git + ssh key):
-
-```sh
-git clone git@github.com:${_REPO_OWNER}/rest.fastapi_template.git && cd rest.fastapi_template
-```
+**B.** Download source code.
 
 ### 3. Install python dependencies
+
+**TIP:** Skip this step, if you're going to use **docker** environment.
 
 <!-- #### 3.1. Install base/common dependencies -->
 
 ```bash
-< ./requirements.txt grep -v '^#' | xargs -t -L 1 pip install --timeout 60 --no-cache-dir
+pip install -r ./requirements.txt
 ```
 
 <!-- #### 3.2. Install hardware specific dependencies
@@ -90,19 +77,19 @@ Follow the one of below instructions based on your environment (A is recommended
 **A.** For Intel/AMD **x86_64** CPU:
 
 ```bash
-< ./requirements.amd64.txt grep -v '^#' | xargs -t -L 1 pip install --timeout 60 --no-cache-dir
+pip install -r ./requirements.amd64.txt
 ```
 
 **B.** For **arm64/aarch64** CPU:
 
 ```bash
-< ./requirements.arm64.txt grep -v '^#' | xargs -t -L 1 pip install --timeout 60 --no-cache-dir
+pip install -r ./requirements.arm64.txt
 ```
 
 **C.** For **NVIDIA GPU** and **x86_64** CPU:
 
 ```bash
-< ./requirements.gpu.txt grep -v '^#' | xargs -t -L 1 pip install --timeout 60 --no-cache-dir
+pip install -r ./requirements.gpu.txt
 ``` -->
 
 ### 4. Configure environment variables
@@ -111,20 +98,7 @@ Follow the one of below instructions based on your environment (A is recommended
 
 **IMPORTANT:** Please, check **[environment variables](#environment-variables)**!
 
-**A.** For **standalone** environment **[5.A ~ 5.D]**:
-
-```sh
-# Copy `.env.example file` into `.env` file:
-cp -v .env.example app/.env
-
-# Edit environment variables to fit in your environment:
-nano ./app/.env
-
-# Enter into app directory:
-cd app
-```
-
-**B.** For **docker** environment **[5.E]**:
+#### **A.** **[RECOMMENDED]** For **docker** environment **[5.A]**
 
 ```sh
 # Copy `.env.example` file to `.env`:
@@ -134,67 +108,26 @@ cp -v .env.example .env
 nano .env
 ```
 
+#### **B.** For **standalone** environment **[5.B ~ 5.F]**
+
+```sh
+# Copy `.env.example file` into `.env` file:
+cp -v .env.example fastapi_template/.env
+
+# Edit environment variables to fit in your environment:
+nano ./fastapi_template/.env
+
+# Enter into app directory:
+cd fastapi_template
+```
+
 ### 5. Run the server
 
-Follow the one of below instructions based on your environment **[A, B, C, D, E]**:
+Follow the one of below instructions based on your environment **[A, B, C, D, E, F]**:
 
-**A.** Run server directly:
+#### Docker environment
 
-```bash
-# Run python server:
-python main.py
-```
-
-**B.** Or run server with **uvicorn**:
-
-```bash
-# Run uvicorn server:
-uvicorn main:app --host=[BIND_HOST] --port=[PORT] --no-access-log
-# For example:
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log
-# For development:
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --reload --reload-include="*.yml"
-```
-
-**C.** Or run server with **gunicorn**:
-
-```bash
-# Or run gunicorn server:
-gunicorn -w=[WORKER] -k=uvicorn.workers.UvicornWorker main:app -b=[BIND_HOST]:[PORT]
-# For example:
-gunicorn -w=4 -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000
-# For development:
-gunicorn -w=4 -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000 --reload
-```
-
-**D.** **[RECOMMENDED]** Or run with **PM2**:
-
-```bash
-## 1. Back to project directory:
-cd ..
-
-
-## 2. Configure PM2 configuration file.
-# TIP: Skip this step, if you've already configured.
-
-# Copy example PM2 configuration file:
-cp -v pm2-process.json.example pm2-process.json
-
-# Edit PM2 configuration file to fit in your environment:
-nano pm2-process.json
-
-
-## 3. Start PM2 process:
-pm2 start ./pm2-process.json && \
-    pm2 logs --lines 50
-
-
-## 4. Stop PM2 process:
-pm2 stop ./pm2-process.json && \
-    pm2 delete ./pm2-process.json
-```
-
-**E.** **[RECOMMENDED]** Or run with **Docker Compose**:
+**A.** **[RECOMMENDED]** Run with **Docker Compose**:
 
 **IMPORTANT:** Please, check **[arguments](#arguments)**!
 
@@ -214,13 +147,100 @@ cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml docker-comp
 nano docker-compose.override.yml
 
 
-## 2. Run docker compose:
+## 2. Check docker compose configuration is valid:
+./compose.sh validate
+# Or:
+docker compose config
+
+
+## 3. Run docker compose:
+./compose.sh start -l
+# Or:
 docker compose up -d && \
     docker compose logs -f --tail 100
 
 
 ## 3. Stop docker compose:
+./compose.sh stop
+# Or:
 docker compose down
+```
+
+#### Standalone environment (Process Manager)
+
+**B.** Or run with **PM2**:
+
+Before running, need to install **PM2**: <https://pm2.keymetrics.io/docs/usage/quick-start>
+
+```bash
+## 1. Configure PM2 configuration file.
+# TIP: Skip this step, if you've already configured.
+
+# Copy example PM2 configuration file:
+cp -v pm2-process.json.example pm2-process.json
+
+# Edit PM2 configuration file to fit in your environment:
+nano pm2-process.json
+
+
+## 2. Start PM2 process:
+pm2 start ./pm2-process.json && \
+    pm2 logs --lines 50 fastapi-template
+
+
+## 3. Stop PM2 process:
+pm2 stop ./pm2-process.json && \
+    pm2 flush && \
+    pm2 delete ./pm2-process.json
+```
+
+#### Standalone environment (Python)
+
+**C.** Or run server as **Python module**:
+
+```bash
+# Run server as python module:
+python -u -m fastapi_template
+```
+
+**D.** Or run server as **Python script**:
+
+```bash
+# Enter into project directory:
+cd fastapi_template
+
+# Run server as python script:
+python -u main.py
+```
+
+**E.** Run with **uvicorn**:
+
+```bash
+# Run uvicorn server:
+uvicorn fastapi_template.main:app --host=[BIND_HOST] --port=[PORT] --no-server-header --forwarded-allow-ips="*" --no-access-log
+
+# For example:
+uvicorn fastapi_template.main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log
+
+# For development:
+# Enter into project directory:
+cd fastapi_template
+uvicorn main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log --reload --reload-include="*.yml" --reload-include="*.yaml" --reload-include="*.json"
+```
+
+**F.** Or run with **gunicorn**:
+
+```bash
+# Or run gunicorn server:
+gunicorn -k=uvicorn.workers.UvicornWorker fastapi_template.main:app -b=[BIND_HOST]:[PORT] --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
+
+# For example:
+gunicorn -k=uvicorn.workers.UvicornWorker fastapi_template.main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
+
+# For development:
+# Enter into project directory:
+cd fastapi_template
+gunicorn -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*" --reload
 ```
 
 :thumbsup: :sparkles:
@@ -234,16 +254,25 @@ You can use the following environment variables to configure:
 [**`.env.example`**](.env.example)
 
 ```sh
+ENV=development
+DEBUG=true
+
+# CHANGEME: Change project name with env variables prefix:
+## FastAPI template settings:
+FASTAPI_TEMPLATE_APP__PORT=8000
+FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
+
 ## Docker image namespace:
-IMG_NAMESCAPE=username
-
-## FastAPI port:
-FASTAPI_PORT=8000
-
+IMG_NAMESCAPE=username # CHANGEME: Change docker image namespace (dockerhub username, or registry hostname)
 
 ## Docker build arguments:
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
+
+
+## Project variables:
+PROJECT_NAME=fastapi-template # CHANGEME: Change project name
+PROJECT_DIR_NAME=fastapi_template # CHANGEME: Change project directory name
 ```
 
 ## Arguments
@@ -260,6 +289,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP__PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation

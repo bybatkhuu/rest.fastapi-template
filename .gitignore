@@ -302,6 +302,7 @@ extra_configs
 pythonpath
 pm2-process.json
 sample.py
+example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml

@@ -9,18 +9,25 @@ cd "${_PROJECT_DIR}" || exit 2
 
 # Loading base script:
 # shellcheck disable=SC1091
-source "${_PROJECT_DIR}/scripts/base.sh"
+source ./scripts/base.sh
 
 exitIfNoDocker
-exitIfNotExists ".env"
+# exitIfNotExists ".env"
+
+# Loading .env file (if exists):
+if [ -f ".env" ]; then
+	# shellcheck disable=SC1091
+	source .env
+fi
 ## --- Base --- ##
 
 
 ## --- Variables --- ##
+# Load from envrionment variables:
+_DEFAULT_SERVICE="${PROJECT_NAME:-fastapi-template}" # CHANGEME: Change default service name
+
 # Extending timeout of docker compose logs:
 export COMPOSE_HTTP_TIMEOUT=43200
-
-_DEFAULT_SERVICE="fastapi"
 ## --- Variables --- ##
 
 
@@ -158,10 +165,10 @@ main()
 		validate | config)
 			shift
 			_doValidate;;
-		start | run)
+		start | run | up)
 			shift
 			_doStart "${@:-}";;
-		stop | remove | rm | delete | del | end)
+		stop | down | remove | rm | delete | del)
 			shift
 			_doStop "${@:-}";;
 		restart)

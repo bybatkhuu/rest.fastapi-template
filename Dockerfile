@@ -1,9 +1,12 @@
-ARG BASE_IMAGE=debian:11.6-slim
+ARG BASE_IMAGE=debian:12.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG APP_DIR="/app/fastapi"
-ARG DATA_DIR="/var/lib/fastapi"
-ARG LOGS_DIR="/var/log/fastapi"
+# CHANGEME: Change project directory:
+ARG APP_DIR="/app/fastapi_template"
+# CHANGEME: Change data directory:
+ARG DATA_DIR="/var/lib/fastapi_template"
+# CHANGEME: Change logs directory:
+ARG LOGS_DIR="/var/log/fastapi_template"
 
 
 # Here is the builder image
@@ -13,7 +16,7 @@ FROM ${BASE_IMAGE} as builder
 ARG DEBIAN_FRONTEND
 
 # ARG USE_GPU=false
-ARG PYTHON_VERSION=3.9.16
+ARG PYTHON_VERSION=3.9.18
 
 # Set the SHELL to bash with pipefail option
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -29,9 +32,9 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 		build-essential \
 		wget && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
-		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh; \
+		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
-		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh; \
+		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
 	else \
 		echo "Unsupported platform: ${_BUILD_TARGET_ARCH}" && \
 		exit 1; \
@@ -41,7 +44,7 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 	/opt/conda/condabin/conda clean -y -av && \
 	/opt/conda/condabin/conda update -y conda && \
 	/opt/conda/condabin/conda install -y python=${PYTHON_VERSION} pip && \
-	/opt/conda/bin/pip install --timeout 60 --no-cache-dir --upgrade pip && \
+	/opt/conda/bin/pip install --timeout 60 --no-cache-dir -U pip && \
 	/opt/conda/bin/pip cache purge && \
 	/opt/conda/condabin/conda clean -y -av
 
@@ -54,8 +57,8 @@ RUN	_BUILD_TARGET_ARCH=$(uname -m) && \
 	# elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
 	# 	export _REQUIRE_FILENAME=requirements.arm64.txt; \
 	# fi && \
-	# < "./${_REQUIRE_FILENAME}" grep -v '^#' | xargs -t -L 1 /opt/conda/bin/pip install --timeout 60 --no-cache-dir && \
-	< ./requirements.txt grep -v '^#' | xargs -t -L 1 /opt/conda/bin/pip install --timeout 60 --no-cache-dir && \
+	# /opt/conda/bin/pip install --timeout 60 --no-cache-dir -r "./${_REQUIRE_FILENAME}" && \
+	/opt/conda/bin/pip install --timeout 60 --no-cache-dir -r ./requirements.txt && \
 	/opt/conda/bin/pip cache purge && \
 	/opt/conda/condabin/conda clean -y -av
 
@@ -69,11 +72,14 @@ ARG APP_DIR
 ARG DATA_DIR
 ARG LOGS_DIR
 
+# CHANGEME: Change hashed password:
 ARG HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 ARG UID=1000
 ARG GID=11000
-ARG USER=fastapi
-ARG GROUP=fastapi
+# CHANGEME: Change user name:
+ARG USER=fat-user
+# CHANGEME: Change group name:
+ARG GROUP=fat-group
 
 ENV UID=${UID} \
 	GID=${GID} \
@@ -140,11 +146,12 @@ COPY --from=builder --chown=${UID}:${GID} /opt /opt
 FROM base as app
 
 WORKDIR ${APP_DIR}
-COPY --chown=${UID}:${GID} ./app ${APP_DIR}
+# CHANGEME: Change project root directory:
+COPY --chown=${UID}:${GID} ./fastapi_template ${APP_DIR}
 COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
-VOLUME ${DATA_DIR}
+# VOLUME ${DATA_DIR}
 
 USER ${UID}:${GID}
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_PORT:-8000} --no-access-log"]
+# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP__PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]

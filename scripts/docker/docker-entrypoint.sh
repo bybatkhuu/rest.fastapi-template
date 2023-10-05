@@ -2,10 +2,11 @@
 set -euo pipefail
 
 
-_runFastAPI()
+_doStart()
 {
 	sleep 1
-	uvicorn main:app --host=0.0.0.0 --port="${FASTAPI_PORT:-8000}" --no-access-log || exit 2
+	python -u main.py || exit 2
+	# uvicorn main:app --host=0.0.0.0 --port="${FASTAPI_TEMPLATE_APP__PORT:-8000}" --no-server-header --proxy-headers --forwarded-allow-ips="*" --no-access-log || exit 2
 	exit 0
 }
 
@@ -25,8 +26,8 @@ main()
 
 	## Parsing input:
 	case ${1:-} in
-		"" | -f | --fastapi | fastapi)
-			_runFastAPI;;
+		"" | -s | --start | start | --run | run)
+			_doStart;;
 			# shift;;
 
 		-b | --bash | bash | /bin/bash)
@@ -41,7 +42,7 @@ main()
 			exit 0;;
 		*)
 			echo "ERROR: Failed to parsing input -> ${*}"
-			echo "USAGE: ${0} -f, --fastapi, fastapi | -b, --bash, bash, /bin/bash"
+			echo "USAGE: ${0} -s, --start, start | -b, --bash, bash, /bin/bash"
 			exit 1;;
 	esac
 }

@@ -1,14 +1,12 @@
 {
-	"name": "fastapi-template",
-	"interpreter": "python",
-	"interpreter_args": "-u",
-	"cwd": "app",
-	"script": "app/main.py",
+	"name": "fastapi-template", // CHANGEME: Change project name
+	"interpreter": "/usr/bin/env",
+	"script": "python",
+	"args": "-u -m fastapi_template", // CHANGEME: Change project directory
 	"min_uptime": 5000,
 	"max_restarts": 3,
-	"watch": true,
-	"ignore_watch":
-	[
+	"watch": false,
+	"ignore_watch": [
 		"**/__pycache__/**",
 		"**/.ipynb_checkpoints/**",
 		"**/.git/**",
@@ -30,6 +28,7 @@
 		"**/logs/**",
 		"**/volumes/**",
 		"**/data/**",
+		"**/dataset/**",
 		"**/datasets/**",
 		"**/tmp/**",
 		"**/*.git*",
@@ -48,6 +47,7 @@
 		"**/*README",
 		"**/*readme",
 		"**/*sample.py",
+		"**/*example.py",
 		"**/*test.py",
 		"**/*setup.cfg",
 		"**/*setup.py",
@@ -56,8 +56,7 @@
 		"**/*.editorconfig",
 		"**/*.markdownlint.json"
 	],
-	"watch_options":
-	{
+	"watch_options": {
 		"followSymlinks": false
 	}
 }
