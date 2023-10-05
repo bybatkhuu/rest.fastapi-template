@@ -153,7 +153,7 @@ nano docker-compose.override.yml
 docker compose config
 
 
-## 3. Run docker compose:
+## 3. Start docker compose:
 ./compose.sh start -l
 # Or:
 docker compose up -d && \
