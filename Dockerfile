@@ -32,7 +32,7 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 		build-essential \
 		wget && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
-		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh; \
+		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
 		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
 	else \
@@ -40,7 +40,7 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 		exit 1; \
 	fi && \
 	wget -nv --show-progress --progress=bar:force:noscroll "${_MINICONDA_URL}" -O /root/miniconda.sh && \
-	/bin/bash /root/miniconda.sh -b -p /opt/conda && \
+	/bin/bash /root/miniconda.sh -b -u -p /opt/conda && \
 	/opt/conda/condabin/conda clean -y -av && \
 	/opt/conda/condabin/conda update -y conda && \
 	/opt/conda/condabin/conda install -y python=${PYTHON_VERSION} pip && \
