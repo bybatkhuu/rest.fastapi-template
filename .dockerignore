@@ -276,6 +276,7 @@ pyrightconfig.json
 
 # Directories:
 .git
+.env
 
 # Files:
 **/*.gitkeep
@@ -286,3 +287,4 @@ pyrightconfig.json
 **/*.env
 **/*.pyo
 **/*.pyd
+**/*.bak
