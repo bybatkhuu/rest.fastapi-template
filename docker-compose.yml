@@ -1,18 +1,18 @@
 version: "3.8"
 
 services:
-  fastapi:
-    image: ${IMG_NAMESCAPE}/fastapi-template:latest
+  fastapi-template: # CHANGEME: Change service name
+    image: ${IMG_NAMESCAPE}/fastapi-template:latest # CHANGEME: Change image name
     build:
       context: .
     restart: unless-stopped
     environment:
       - TERM=${TERM:-xterm}
       - TZ=${TZ:-Asia/Seoul}
-      - FASTAPI_PORT=${FASTAPI_PORT:-8000}
+      - FASTAPI_TEMPLATE_APP__PORT=${FASTAPI_TEMPLATE_APP__PORT:-8000} # CHANGEME: Change env variable prefix
     volumes:
-      - "./volumes/storage/fastapi/data:/var/lib/fastapi"
-      - "./volumes/storage/fastapi/logs:/var/log/fastapi"
+      - "./volumes/storage/fastapi_template/data:/var/lib/fastapi_template" # CHANGEME: Change data directory and mount path
+      - "./volumes/storage/fastapi_template/logs:/var/log/fastapi_template" # CHANGEME: Change logs directory and mount path
     ports:
-      - "${FASTAPI_PORT:-8000}:${FASTAPI_PORT:-8000}"
+      - "${FASTAPI_TEMPLATE_APP__PORT:-8000}:${FASTAPI_TEMPLATE_APP__PORT:-8000}" # CHANGEME: Change env variable prefix
     tty: true

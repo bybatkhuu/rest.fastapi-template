@@ -1,0 +1,14 @@
+dev:
+  reload: false
+  reload_includes: ["*.json", "*.yml", "*.yaml"]
+  reload_excludes:
+    [
+      "*.pyc",
+      "*.pyo",
+      "__pycache__",
+      "*.git",
+      ".github",
+      "*.svn",
+      "*.hg",
+      "*.log",
+    ]

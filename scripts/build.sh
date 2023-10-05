@@ -9,11 +9,11 @@ cd "${_PROJECT_DIR}" || exit 2
 
 # Loading base script:
 # shellcheck disable=SC1091
-source "${_SCRIPT_DIR}/base.sh"
+source ./scripts/base.sh
 
 exitIfNoDocker
 
-# Loading .env file:
+# Loading .env file (if exists):
 if [ -f ".env" ]; then
 	# shellcheck disable=SC1091
 	source .env
@@ -24,9 +24,9 @@ fi
 ## --- Variables --- ##
 # Load from envrionment variables:
 # BASE_IMAGE
-IMG_NAMESCAPE=${IMG_NAMESCAPE:-}
-IMG_REPO=${IMG_REPO:-fastapi-template}
-IMG_VERSION=${IMG_VERSION:-$(< app/__version__.py grep "__version__ = " | awk -F' = ' '{print $2}' | tr -d '"')}
+IMG_NAMESCAPE=${IMG_NAMESCAPE:-username} # CHANGEME: Change docker image namespace (dockerhub username, or registry hostname)
+IMG_REPO=${PROJECT_NAME:-fastapi-template} # CHANGEME: Change project repo name
+IMG_VERSION=${IMG_VERSION:-$(./scripts/get-version.sh)}
 IMG_SUBTAG=${IMG_SUBTAG:-}
 IMG_PLATFORM=${IMG_PLATFORM:-$(uname -m)}
 

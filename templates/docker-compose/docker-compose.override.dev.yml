@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  fastapi:
+  fastapi-template: # CHANGEME: Change service name
     # env_file:
     #   - .env
     volumes:
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
-      - "./app:/app/fastapi"
-      - "./volumes/.vscode-server:/home/fastapi/.vscode-server"
+      - "./fastapi_template:/app/fastapi_template" # CHANGEME: Change project directory
+      - "./volumes/.vscode-server:/home/fat-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:
