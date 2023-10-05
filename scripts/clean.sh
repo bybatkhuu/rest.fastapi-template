@@ -67,7 +67,7 @@ main()
 	rm -rfv .coverage || exit 2
 
 	if [ "${_IS_ALL}" == true ]; then
-		rm -rfv ./volumes/.vscode-server/* || exit 2
+		rm -rf ./volumes/.vscode-server/* || exit 2
 		rm -rfv ./volumes/backups || exit 2
 	fi
 
