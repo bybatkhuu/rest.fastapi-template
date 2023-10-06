@@ -9,10 +9,10 @@ services:
     environment:
       - TERM=${TERM:-xterm}
       - TZ=${TZ:-Asia/Seoul}
-      - FASTAPI_TEMPLATE_APP__PORT=${FASTAPI_TEMPLATE_APP__PORT:-8000} # CHANGEME: Change env variable prefix
+      - FASTAPI_TEMPLATE_APP_PORT=${FASTAPI_TEMPLATE_APP_PORT:-8000} # CHANGEME: Change env variable prefix
     volumes:
-      - "./volumes/storage/fastapi_template/data:/var/lib/fastapi_template" # CHANGEME: Change data directory and mount path
-      - "./volumes/storage/fastapi_template/logs:/var/log/fastapi_template" # CHANGEME: Change logs directory and mount path
+      - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template" # CHANGEME: Change data directory and mount path
+      - "./volumes/storage/fastapi-template/logs:/var/log/fastapi-template" # CHANGEME: Change logs directory and mount path
     ports:
-      - "${FASTAPI_TEMPLATE_APP__PORT:-8000}:${FASTAPI_TEMPLATE_APP__PORT:-8000}" # CHANGEME: Change env variable prefix
+      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}" # CHANGEME: Change env variable prefix
     tty: true

@@ -4,7 +4,7 @@
 import os
 import sys
 
-os.chdir("./fastapi_template")  # CHANGEME: Change project directory name
+os.chdir("./app")
 sys.path.append(os.getcwd())
 
 ## Internal modules

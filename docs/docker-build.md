@@ -23,7 +23,7 @@ export IMG_NAMESCAPE=username
 # -b=BASE_IMAGE, --base-image=BASE_IMAGE    Base image name. Default is "debian:12.1-slim".
 # -n=NAMESPACE, --namespace=NAMESPACE       Docker image namespace.
 # -r=REPO, --repo=REPO                      Docker image repository. Default is "fastapi-template". # CHANGEME: Change project name
-# -v=VERSION, --version=VERSION             Docker image version. Default read from "fastapi_template/__version__.py" file. # CHANGEME: Change project directory
+# -v=VERSION, --version=VERSION             Docker image version. Default read from "app/__version__.py" file.
 # -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".
 
 

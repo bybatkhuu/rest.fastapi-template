@@ -2,13 +2,16 @@
 
 from typing import List, Dict, Any, Optional
 
-from pydantic import Field, constr
+from pydantic import Field, constr, root_validator, validator
 
 from beans_logging import LoggerConfigPM
 
 from src.core.constants.base import EnvEnum, CORSMethodEnum
-from .base import FrozenBaseConfig
+from .base import FrozenBaseConfig, BaseConfig
 from __version__ import __version__
+
+
+_ENV_PREFIX = "FASTAPI_TEMPLATE_"  # CHANGEME: Change project env variables prefix
 
 
 # App config schema:
@@ -23,7 +26,7 @@ class AppConfig(FrozenBaseConfig):
     )
     port: int = Field(default=8000, ge=80, lt=65536)
     tz: constr(strip_whitespace=True) = Field(
-        default="UTC", min_length=2, max_length=127
+        default="UTC", min_length=2, max_length=127, env="TZ"
     )
     version: constr(strip_whitespace=True) = Field(
         default=__version__, min_length=3, max_length=31
@@ -35,6 +38,19 @@ class AppConfig(FrozenBaseConfig):
     behind_proxy: bool = Field(default=True)
     behind_cf_proxy: bool = Field(default=False)
     gzip_min_size: int = Field(default=512, ge=0, le=10_485_760)
+
+    @validator("api_prefix", always=True)
+    def _check_api_prefix(cls, val: Any, values: dict):
+        if (
+            isinstance(val, str)
+            and ("{api_version}" in val)
+            and ("api_version" in values)
+        ):
+            val = val.format(api_version=values["api_version"])
+        return val
+
+    class Config:
+        env_prefix = f"{_ENV_PREFIX}APP_"
 
 
 class CorsConfig(FrozenBaseConfig):
@@ -54,6 +70,9 @@ class CorsConfig(FrozenBaseConfig):
     ] = Field(default=[])
     max_age: int = Field(default=600, ge=0, le=86_400)
 
+    class Config:
+        env_prefix = f"{_ENV_PREFIX}SECURE_CORS_"
+
 
 class SecureConfig(FrozenBaseConfig):
     allowed_hosts: List[
@@ -62,10 +81,13 @@ class SecureConfig(FrozenBaseConfig):
     forwarded_allow_ips: List[
         constr(strip_whitespace=True, min_length=1, max_length=253)
     ] = Field(default=["*"])
-    cors: CorsConfig = Field(CorsConfig())
+    cors: CorsConfig = Field(default_factory=CorsConfig)
+
+    class Config:
+        env_prefix = f"{_ENV_PREFIX}SECURE_"
 
 
-class DevConfig(FrozenBaseConfig):
+class DevConfig(BaseConfig):
     reload: bool = Field(default=False)
     reload_includes: Optional[
         List[constr(strip_whitespace=True, min_length=1, max_length=255)]
@@ -74,8 +96,16 @@ class DevConfig(FrozenBaseConfig):
         List[constr(strip_whitespace=True, min_length=1, max_length=255)]
     ] = Field(default=None)
 
+    class Config:
+        env_prefix = f"{_ENV_PREFIX}DEV_"
 
-class DocsConfig(FrozenBaseConfig):
+
+class FrozenDevConfig(DevConfig):
+    class Config:
+        frozen = True
+
+
+class DocsConfig(BaseConfig):
     enabled: bool = Field(default=True)
     openapi_url: Optional[
         constr(strip_whitespace=True, min_length=8, max_length=127)
@@ -101,6 +131,24 @@ class DocsConfig(FrozenBaseConfig):
     openapi_tags: Optional[List[Dict[str, Any]]] = Field(default=None)
     swagger_ui_parameters: Optional[Dict[str, Any]] = Field(default=None)
 
+    class Config:
+        env_prefix = f"{_ENV_PREFIX}DOCS_"
+
+    @root_validator(skip_on_failure=True)
+    def _check_enabled(cls, values: dict):
+        if "enabled" in values:
+            if not values["enabled"]:
+                values["openapi_url"] = None
+                values["docs_url"] = None
+                values["redoc_url"] = None
+                values["swagger_ui_oauth2_redirect_url"] = None
+        return values
+
+
+class FrozenDocsConfig(DocsConfig):
+    class Config:
+        frozen = True
+
 
 # Main config schema:
 class ConfigSchema(FrozenBaseConfig):
@@ -113,10 +161,47 @@ class ConfigSchema(FrozenBaseConfig):
     logger: LoggerConfigPM = Field(default_factory=LoggerConfigPM)
 
     class Config:
-        env_prefix = (
-            "FASTAPI_TEMPLATE_"  # CHANGEME: Change project env variables prefix
-        )
+        env_prefix = f"{_ENV_PREFIX}"
         env_nested_delimiter = "__"
+
+    @validator("docs", always=True)
+    def _check_docs_url_prefix(cls, val: DocsConfig, values: dict):
+        if val.enabled:
+            if "{api_prefix}" in val.openapi_url:
+                val.openapi_url = val.openapi_url.format(
+                    api_prefix=values["app"].api_prefix
+                )
+
+            if "{api_prefix}" in val.docs_url:
+                val.docs_url = val.docs_url.format(api_prefix=values["app"].api_prefix)
+
+            if "{api_prefix}" in val.redoc_url:
+                val.redoc_url = val.redoc_url.format(
+                    api_prefix=values["app"].api_prefix
+                )
+
+            if "{api_prefix}" in val.swagger_ui_oauth2_redirect_url:
+                val.swagger_ui_oauth2_redirect_url = (
+                    val.swagger_ui_oauth2_redirect_url.format(
+                        api_prefix=values["app"].api_prefix
+                    )
+                )
+
+        val = FrozenDocsConfig(**val.dict())
+        return val
+
+    @validator("dev", always=True)
+    def _check_dev_reload(cls, val: DevConfig, values: dict):
+        if values["env"] == EnvEnum.DEVELOPMENT:
+            val.reload = True
+
+        val = FrozenDevConfig(**val.dict())
+        return val
+
+    @validator("logger", always=True)
+    def _check_logger_app_name(cls, val: LoggerConfigPM, values: dict):
+        val.app_name = values["app"].name.replace(" ", "_").lower()
+        return val
 
 
 __all__ = [

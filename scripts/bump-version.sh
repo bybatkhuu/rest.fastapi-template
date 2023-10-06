@@ -22,11 +22,10 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-PROJECT_DIR_NAME="${PROJECT_DIR_NAME:-fastapi_template}" # CHANGEME: Change project directory name
 VERSION_FILENAME="${VERSION_FILENAME:-__version__.py}"
 
 # Calculated variables:
-VERSION_FILE_PATH="${PROJECT_DIR_NAME}/${VERSION_FILENAME}"
+VERSION_FILE_PATH="app/${VERSION_FILENAME}"
 
 
 _BUMP_TYPE=""
