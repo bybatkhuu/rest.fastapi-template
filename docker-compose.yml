@@ -9,6 +9,8 @@ services:
     environment:
       - TERM=${TERM:-xterm}
       - TZ=${TZ:-Asia/Seoul}
+      - ENV=${ENV:-local}
+      - DEBUG=${DEBUG:-false}
       - FASTAPI_TEMPLATE_APP_PORT=${FASTAPI_TEMPLATE_APP_PORT:-8000} # CHANGEME: Change env variable prefix
     volumes:
       - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template" # CHANGEME: Change data directory and mount path
