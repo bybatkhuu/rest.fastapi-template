@@ -104,6 +104,14 @@ class FrozenDevConfig(DevConfig):
     class Config:
         frozen = True
 
+    @root_validator(skip_on_failure=True)
+    def _check_reload(cls, values: dict):
+        if "reload" in values:
+            if not values["reload"]:
+                values["reload_includes"] = None
+                values["reload_excludes"] = None
+        return values
+
 
 class DocsConfig(BaseConfig):
     enabled: bool = Field(default=True)
@@ -200,7 +208,7 @@ class ConfigSchema(FrozenBaseConfig):
 
     @validator("logger", always=True)
     def _check_logger_app_name(cls, val: LoggerConfigPM, values: dict):
-        val.app_name = values["app"].name.replace(" ", "_").lower()
+        val.app_name = values["app"].name.replace(" ", "-").lower()
         return val
 
 
