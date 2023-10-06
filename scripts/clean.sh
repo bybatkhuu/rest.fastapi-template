@@ -21,7 +21,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-PROJECT_DIR_NAME="${PROJECT_DIR_NAME:-fastapi_template}" # CHANGEME: Change project directory name
+PROJECT_NAME="${PROJECT_NAME:-fastapi-template}" # CHANGEME: Change project name
 
 # Flags:
 _IS_ALL=false
@@ -61,7 +61,8 @@ main()
 	find . -type d -name "__pycache__" -exec rm -rfv {} + || exit 2
 	find . -type d -name ".git" -prune -o -type d -name "logs" -exec rm -rfv {} + || exit 2
 
-	rm -rfv "./volumes/storage/${PROJECT_DIR_NAME}/data/*" || exit 2
+	rm -rfv "./volumes/storage/${PROJECT_NAME}/*" || exit 2
+	# rm -rfv ./logs || exit 2
 	rm -rfv .benchmarks || exit 2
 	rm -rfv .pytest_cache || exit 2
 	rm -rfv .coverage || exit 2

@@ -2,7 +2,7 @@
 	"name": "fastapi-template", // CHANGEME: Change project name
 	"interpreter": "/usr/bin/env",
 	"script": "python",
-	"args": "-u -m fastapi_template", // CHANGEME: Change project directory
+	"args": "-u -m app",
 	"min_uptime": 5000,
 	"max_restarts": 3,
 	"watch": false,

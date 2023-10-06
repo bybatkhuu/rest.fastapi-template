@@ -68,8 +68,14 @@ _doStop()
 
 _doRestart()
 {
-	_doStop "${@:-}" || exit 2
-	_doStart "${@:-}" || exit 2
+	if [ "${1:-}" == "-l" ]; then
+		shift
+		_doStop "${@:-}" || exit 2
+		_doStart -l "${@:-}" || exit 2
+	else
+		_doStop "${@:-}" || exit 2
+		_doStart "${@:-}" || exit 2
+	fi
 	# docker compose restart ${@:-} || exit 2
 }
 

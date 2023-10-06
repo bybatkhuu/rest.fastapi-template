@@ -146,7 +146,7 @@
 	"python.languageServer": "Pylance",
 	"python.analysis.extraPaths":
 	[
-		"${workspaceFolder}/fastapi_template" // CHANGEME: Change to your project root.
-		// "${workspaceFolder}/fastapi_template/src/modules" // CHANGEME: Change to your project root.
+		"${workspaceFolder}/app"
+		// "${workspaceFolder}/app/src/modules"
 	]
 }

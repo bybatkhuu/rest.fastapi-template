@@ -112,13 +112,13 @@ nano .env
 
 ```sh
 # Copy `.env.example file` into `.env` file:
-cp -v .env.example fastapi_template/.env
+cp -v .env.example app/.env
 
 # Edit environment variables to fit in your environment:
-nano ./fastapi_template/.env
+nano ./app/.env
 
 # Enter into app directory:
-cd fastapi_template
+cd app
 ```
 
 ### 5. Run the server
@@ -200,14 +200,14 @@ pm2 stop ./pm2-process.json && \
 
 ```bash
 # Run server as python module:
-python -u -m fastapi_template
+python -u -m app
 ```
 
 **D.** Or run server as **Python script**:
 
 ```bash
 # Enter into project directory:
-cd fastapi_template
+cd app
 
 # Run server as python script:
 python -u main.py
@@ -217,14 +217,14 @@ python -u main.py
 
 ```bash
 # Run uvicorn server:
-uvicorn fastapi_template.main:app --host=[BIND_HOST] --port=[PORT] --no-server-header --forwarded-allow-ips="*" --no-access-log
+uvicorn app.main:app --host=[BIND_HOST] --port=[PORT] --no-server-header --forwarded-allow-ips="*" --no-access-log
 
 # For example:
-uvicorn fastapi_template.main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log
+uvicorn app.main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log
 
 # For development:
 # Enter into project directory:
-cd fastapi_template
+cd app
 uvicorn main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log --reload --reload-include="*.yml" --reload-include="*.yaml" --reload-include="*.json"
 ```
 
@@ -232,14 +232,14 @@ uvicorn main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow
 
 ```bash
 # Or run gunicorn server:
-gunicorn -k=uvicorn.workers.UvicornWorker fastapi_template.main:app -b=[BIND_HOST]:[PORT] --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
+gunicorn -k=uvicorn.workers.UvicornWorker app.main:app -b=[BIND_HOST]:[PORT] --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
 
 # For example:
-gunicorn -k=uvicorn.workers.UvicornWorker fastapi_template.main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
+gunicorn -k=uvicorn.workers.UvicornWorker app.main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
 
 # For development:
 # Enter into project directory:
-cd fastapi_template
+cd app
 gunicorn -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*" --reload
 ```
 
@@ -259,7 +259,7 @@ DEBUG=false
 
 # CHANGEME: Change project name with env variables prefix:
 ## FastAPI template settings:
-FASTAPI_TEMPLATE_APP__PORT=8000
+FASTAPI_TEMPLATE_APP_PORT=8000
 FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
 
 ## Docker image namespace:
@@ -272,7 +272,6 @@ IMG_NAMESCAPE=username # CHANGEME: Change docker image namespace (dockerhub user
 
 ## Project variables:
 PROJECT_NAME=fastapi-template # CHANGEME: Change project name
-PROJECT_DIR_NAME=fastapi_template # CHANGEME: Change project directory name
 ```
 
 ## Arguments
@@ -289,7 +288,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP__PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation

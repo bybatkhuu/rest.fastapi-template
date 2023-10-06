@@ -2,11 +2,11 @@ ARG BASE_IMAGE=debian:12.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
 # CHANGEME: Change project directory:
-ARG APP_DIR="/app/fastapi_template"
+ARG APP_DIR="/app/fastapi-template"
 # CHANGEME: Change data directory:
-ARG DATA_DIR="/var/lib/fastapi_template"
+ARG DATA_DIR="/var/lib/fastapi-template"
 # CHANGEME: Change logs directory:
-ARG LOGS_DIR="/var/log/fastapi_template"
+ARG LOGS_DIR="/var/log/fastapi-template"
 
 
 # Here is the builder image
@@ -146,12 +146,11 @@ COPY --from=builder --chown=${UID}:${GID} /opt /opt
 FROM base as app
 
 WORKDIR ${APP_DIR}
-# CHANGEME: Change project root directory:
-COPY --chown=${UID}:${GID} ./fastapi_template ${APP_DIR}
+COPY --chown=${UID}:${GID} ./app ${APP_DIR}
 COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
 # VOLUME ${DATA_DIR}
 
 USER ${UID}:${GID}
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='${FASTAPI_TEMPLATE_APP__PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='${FASTAPI_TEMPLATE_APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
