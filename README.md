@@ -1,4 +1,4 @@
-# FastAPI template
+# {{cookiecutter.project_name}}
 
 This is a template repo for a FastAPI project.
 

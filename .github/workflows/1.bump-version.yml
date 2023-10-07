@@ -22,8 +22,8 @@ jobs:
           fetch-depth: 0
       - name: Bump version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          ./scripts/bump-version.sh -b=${{ inputs.bump_type }} -c -p
+          ./scripts/bump-version.sh -b={% raw %}${{ inputs.bump_type }}{% endraw %} -c -p
