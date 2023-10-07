@@ -7,15 +7,9 @@ on:
     workflows: ["1. Bump Version"]
     types:
       - completed
-    branches-ignore:
-      - cookiecutter
   push:
-    branches:
-      - main
     tags:
       - "v*.*.*"
-    branches-ignore:
-      - cookiecutter
   # pull_request:
   #   branches:
   #     - main
