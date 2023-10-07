@@ -1,0 +1,9 @@
+exceptiongroup>=1.1.3,<2.0.0
+sniffio>=1.3.0,<2.0.0
+packaging>=23.1,<28.0
+certifi>=2023.7.22,<2028.0.0
+onion-config[pydantic-v1]==5.1.0
+beans-logging==4.3.2
+gunicorn==21.2.0
+uvicorn[standard]==0.23.2
+fastapi[all]==0.99.1
