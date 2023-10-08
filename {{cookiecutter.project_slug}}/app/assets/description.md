@@ -1,4 +1,4 @@
-FastAPI template project for building RESTful API services.
+{{cookiecutter.project_name}} project for building RESTful API services
 
 ## Features
 

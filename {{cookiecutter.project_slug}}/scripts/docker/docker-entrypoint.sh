@@ -6,7 +6,7 @@ _doStart()
 {
 	sleep 1
 	python -u main.py || exit 2
-	# uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log || exit 2
+	# uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log || exit 2
 	exit 0
 }
 

@@ -11,3 +11,4 @@ app:
   behind_proxy: true
   behind_cf_proxy: true
   gzip_min_size: 1024 # Bytes (1KB)
+  data_dir: "/var/lib/{{cookiecutter.project_slug}}"

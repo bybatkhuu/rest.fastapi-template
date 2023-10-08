@@ -4,7 +4,7 @@
 	"project_summary": "This is a {{cookiecutter.project_name}} project",
 	"project_description": "",
 	"project_slug": "{{cookiecutter.project_name.lower().strip().replace(' ', '-').replace('_', '-').replace('.', '-')}}",
-	"env_prefix": "{{cookiecutter.project_slug.upper().replace('-', '_')}}",
+	"env_prefix": "{{cookiecutter.project_slug.upper().replace('-', '_')}}_",
 	"repo_username": "username",
 	"github_username": "{{cookiecutter.repo_username}}",
 	"docker_registry": "{{cookiecutter.repo_username}}",

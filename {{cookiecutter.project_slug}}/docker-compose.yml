@@ -11,10 +11,10 @@ services:
       - TZ=${TZ:-{{cookiecutter.timezone}}}
       - ENV=${ENV:-local}
       - DEBUG=${DEBUG:-false}
-      - {{cookiecutter.env_prefix}}_APP_PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}
+      - {{cookiecutter.env_prefix}}APP_PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}
     volumes:
       - "./volumes/storage/{{cookiecutter.project_slug}}/data:/var/lib/{{cookiecutter.project_slug}}"
       - "./volumes/storage/{{cookiecutter.project_slug}}/logs:/var/log/{{cookiecutter.project_slug}}"
     ports:
-      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}"
+      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}"
     tty: true

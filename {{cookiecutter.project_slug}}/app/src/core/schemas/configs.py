@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 from typing import List, Dict, Any, Optional
 
 from pydantic import Field, constr, root_validator, validator
@@ -11,7 +12,7 @@ from .base import FrozenBaseConfig, BaseConfig
 from __version__ import __version__
 
 
-_ENV_PREFIX = "{{cookiecutter.env_prefix}}_"
+_ENV_PREFIX = "{{cookiecutter.env_prefix}}"
 
 
 # App config schema:
@@ -38,6 +39,9 @@ class AppConfig(FrozenBaseConfig):
     behind_proxy: bool = Field(default=True)
     behind_cf_proxy: bool = Field(default=False)
     gzip_min_size: int = Field(default=512, ge=0, le=10_485_760)
+    data_dir: constr(strip_whitespace=True) = Field(
+        default="/var/lib/{{cookiecutter.project_slug}}", min_length=2, max_length=1023
+    )
 
     @validator("api_prefix", always=True)
     def _check_api_prefix(cls, val: Any, values: dict):
@@ -142,6 +146,14 @@ class DocsConfig(BaseConfig):
     class Config:
         env_prefix = f"{_ENV_PREFIX}DOCS_"
 
+    @validator("description", always=True)
+    def _check_description(cls, val: Any):
+        _desc_path = "./assets/description.md"
+        if not val and os.path.isfile(_desc_path):
+            with open(_desc_path, "r") as _file:
+                val = _file.read()
+        return val
+
     @root_validator(skip_on_failure=True)
     def _check_enabled(cls, values: dict):
         if "enabled" in values:
@@ -206,10 +218,10 @@ class ConfigSchema(FrozenBaseConfig):
         val = FrozenDevConfig(**val.dict())
         return val
 
-    @validator("logger", always=True)
-    def _check_logger_app_name(cls, val: LoggerConfigPM, values: dict):
-        val.app_name = values["app"].name.replace(" ", "-").lower()
-        return val
+    # @validator("logger", always=True)
+    # def _check_logger_app_name(cls, val: LoggerConfigPM, values: dict):
+    #     val.app_name = values["app"].name.strip().lower().replace(" ", "-")
+    #     return val
 
 
 __all__ = [

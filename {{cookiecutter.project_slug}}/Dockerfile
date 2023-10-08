@@ -31,7 +31,8 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
-		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
+		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-aarch64.sh; \
+		# export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
 	else \
 		echo "Unsupported platform: ${_BUILD_TARGET_ARCH}" && \
 		exit 1; \
@@ -148,4 +149,4 @@ COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
 USER ${UID}:${GID}
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]

@@ -253,8 +253,9 @@ DEBUG=false
 #TZ=UTC
 
 ## FastAPI template settings:
-{{cookiecutter.env_prefix}}_APP_PORT=8000
-{{cookiecutter.env_prefix}}_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
+{{cookiecutter.env_prefix}}APP_PORT=8000
+{{cookiecutter.env_prefix}}APP_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
+{{cookiecutter.env_prefix}}LOGGER__FILE__LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
 
 ## Docker build arguments:
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
@@ -275,7 +276,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation
