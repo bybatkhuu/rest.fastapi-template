@@ -24,8 +24,8 @@ fi
 ## --- Variables --- ##
 # Load from envrionment variables:
 # BASE_IMAGE
-IMG_NAMESCAPE=${IMG_NAMESCAPE:-username} # CHANGEME: Change docker image namespace (dockerhub username, or registry hostname)
-IMG_REPO=${PROJECT_NAME:-fastapi-template} # CHANGEME: Change project repo name
+IMG_NAMESCAPE=${IMG_NAMESCAPE:-{{cookiecutter.docker_registry}}}
+IMG_REPO=${IMG_REPO:-{{cookiecutter.project_slug}}}
 IMG_VERSION=${IMG_VERSION:-$(./scripts/get-version.sh)}
 IMG_SUBTAG=${IMG_SUBTAG:-}
 IMG_PLATFORM=${IMG_PLATFORM:-$(uname -m)}

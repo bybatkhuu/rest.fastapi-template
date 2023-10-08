@@ -21,7 +21,6 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-PROJECT_NAME="${PROJECT_NAME:-fastapi-template}" # CHANGEME: Change project name
 BACKUPS_DIR="${BACKUPS_DIR:-./volumes/backups}"
 ## --- Variables --- ##
 
@@ -37,7 +36,7 @@ main()
 	_current_version="$(./scripts/get-version.sh)"
 	echoOk "Current version: '${_current_version}'"
 
-	_backup_file_path="${BACKUPS_DIR}/${PROJECT_NAME}.v${_current_version}.$(date -u '+%y%m%d_%H%M%S').tar.gz"
+	_backup_file_path="${BACKUPS_DIR}/{{cookiecutter.project_slug}}.v${_current_version}.$(date -u '+%y%m%d_%H%M%S').tar.gz"
 	echoInfo "Creating backup file: '${_backup_file_path}'..."
 	tar -czpvf "${_backup_file_path}" -C ./volumes ./storage || exit 2
 	echoOk "Done."

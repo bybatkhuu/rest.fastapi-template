@@ -1,14 +1,6 @@
 # Build and publish docker image
 
-## 1. Set image namespace
-
-```sh
-export IMG_NAMESCAPE=[IMG_NAMESPACE]
-# For example:
-export IMG_NAMESCAPE=username
-```
-
-## 2. Build and push image
+## Build and push image
 
 **A.** **[RECOMMENDED]** Run **`build.sh`** script to build images:
 
@@ -21,8 +13,8 @@ export IMG_NAMESCAPE=username
 # -c, --clean-images                        Enable clearning leftover images.
 # -x, --cross-compile                       Enable cross compiling.
 # -b=BASE_IMAGE, --base-image=BASE_IMAGE    Base image name. Default is "debian:12.1-slim".
-# -n=NAMESPACE, --namespace=NAMESPACE       Docker image namespace.
-# -r=REPO, --repo=REPO                      Docker image repository. Default is "fastapi-template". # CHANGEME: Change project name
+# -n=NAMESPACE, --namespace=NAMESPACE       Docker image namespace (docker registry and username). Default is "{{cookiecutter.docker_registry}}".
+# -r=REPO, --repo=REPO                      Docker image repository. Default is "{{cookiecutter.project_slug}}".
 # -v=VERSION, --version=VERSION             Docker image version. Default read from "app/__version__.py" file.
 # -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".
 
@@ -34,7 +26,7 @@ export IMG_NAMESCAPE=username
 ./scripts/build.sh -x
 
 # Or:
-./scripts/build.sh -p=arm64 -b=debian:12.1-slim -n=${IMG_NAMESCAPE} -r=fastapi-template -v=1.0.0 -s=-arm64 -u -c # CHANGEME: Change project name
+./scripts/build.sh -p=arm64 -b=debian:12.1-slim -n={{cookiecutter.docker_registry}} -r={{cookiecutter.project_slug}} -v=1.0.0 -s=-arm64 -u -c
 ```
 
 **B.** Or docker build command:
@@ -51,14 +43,13 @@ docker build \
 # For example:
 docker build \
     --progress plain \
-    # CHANGEME: Change project name:
-    -t ${IMG_NAMESCAPE}/fastapi-template:latest \
+    -t {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest \
     .
 
 # Push image to Docker Registry:
 docker push [IMG_FULLNAME]
 # For example:
-docker push ${IMG_NAMESCAPE}/fastapi-template:latest # CHANGEME: Change project name
+docker push {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest
 ```
 
 **C.** Or docker buildx command (**cross-compile**):
@@ -82,12 +73,9 @@ docker buildx build \
 docker buildx build \
     --progress plain \
     --platform linux/amd64,linux/arm64 \
-    # CHANGEME: Change project name:
-    --cache-from=type=registry,ref=${IMG_NAMESCAPE}/fastapi-template:cache-latest \
-    # CHANGEME: Change project name:
-    --cache-to=type=registry,ref=${IMG_NAMESCAPE}/fastapi-template:cache-latest,mode=max \
-    # CHANGEME: Change project name:
-    -t ${IMG_NAMESCAPE}/fastapi-template:latest \
+    --cache-from=type=registry,ref={{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:cache-latest \
+    --cache-to=type=registry,ref={{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:cache-latest,mode=max \
+    -t {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest \
     --push \
     .
 

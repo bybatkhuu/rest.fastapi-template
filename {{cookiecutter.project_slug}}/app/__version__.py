@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-__version__ = "2.0.0-231006"
+__version__ = "{{cookiecutter.version}}"

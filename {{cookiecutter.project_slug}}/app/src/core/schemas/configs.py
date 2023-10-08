@@ -11,13 +11,13 @@ from .base import FrozenBaseConfig, BaseConfig
 from __version__ import __version__
 
 
-_ENV_PREFIX = "FASTAPI_TEMPLATE_"  # CHANGEME: Change project env variables prefix
+_ENV_PREFIX = "{{cookiecutter.env_prefix}}_"
 
 
 # App config schema:
 class AppConfig(FrozenBaseConfig):
     name: constr(strip_whitespace=True) = Field(
-        default="FastAPI Template",  # CHANGEME: Change project title
+        default="{{cookiecutter.project_name}}",
         min_length=2,
         max_length=127,
     )

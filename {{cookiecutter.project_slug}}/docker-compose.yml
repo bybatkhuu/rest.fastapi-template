@@ -1,20 +1,20 @@
 version: "3.8"
 
 services:
-  fastapi-template: # CHANGEME: Change service name
-    image: ${IMG_NAMESCAPE}/fastapi-template:latest # CHANGEME: Change image name
+  {{cookiecutter.project_slug}}:
+    image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest
     build:
       context: .
     restart: unless-stopped
     environment:
       - TERM=${TERM:-xterm}
-      - TZ=${TZ:-Asia/Seoul}
+      - TZ=${TZ:-{{cookiecutter.timezone}}}
       - ENV=${ENV:-local}
       - DEBUG=${DEBUG:-false}
-      - FASTAPI_TEMPLATE_APP_PORT=${FASTAPI_TEMPLATE_APP_PORT:-8000} # CHANGEME: Change env variable prefix
+      - {{cookiecutter.env_prefix}}_APP_PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}
     volumes:
-      - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template" # CHANGEME: Change data directory and mount path
-      - "./volumes/storage/fastapi-template/logs:/var/log/fastapi-template" # CHANGEME: Change logs directory and mount path
+      - "./volumes/storage/{{cookiecutter.project_slug}}/data:/var/lib/{{cookiecutter.project_slug}}"
+      - "./volumes/storage/{{cookiecutter.project_slug}}/logs:/var/log/{{cookiecutter.project_slug}}"
     ports:
-      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}" # CHANGEME: Change env variable prefix
+      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}"
     tty: true

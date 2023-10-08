@@ -24,7 +24,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-_DEFAULT_SERVICE="${PROJECT_NAME:-fastapi-template}" # CHANGEME: Change default service name
+_DEFAULT_SERVICE="{{cookiecutter.project_slug}}"
 
 # Extending timeout of docker compose logs:
 export COMPOSE_HTTP_TIMEOUT=43200

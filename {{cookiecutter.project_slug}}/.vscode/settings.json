@@ -128,20 +128,6 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
 	},
-	"todo-tree.general.tags": [
-		"TODO",
-		"BUG",
-		"FIXME",
-		"CHANGEME"
-	],
-	"todo-tree.highlights.customHighlight": {
-		"CHANGEME": {
-			"gutterIcon": true,
-			"icon": "pencil",
-			"iconColour": "#008000",
-			"background": "#1E5B2D"
-		}
-	},
 	"git-graph.maxDepthOfRepoSearch": 4,
 	"python.languageServer": "Pylance",
 	"python.analysis.extraPaths":

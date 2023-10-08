@@ -2,10 +2,10 @@ env: local
 debug: false
 
 app:
-  name: "FastAPI Template" # CHANGEME: Change project title
+  name: "{{cookiecutter.project_name}}"
   bind_host: "0.0.0.0"
   port: 8000
-  tz: "Asia/Seoul"
+  tz: "{{cookiecutter.timezone}}"
   api_version: "v1"
   api_prefix: "/api/{api_version}"
   behind_proxy: true

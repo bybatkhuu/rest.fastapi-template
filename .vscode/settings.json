@@ -130,4 +130,9 @@
 	},
 	"git-graph.maxDepthOfRepoSearch": 4,
 	"python.languageServer": "Pylance",
+	"python.analysis.extraPaths":
+	[
+		"${workspaceFolder}/fastapi-template/app",
+		// "${workspaceFolder}/fastapi-template/app/src/modules"
+	]
 }

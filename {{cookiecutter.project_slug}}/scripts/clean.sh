@@ -20,9 +20,6 @@ fi
 
 
 ## --- Variables --- ##
-# Load from envrionment variables:
-PROJECT_NAME="${PROJECT_NAME:-fastapi-template}" # CHANGEME: Change project name
-
 # Flags:
 _IS_ALL=false
 ## --- Variables --- ##
@@ -61,14 +58,14 @@ main()
 	find . -type d -name "__pycache__" -exec rm -rfv {} + || exit 2
 	# find . -type d -name ".git" -prune -o -type d -name "logs" -exec rm -rfv {} + || exit 2
 
-	rm -rfv "./volumes/storage/${PROJECT_NAME}/logs" || exit 2
+	rm -rfv "./volumes/storage/{{cookiecutter.project_slug}}/logs" || exit 2
 	# rm -rfv ./logs || exit 2
 	rm -rfv .benchmarks || exit 2
 	rm -rfv .pytest_cache || exit 2
 	rm -rfv .coverage || exit 2
 
 	if [ "${_IS_ALL}" == true ]; then
-		rm -rfv "./volumes/storage/${PROJECT_NAME}/data" || exit 2
+		rm -rfv "./volumes/storage/{{cookiecutter.project_slug}}/data" || exit 2
 		rm -rfv ./volumes/backups || exit 2
 		rm -rf ./volumes/.vscode-server/* || exit 2
 	fi

@@ -4,24 +4,17 @@ docs:
   docs_url: "{api_prefix}/docs"
   redoc_url: "{api_prefix}/redoc"
   swagger_ui_oauth2_redirect_url: "{api_prefix}/docs/oauth2-redirect"
-  summary: "FastAPI template project." # CHANGEME: Change project summary
-  description: | # CHANGEME: Change project description
-    FastAPI template project for building RESTful API services.
-
-    ## Features
-
-    - Markdown support
-    - OpenAPI support
-    - Swagger UI support
-  terms_of_service: "https://example.com/terms"
+  summary: "{{cookiecutter.project_summary}}"
+  description: "{{cookiecutter.project_description}}"
+  terms_of_service: "{{cookiecutter.term_url}}"
   contact:
-    name: "User Support"
-    url: "https://example.com/contact"
-    email: "user@example.com"
+    name: "{{cookiecutter.contact_name}}"
+    email: "{{cookiecutter.contact_email}}"
+    url: "{{cookiecutter.contact_url}}"
   license_info:
-    name: "MIT License"
-    identifier: "MIT"
-    url: "https://opensource.org/licenses/MIT"
+    name: "{{cookiecutter.license}} License"
+    identifier: "{{cookiecutter.license}}"
+    url: "https://opensource.org/licenses/{{cookiecutter.license}}"
   openapi_tags:
     - name: "Utils"
       description: "Useful utility endpoints."

@@ -276,10 +276,19 @@ pyrightconfig.json
 
 # Directories:
 .git
-.env
+.github
 
 # Files:
+.gitignore
+.gitkeep
+.gitmodules
+
+
+**/*.git
+**/*.gitignore
 **/*.gitkeep
+**/*.gitmodules
+**/*.github
 **/*.DS_Store
 **/*.lock
 **/*.tmp

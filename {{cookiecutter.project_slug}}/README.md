@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-This is a template repo for a FastAPI project.
+This is a **{{cookiecutter.project_name}}** project.
 
 ## Features
 
@@ -8,7 +8,6 @@ This is a template repo for a FastAPI project.
 - REST API
 - Web service
 - Microservice
-- Template
 - CI/CD
 - Docker and docker compose
 
@@ -43,11 +42,6 @@ mkdir -pv ~/workspaces/projects
 
 # Enter into projects directory:
 cd ~/workspaces/projects
-
-# Set repository owner:
-export _REPO_OWNER=[REPO_OWNER]
-# For example:
-export _REPO_OWNER=username
 ```
 
 **2.2.** Follow one of the below options **[A]** or **[B]**:
@@ -55,7 +49,7 @@ export _REPO_OWNER=username
 **A.** Or clone the repository (for development: git + ssh key):
 
 ```sh
-git clone git@github.com:${_REPO_OWNER}/rest.fastapi-template.git && cd rest.fastapi-template
+git clone git@github.com:{{cookiecutter.github_username}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
 ```
 
 **B.** Download source code.
@@ -185,7 +179,7 @@ nano pm2-process.json
 
 ## 2. Start PM2 process:
 pm2 start ./pm2-process.json && \
-    pm2 logs --lines 50 fastapi-template
+    pm2 logs --lines 50 {{cookiecutter.project_slug}}
 
 
 ## 3. Stop PM2 process:
@@ -256,22 +250,15 @@ You can use the following environment variables to configure:
 ```sh
 ENV=local
 DEBUG=false
+#TZ=UTC
 
-# CHANGEME: Change project name with env variables prefix:
 ## FastAPI template settings:
-FASTAPI_TEMPLATE_APP_PORT=8000
-FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
-
-## Docker image namespace:
-IMG_NAMESCAPE=username # CHANGEME: Change docker image namespace (dockerhub username, or registry hostname)
+{{cookiecutter.env_prefix}}_APP_PORT=8000
+{{cookiecutter.env_prefix}}_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
 
 ## Docker build arguments:
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
-
-
-## Project variables:
-PROJECT_NAME=fastapi-template # CHANGEME: Change project name
 ```
 
 ## Arguments
@@ -288,7 +275,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation

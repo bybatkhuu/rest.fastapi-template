@@ -1,4 +1,25 @@
 {
 	"project_name": "FastAPI Template",
-	"project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}"
+	"project_abbr": "fat",
+	"project_summary": "This is a {{cookiecutter.project_name}} project",
+	"project_description": "",
+	"project_slug": "{{cookiecutter.project_name.lower().strip().replace(' ', '-').replace('_', '-').replace('.', '-')}}",
+	"env_prefix": "{{cookiecutter.project_slug.upper().replace('-', '_')}}",
+	"repo_username": "username",
+	"github_username": "{{cookiecutter.repo_username}}",
+	"docker_registry": "{{cookiecutter.repo_username}}",
+	"version": "0.0.1-230101",
+	"timezone": "UTC",
+	"domain_name": "example.com",
+	"term_url": "https://{{cookiecutter.domain_name}}/terms",
+	"contact_name": "Support Team",
+	"contact_email": "support@{{cookiecutter.domain_name}}",
+	"contact_url": "https://{{cookiecutter.domain_name}}/contact",
+	"license": [
+		"MIT",
+		"BSD",
+		"GPL",
+		"Apache-2.0",
+		"Not open source"
+	]
 }

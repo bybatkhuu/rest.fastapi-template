@@ -1,12 +1,9 @@
 ARG BASE_IMAGE=debian:12.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-# CHANGEME: Change project directory:
-ARG APP_DIR="/app/fastapi-template"
-# CHANGEME: Change data directory:
-ARG DATA_DIR="/var/lib/fastapi-template"
-# CHANGEME: Change logs directory:
-ARG LOGS_DIR="/var/log/fastapi-template"
+ARG APP_DIR="/app/{{cookiecutter.project_slug}}"
+ARG DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
+ARG LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
 
 
 # Here is the builder image
@@ -76,10 +73,8 @@ ARG LOGS_DIR
 ARG HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 ARG UID=1000
 ARG GID=11000
-# CHANGEME: Change user name:
-ARG USER=fat-user
-# CHANGEME: Change group name:
-ARG GROUP=fat-group
+ARG USER={{cookiecutter.project_abbr}}-user
+ARG GROUP={{cookiecutter.project_abbr}}-group
 
 ENV UID=${UID} \
 	GID=${GID} \
@@ -153,4 +148,4 @@ COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
 USER ${UID}:${GID}
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='${FASTAPI_TEMPLATE_APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}_APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
