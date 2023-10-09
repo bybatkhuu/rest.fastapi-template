@@ -289,6 +289,7 @@ extra_configs/
 pythonpath/
 fastapi-template/
 {{cookiecutter.project_slug}}/
+.benchmarks/
 
 
 # Files:
@@ -310,6 +311,7 @@ example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml
+.benchmarks
 .temp.*
 *.bak
 *.pyc
