@@ -119,17 +119,19 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-#coverage reports
+# Unit test / coverage reports
 htmlcov/
 .tox/
 .nox/
-overage
-overage.*
+.coverage
+.coverage.*
 .cache
-nosetests.coverage.xml
+nosetests.xml
+coverage.xml
 *.cover
 *.py,cover
-.coverage/
+.hypothesis/
+.pytest_cache/
 cover/
 
 # Translations
@@ -291,13 +293,13 @@ pyrightconfig.json
 **/*.coverage
 **/*.benchmarks
 **/*__pycache__
-**/*.py[cod]
-**/*$py.class
 **/*.DS_Store
-**/*.lock
-**/*.tmp
 **/*.pyc
-**/*.env
 **/*.pyo
 **/*.pyd
+**/*.env
+**/*.lock
 **/*.bak
+**/*.tmp
+**/*.temp
+**/*.temp.*
