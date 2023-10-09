@@ -49,7 +49,7 @@ cd ~/workspaces/projects
 **A.** Or clone the repository (for development: git + ssh key):
 
 ```sh
-git clone git@github.com:{{cookiecutter.github_username}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
+git clone git@github.com:{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
 ```
 
 **B.** Download source code.
