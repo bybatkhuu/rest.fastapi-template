@@ -8,6 +8,7 @@
 - REST API
 - Web service
 - Microservice
+- Template
 - CI/CD
 - Docker and docker compose
 
@@ -250,12 +251,13 @@ You can use the following environment variables to configure:
 ```sh
 ENV=local
 DEBUG=false
-#TZ=UTC
+# TZ={{cookiecutter.timezone}}
 
-## FastAPI template settings:
+## {{cookiecutter.project_name}} settings:
 {{cookiecutter.env_prefix}}APP_PORT=8000
 {{cookiecutter.env_prefix}}APP_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
 {{cookiecutter.env_prefix}}LOGGER__FILE__LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
+
 
 ## Docker build arguments:
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
