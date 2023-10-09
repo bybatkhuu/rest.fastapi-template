@@ -13,7 +13,7 @@
 # -c, --clean-images                        Enable clearning leftover images.
 # -x, --cross-compile                       Enable cross compiling.
 # -b=BASE_IMAGE, --base-image=BASE_IMAGE    Base image name. Default is "debian:12.1-slim".
-# -n=NAMESPACE, --namespace=NAMESPACE       Docker image namespace (docker registry and username). Default is "{{cookiecutter.docker_registry}}".
+# -g=REGISTRY, --registry=REGISTRY          Docker image registry (docker registry and username). Default is "{{cookiecutter.docker_registry}}".
 # -r=REPO, --repo=REPO                      Docker image repository. Default is "{{cookiecutter.project_slug}}".
 # -v=VERSION, --version=VERSION             Docker image version. Default read from "app/__version__.py" file.
 # -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".

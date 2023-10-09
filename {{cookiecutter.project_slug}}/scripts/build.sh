@@ -24,8 +24,8 @@ fi
 ## --- Variables --- ##
 # Load from envrionment variables:
 # BASE_IMAGE
-IMG_NAMESCAPE=${IMG_NAMESCAPE:-{{cookiecutter.docker_registry}}}
-IMG_REPO=${IMG_REPO:-{{cookiecutter.project_slug}}}
+IMG_REGISTRY=${IMG_REGISTRY:-{{cookiecutter.docker_registry}}}
+IMG_REPO=${PROJECT_SLUG:-{{cookiecutter.project_slug}}}
 IMG_VERSION=${IMG_VERSION:-$(./scripts/get-version.sh)}
 IMG_SUBTAG=${IMG_SUBTAG:-}
 IMG_PLATFORM=${IMG_PLATFORM:-$(uname -m)}
@@ -38,7 +38,7 @@ _IS_PUSH_IMAGES=false
 _IS_CLEAN_IMAGES=false
 
 # Calculated variables:
-_IMG_NAME=${IMG_NAMESCAPE}/${IMG_REPO}
+_IMG_NAME=${IMG_REGISTRY}/${IMG_REPO}
 _IMG_FULLNAME=${_IMG_NAME}:${IMG_VERSION}${IMG_SUBTAG}
 _IMG_LATEST_FULLNAME=${_IMG_NAME}:latest${IMG_SUBTAG}
 ## --- Variables --- ##
@@ -140,8 +140,8 @@ main()
 				-b=* | --base-image=*)
 					BASE_IMAGE="${_input#*=}"
 					shift;;
-				-n=* | --namespace=*)
-					IMG_NAMESCAPE="${_input#*=}"
+				-g=* | --registry=*)
+					IMG_REGISTRY="${_input#*=}"
 					shift;;
 				-r=* | --repo=*)
 					IMG_REPO="${_input#*=}"
@@ -154,7 +154,7 @@ main()
 					shift;;
 				*)
 					echoError "Failed to parsing input -> ${_input}"
-					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -n=*, --namespace=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=*"
+					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -g=*, --registry=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=*"
 					exit 1;;
 			esac
 		done
@@ -162,8 +162,8 @@ main()
 	## --- Menu arguments --- ##
 
 
-	if [ -z "${IMG_NAMESCAPE:-}" ]; then
-		echoError "Required 'IMG_NAMESCAPE' environment variable or '--namespace=' argument for image namespace!"
+	if [ -z "${IMG_REGISTRY:-}" ]; then
+		echoError "Required 'IMG_REGISTRY' environment variable or '--registry=' argument for image registry!"
 		exit 1
 	fi
 
@@ -172,7 +172,7 @@ main()
 		IMG_ARGS="${IMG_ARGS} --build-arg BASE_IMAGE=${BASE_IMAGE}"
 	fi
 
-	_IMG_NAME=${IMG_NAMESCAPE}/${IMG_REPO}
+	_IMG_NAME=${IMG_REGISTRY}/${IMG_REPO}
 	_IMG_FULLNAME=${_IMG_NAME}:${IMG_VERSION}${IMG_SUBTAG}
 	_IMG_LATEST_FULLNAME=${_IMG_NAME}:latest${IMG_SUBTAG}
 

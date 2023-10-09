@@ -1,4 +1,4 @@
-{{cookiecutter.project_name}} project for building RESTful API services
+{{cookiecutter.project_summary}}
 
 ## Features
 

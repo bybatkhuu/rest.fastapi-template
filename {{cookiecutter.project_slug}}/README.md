@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-This is a **{{cookiecutter.project_name}}** project.
+{{cookiecutter.project_summary}}
 
 ## Features
 
