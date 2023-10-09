@@ -7,7 +7,7 @@
   "repo_owner": "username",
   "github_owner": "{{cookiecutter.repo_owner}}",
   "docker_registry": "{{cookiecutter.repo_owner}}",
-  "version": "2.1.0-231009",
+  "version": "2.1.1-231009",
   "timezone": "Asia/Seoul",
   "domain": "example.com",
   "term_url": "https://{{cookiecutter.domain}}/terms",
