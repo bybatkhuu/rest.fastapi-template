@@ -39,12 +39,6 @@ main()
 	## --- Menu arguments --- ##
 
 
-	if docker compose ps | grep 'Up' > /dev/null 2>&1; then
-		echoWarn "Docker is running, please stop it before cleaning."
-		exit 1
-	fi
-
-
 	echoInfo "Cleaning..."
 
 	find . -type f -name ".DS_Store" -print -delete || exit 2
