@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  fastapi-template: # CHANGEME: Change service name
-    image: ${IMG_NAMESCAPE}/fastapi-template:latest # CHANGEME: Change image name
+  fastapi-template:
+    image: bybatkhuu/fastapi-template:latest
     build:
       context: .
     restart: unless-stopped
@@ -11,10 +11,10 @@ services:
       - TZ=${TZ:-Asia/Seoul}
       - ENV=${ENV:-local}
       - DEBUG=${DEBUG:-false}
-      - FASTAPI_TEMPLATE_APP_PORT=${FASTAPI_TEMPLATE_APP_PORT:-8000} # CHANGEME: Change env variable prefix
+      - FASTAPI_TEMPLATE_APP_PORT=${FASTAPI_TEMPLATE_APP_PORT:-8000}
     volumes:
-      - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template" # CHANGEME: Change data directory and mount path
-      - "./volumes/storage/fastapi-template/logs:/var/log/fastapi-template" # CHANGEME: Change logs directory and mount path
+      - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template"
+      - "./volumes/storage/fastapi-template/logs:/var/log/fastapi-template"
     ports:
-      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}" # CHANGEME: Change env variable prefix
+      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}"
     tty: true

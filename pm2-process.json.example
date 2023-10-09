@@ -1,5 +1,5 @@
 {
-	"name": "fastapi-template", // CHANGEME: Change project name
+	"name": "fastapi-template",
 	"interpreter": "/usr/bin/env",
 	"script": "python",
 	"args": "-u -m app",

@@ -287,6 +287,8 @@ archive/
 results/
 extra_configs/
 pythonpath/
+fastapi-template/
+{{cookiecutter.project_slug}}/
 
 
 # Files:
@@ -300,12 +302,15 @@ archive
 results
 extra_configs
 pythonpath
+fastapi-template
+{{cookiecutter.project_slug}}
 pm2-process.json
 sample.py
 example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml
+.temp.*
 *.bak
 *.pyc
 

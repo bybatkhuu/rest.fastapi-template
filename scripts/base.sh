@@ -58,7 +58,7 @@ exitIfNotExists()
 exitIfNoGit()
 {
 	if [ -z "$(which git)" ]; then
-		echoError "Git not found or not installed."
+		echoError "'git' not found or not installed."
 		exit 1
 	fi
 }
@@ -67,7 +67,7 @@ exitIfNoGit()
 exitIfNoDocker()
 {
 	if [ -z "$(which docker)" ]; then
-		echoError "Docker not found or not installed."
+		echoError "'docker' not found or not installed."
 		exit 1
 	fi
 
@@ -77,7 +77,7 @@ exitIfNoDocker()
 	fi
 
 	if ! docker compose > /dev/null 2>&1; then
-		echoError "Docker compose not found or not installed."
+		echoError "'docker compose' not found or not installed."
 		exit 1
 	fi
 }
