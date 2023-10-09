@@ -52,7 +52,7 @@ cd ~/workspaces/projects
 git clone git@github.com:{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
 ```
 
-**B.** Download source code.
+**B.** Download source code: <https://github.com/{{cookiecutter.github_owner}}/rest.fastapi-template/releases>
 
 ### 3. Install python dependencies
 
