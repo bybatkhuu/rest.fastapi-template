@@ -18,7 +18,7 @@ router = APIRouter(tags=config.routes["utils"]["_tags"])
 )
 async def get_base(request: Request):
     return BaseResponse(
-        request=request, message="Welcome to the FastAPI template service."
+        request=request, message="Welcome to the FastAPI Template service."
     )
 
 
