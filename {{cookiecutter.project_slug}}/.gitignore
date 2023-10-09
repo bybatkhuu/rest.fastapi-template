@@ -81,8 +81,7 @@ $RECYCLE.BIN/
 
 
 ### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# Bytpycache__/
 *.py[cod]
 *$py.class
 
@@ -234,8 +233,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-# PyCharm
+PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
@@ -289,6 +287,9 @@ extra_configs/
 pythonpath/
 {{cookiecutter.project_slug}}/
 {% raw %}{{cookiecutter.project_slug}}{% endraw %}/
+.benchmarks/
+.temp/
+.temp.*/
 
 
 # Files:
@@ -310,9 +311,10 @@ example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml
+.benchmarks
+.temp
 .temp.*
 *.bak
-*.pyc
 
 
 # Specific directories:
