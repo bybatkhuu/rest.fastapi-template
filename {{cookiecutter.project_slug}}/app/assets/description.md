@@ -1,4 +1,4 @@
-{{cookiecutter.project_summary}}
+Project description here.
 
 ## Features
 
