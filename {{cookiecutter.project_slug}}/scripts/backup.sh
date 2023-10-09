@@ -21,8 +21,8 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-BACKUPS_DIR="${BACKUPS_DIR:-./volumes/backups}"
 PROJECT_SLUG="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
+BACKUPS_DIR="${BACKUPS_DIR:-./volumes/backups}"
 ## --- Variables --- ##
 
 
