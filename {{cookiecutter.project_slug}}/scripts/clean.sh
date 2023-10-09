@@ -61,6 +61,7 @@ main()
 	find . -type d -name "__pycache__" -exec rm -rfv {} + || exit 2
 	# find . -type d -name ".git" -prune -o -type d -name "logs" -exec rm -rfv {} + || exit 2
 
+	rm -rfv "./${PROJECT_SLUG}" || exit 2
 	rm -rfv "./volumes/storage/${PROJECT_SLUG}/logs" || exit 2
 	# rm -rfv ./logs || exit 2
 	rm -rfv .benchmarks || exit 2
