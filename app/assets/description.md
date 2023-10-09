@@ -1,4 +1,4 @@
-FastAPI template project for building RESTful API services.
+Project description here.
 
 ## Features
 

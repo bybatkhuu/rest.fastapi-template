@@ -1,6 +1,6 @@
-# FastAPI template
+# FastAPI Template
 
-This is a template repo for a FastAPI project.
+This is a FastAPI Template project.
 
 ## Features
 
@@ -43,11 +43,6 @@ mkdir -pv ~/workspaces/projects
 
 # Enter into projects directory:
 cd ~/workspaces/projects
-
-# Set repository owner:
-export _REPO_OWNER=[REPO_OWNER]
-# For example:
-export _REPO_OWNER=username
 ```
 
 **2.2.** Follow one of the below options **[A]** or **[B]**:
@@ -55,10 +50,10 @@ export _REPO_OWNER=username
 **A.** Or clone the repository (for development: git + ssh key):
 
 ```sh
-git clone git@github.com:${_REPO_OWNER}/rest.fastapi-template.git && cd rest.fastapi-template
+git clone git@github.com:bybatkhuu/rest.fastapi-template.git && cd rest.fastapi-template
 ```
 
-**B.** Download source code.
+**B.** Download source code: <https://github.com/bybatkhuu/rest.fastapi-template/releases>
 
 ### 3. Install python dependencies
 
@@ -256,22 +251,17 @@ You can use the following environment variables to configure:
 ```sh
 ENV=local
 DEBUG=false
+# TZ=Asia/Seoul
 
-# CHANGEME: Change project name with env variables prefix:
-## FastAPI template settings:
+## FastAPI Template settings:
 FASTAPI_TEMPLATE_APP_PORT=8000
-FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/{app_name}"
+FASTAPI_TEMPLATE_APP_DATA_DIR="/var/lib/fastapi-template"
+FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/fastapi-template"
 
-## Docker image namespace:
-IMG_NAMESCAPE=username # CHANGEME: Change docker image namespace (dockerhub username, or registry hostname)
 
 ## Docker build arguments:
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
-
-
-## Project variables:
-PROJECT_NAME=fastapi-template # CHANGEME: Change project name
 ```
 
 ## Arguments

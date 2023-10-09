@@ -4,20 +4,13 @@ docs:
   docs_url: "{api_prefix}/docs"
   redoc_url: "{api_prefix}/redoc"
   swagger_ui_oauth2_redirect_url: "{api_prefix}/docs/oauth2-redirect"
-  summary: "FastAPI template project." # CHANGEME: Change project summary
-  description: | # CHANGEME: Change project description
-    FastAPI template project for building RESTful API services.
-
-    ## Features
-
-    - Markdown support
-    - OpenAPI support
-    - Swagger UI support
+  summary: "This is a FastAPI Template project."
+  description: ""
   terms_of_service: "https://example.com/terms"
   contact:
-    name: "User Support"
+    name: "Support Team"
+    email: "support@example.com"
     url: "https://example.com/contact"
-    email: "user@example.com"
   license_info:
     name: "MIT License"
     identifier: "MIT"

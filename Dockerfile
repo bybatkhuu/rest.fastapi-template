@@ -1,11 +1,8 @@
 ARG BASE_IMAGE=debian:12.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-# CHANGEME: Change project directory:
 ARG APP_DIR="/app/fastapi-template"
-# CHANGEME: Change data directory:
 ARG DATA_DIR="/var/lib/fastapi-template"
-# CHANGEME: Change logs directory:
 ARG LOGS_DIR="/var/log/fastapi-template"
 
 
@@ -34,7 +31,8 @@ RUN _BUILD_TARGET_ARCH=$(uname -m) && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
-		export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
+		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-aarch64.sh; \
+		# export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh; \
 	else \
 		echo "Unsupported platform: ${_BUILD_TARGET_ARCH}" && \
 		exit 1; \
@@ -76,9 +74,7 @@ ARG LOGS_DIR
 ARG HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 ARG UID=1000
 ARG GID=11000
-# CHANGEME: Change user name:
 ARG USER=fat-user
-# CHANGEME: Change group name:
 ARG GROUP=fat-group
 
 ENV UID=${UID} \

@@ -1,4 +1,5 @@
 logger:
+  app_name: "fastapi-template"
   level: "INFO"
   use_diagnose: false
   stream:
@@ -6,7 +7,7 @@ logger:
     std_handler:
       enabled: true
   file:
-    logs_dir: "/var/log/{app_name}"
+    logs_dir: "/var/log/fastapi-template"
     rotate_size: 10000000 # 10MB
     rotate_time: "00:00:00"
     backup_count: 90
