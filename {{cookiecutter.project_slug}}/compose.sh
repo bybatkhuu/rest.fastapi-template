@@ -23,6 +23,7 @@ fi
 
 
 ## --- Variables --- ##
+# Load from envrionment variables:
 _DEFAULT_SERVICE="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
 
 # Extending timeout of docker compose logs:
