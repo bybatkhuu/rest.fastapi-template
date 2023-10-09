@@ -911,6 +911,9 @@ results/
 extra_configs/
 pythonpath/
 fastapi-template/
+.benchmarks/
+.temp/
+.temp.*/
 
 
 # Files:
@@ -931,9 +934,10 @@ example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml
+.benchmarks
+.temp
 .temp.*
 *.bak
-*.pyc
 
 
 # Specific directories:
