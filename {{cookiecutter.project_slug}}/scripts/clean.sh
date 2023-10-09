@@ -49,7 +49,7 @@ main()
 
 
 	if docker compose ps | grep 'Up' > /dev/null 2>&1; then
-		echoError "Docker is running, please stop it before cleaning."
+		echoWarn "Docker is running, please stop it before cleaning."
 		exit 1
 	fi
 

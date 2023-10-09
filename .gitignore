@@ -931,6 +931,7 @@ example.py
 test.py
 docker-compose.override.yml
 docker-compose.override.yaml
+.temp.*
 *.bak
 *.pyc
 
