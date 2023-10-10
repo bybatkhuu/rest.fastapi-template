@@ -34,6 +34,11 @@ PROJECT_SLUG="${PROJECT_SLUG:-fastapi-template}"
 ## --- Main --- ##
 main()
 {
+	if [ ! -d "./${PROJECT_SLUG}" ]; then
+		echoError "Not found '${PROJECT_SLUG}' directory!"
+		exit 1
+	fi
+
 	echoInfo "Syncing files..."
 	rsync -av "./${PROJECT_SLUG}/" ./
 	echoOk "Done."
