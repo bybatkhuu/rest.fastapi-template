@@ -4,9 +4,10 @@ services:
   api:
     # env_file:
     #   - .env
-    # environment:
-    #   - {{cookiecutter.env_prefix}}DATA_DIR=/var/lib/{{cookiecutter.project_slug}}
-    #   - {{cookiecutter.env_prefix}}LOGS_DIR=/var/log/{{cookiecutter.project_slug}}
+    environment:
+      - DEBUG=${DEBUG:-false}
+      # - {{cookiecutter.env_prefix}}DATA_DIR=/var/lib/{{cookiecutter.project_slug}}
+      # - {{cookiecutter.env_prefix}}LOGS_DIR=/var/log/{{cookiecutter.project_slug}}
     volumes:
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
       - "./app:/app/{{cookiecutter.project_slug}}"

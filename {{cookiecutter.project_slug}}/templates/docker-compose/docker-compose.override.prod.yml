@@ -4,6 +4,8 @@ version: "3.8"
 #   api:
 #     env_file:
 #       - .env
+#     environment:
+#       - DEBUG=${DEBUG:-false}
 #     deploy:
 #       replicas: 0
 #       resources:

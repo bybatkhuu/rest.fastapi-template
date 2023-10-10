@@ -7,14 +7,13 @@ services:
       context: .
     restart: unless-stopped
     environment:
-      - TERM=${TERM:-xterm}
       - TZ=${TZ:-{{cookiecutter.timezone}}}
+      - TERM=${TERM:-xterm}
       - ENV=${ENV:-local}
-      - DEBUG=${DEBUG:-false}
       - {{cookiecutter.env_prefix}}PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}
     volumes:
-      - "./volumes/storage/{{cookiecutter.project_slug}}/data:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR:-/var/lib/{{cookiecutter.project_slug}}}"
-      - "./volumes/storage/{{cookiecutter.project_slug}}/logs:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR:-/var/log/{{cookiecutter.project_slug}}}"
+      - "./volumes/storage/{{cookiecutter.project_slug}}/data:/var/lib/{{cookiecutter.project_slug}}"
+      - "./volumes/storage/{{cookiecutter.project_slug}}/logs:/var/log/{{cookiecutter.project_slug}}"
     ports:
       - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}"
     tty: true

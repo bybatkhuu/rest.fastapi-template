@@ -4,11 +4,12 @@ services:
   api:
     image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest-gpu
     runtime: nvidia
+    # env_file:
+    #   - .env
     environment:
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
       - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-all}
-    # env_file:
-    #   - .env
+    #   - DEBUG=${DEBUG:-false}
     # deploy:
     #   replicas: 0
     #   resources:

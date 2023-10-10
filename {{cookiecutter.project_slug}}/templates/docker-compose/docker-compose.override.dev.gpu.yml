@@ -4,14 +4,14 @@ services:
   api:
     image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest-gpu
     runtime: nvidia
+    # env_file:
+    #   - .env
     environment:
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
       - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-all}
-    # env_file:
-    #   - .env
-    # environment:
-    #   - {{cookiecutter.env_prefix}}DATA_DIR=/var/lib/{{cookiecutter.project_slug}}
-    #   - {{cookiecutter.env_prefix}}LOGS_DIR=/var/log/{{cookiecutter.project_slug}}
+      - DEBUG=${DEBUG:-false}
+      # - {{cookiecutter.env_prefix}}DATA_DIR=/var/lib/{{cookiecutter.project_slug}}
+      # - {{cookiecutter.env_prefix}}LOGS_DIR=/var/log/{{cookiecutter.project_slug}}
     volumes:
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
       - "./app:/app/{{cookiecutter.project_slug}}"
