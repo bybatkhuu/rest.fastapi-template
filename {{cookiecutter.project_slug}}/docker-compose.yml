@@ -7,8 +7,8 @@ services:
       context: .
     restart: unless-stopped
     environment:
-      - TZ=${TZ:-{{cookiecutter.timezone}}}
       - TERM=${TERM:-xterm}
+      - TZ=${TZ:-{{cookiecutter.timezone}}}
       - ENV=${ENV:-local}
       - {{cookiecutter.env_prefix}}PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}
     volumes:
