@@ -7,14 +7,13 @@ services:
       context: .
     restart: unless-stopped
     environment:
-      - TERM=${TERM:-xterm}
       - TZ=${TZ:-Asia/Seoul}
+      - TERM=${TERM:-xterm}
       - ENV=${ENV:-local}
-      - DEBUG=${DEBUG:-false}
       - FASTAPI_TEMPLATE_PORT=${FASTAPI_TEMPLATE_PORT:-8000}
     volumes:
-      - "./volumes/storage/fastapi-template/data:${FASTAPI_TEMPLATE_DATA_DIR:-/var/lib/fastapi-template}"
-      - "./volumes/storage/fastapi-template/logs:${FASTAPI_TEMPLATE_LOGS_DIR:-/var/log/fastapi-template}"
+      - "./volumes/storage/fastapi-template/data:/var/lib/fastapi-template"
+      - "./volumes/storage/fastapi-template/logs:/var/log/fastapi-template"
     ports:
       - "${FASTAPI_TEMPLATE_PORT:-8000}:${FASTAPI_TEMPLATE_PORT:-8000}"
     tty: true
