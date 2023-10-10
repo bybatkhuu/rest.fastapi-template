@@ -34,13 +34,30 @@ PROJECT_SLUG="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
 ## --- Main --- ##
 main()
 {
-	if [ ! -d "./${PROJECT_SLUG}" ]; then
+	## --- Menu arguments --- ##
+	if [ -n "${1:-}" ]; then
+		for _input in "${@:-}"; do
+			case ${_input} in
+				-p=* | --project-slug=*)
+					PROJECT_SLUG="${_input#*=}"
+					shift;;
+				*)
+					echoError "Failed to parsing input -> ${_input}"
+					echoInfo "USAGE: ${0} -p=*, --project-slug=*"
+					exit 1;;
+			esac
+		done
+	fi
+	## --- Menu arguments --- ##
+
+
+	if [ ! -d "${PROJECT_SLUG}" ]; then
 		echoError "Not found '${PROJECT_SLUG}' directory!"
 		exit 1
 	fi
 
 	echoInfo "Syncing files..."
-	rsync -av "./${PROJECT_SLUG}/" ./
+	rsync -av "${PROJECT_SLUG}/" ./
 	echoOk "Done."
 }
 
