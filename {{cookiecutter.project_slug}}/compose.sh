@@ -23,8 +23,7 @@ fi
 
 
 ## --- Variables --- ##
-# Load from envrionment variables:
-_DEFAULT_SERVICE="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
+_DEFAULT_SERVICE="api"
 
 # Extending timeout of docker compose logs:
 export COMPOSE_HTTP_TIMEOUT=43200

@@ -25,7 +25,7 @@ class AppConfig(FrozenBaseConfig):
     bind_host: constr(strip_whitespace=True) = Field(
         default="0.0.0.0", min_length=2, max_length=127
     )
-    port: int = Field(default=8000, ge=80, lt=65536)
+    port: int = Field(default=8000, ge=80, lt=65536, env=f"{_ENV_PREFIX}PORT")
     tz: constr(strip_whitespace=True) = Field(
         default="UTC", min_length=2, max_length=127, env="TZ"
     )
@@ -40,7 +40,10 @@ class AppConfig(FrozenBaseConfig):
     behind_cf_proxy: bool = Field(default=False)
     gzip_min_size: int = Field(default=512, ge=0, le=10_485_760)
     data_dir: constr(strip_whitespace=True) = Field(
-        default="/var/lib/{{cookiecutter.project_slug}}", min_length=2, max_length=1023
+        default="/var/lib/{{cookiecutter.project_slug}}",
+        min_length=2,
+        max_length=1023,
+        env=f"{_ENV_PREFIX}DATA_DIR",
     )
 
     @validator("api_prefix", always=True)
@@ -149,7 +152,7 @@ class DocsConfig(BaseConfig):
     @validator("description", always=True)
     def _check_description(cls, val: Any):
         _desc_path = "./assets/description.md"
-        if not val and os.path.isfile(_desc_path):
+        if (not val) and os.path.isfile(_desc_path):
             with open(_desc_path, "r") as _file:
                 val = _file.read()
         return val
@@ -218,10 +221,14 @@ class ConfigSchema(FrozenBaseConfig):
         val = FrozenDevConfig(**val.dict())
         return val
 
-    # @validator("logger", always=True)
-    # def _check_logger_app_name(cls, val: LoggerConfigPM, values: dict):
-    #     val.app_name = values["app"].name.strip().lower().replace(" ", "-")
-    #     return val
+    @validator("logger", always=True)
+    def _check_logger(cls, val: LoggerConfigPM, values: dict):
+        # val.app_name = (
+        #     values["app"].name.strip().lower().replace(" ", "-").replace("_", "-")
+        # ).replace(".", "-")
+        if f"{_ENV_PREFIX}LOGS_DIR" in os.environ:
+            val.file.logs_dir = os.getenv(f"{_ENV_PREFIX}LOGS_DIR")
+        return val
 
 
 __all__ = [

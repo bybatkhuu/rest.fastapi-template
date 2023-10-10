@@ -20,7 +20,8 @@ This is a cookiecutter template for FastAPI projects.
 ### 1. Prerequisites
 
 - Install **Python (>= v3.9)**:
-    - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/en/latest/miniconda.html>
+    - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/projects/miniconda/en/latest/index.html>
+    - *[arm64/aarch64] Miniforge (v3)* - <https://github.com/conda-forge/miniforge>
     - *[OPTIONAL] venv* - <https://docs.python.org/3/library/venv.html>
 - Install **docker** and **docker compose** - <https://docs.docker.com/engine/install>
 
@@ -46,9 +47,17 @@ export _REPO_OWNER=[REPO_OWNER]
 export _REPO_OWNER=username
 ```
 
-**2.2.** Follow one of the below options **[A]** or **[B]**:
+**2.2.** Follow one of the below options **[A]**, **[B]** or **[C]**:
 
-**A.** Or clone the repository (for development: git + ssh key):
+**A.** Clone the repository (for public: git + https):
+
+```sh
+git clone https://github.com/${_REPO_OWNER}/rest.fastapi-template.git && \
+    cd rest.fastapi-template && \
+    git checkout cookiecutter
+```
+
+**B.** Clone the repository (for development: git + ssh key):
 
 ```sh
 git clone git@github.com:${_REPO_OWNER}/rest.fastapi-template.git && \
@@ -56,7 +65,7 @@ git clone git@github.com:${_REPO_OWNER}/rest.fastapi-template.git && \
     git checkout cookiecutter
 ```
 
-**B.** Download source code.
+**C.** Or download source code.
 
 ### 3. Install cookiecutter
 

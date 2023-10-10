@@ -1,6 +1,6 @@
 {
   "project_name": "FastAPI Template",
-  "project_abbr": "fat",
+  "project_abbr": "ft",
   "project_summary": "This is a {{cookiecutter.project_name}} project.",
   "project_slug": "{{cookiecutter.project_name.lower().strip().replace(' ', '-').replace('_', '-').replace('.', '-')}}",
   "env_prefix": "{{cookiecutter.project_slug.upper().replace('-', '_')}}_",

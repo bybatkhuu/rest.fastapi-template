@@ -1,7 +1,7 @@
 version: "3.8"
 
 # services:
-#   {{cookiecutter.project_slug}}:
+#   api:
 #     env_file:
 #       - .env
 #     deploy:
@@ -11,4 +11,4 @@ version: "3.8"
 #           cpus: "0.5"
 #           memory: 512M
 #     command: ["/bin/bash"]
-#     command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+#     command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]

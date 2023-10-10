@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  {{cookiecutter.project_slug}}:
+  api:
     image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest
     build:
       context: .
@@ -11,10 +11,10 @@ services:
       - TZ=${TZ:-{{cookiecutter.timezone}}}
       - ENV=${ENV:-local}
       - DEBUG=${DEBUG:-false}
-      - {{cookiecutter.env_prefix}}APP_PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}
+      - {{cookiecutter.env_prefix}}PORT={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}
     volumes:
-      - "./volumes/storage/{{cookiecutter.project_slug}}/data:/var/lib/{{cookiecutter.project_slug}}"
-      - "./volumes/storage/{{cookiecutter.project_slug}}/logs:/var/log/{{cookiecutter.project_slug}}"
+      - "./volumes/storage/{{cookiecutter.project_slug}}/data:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR:-/var/lib/{{cookiecutter.project_slug}}}"
+      - "./volumes/storage/{{cookiecutter.project_slug}}/logs:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR:-/var/log/{{cookiecutter.project_slug}}}"
     ports:
-      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000}"
+      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}"
     tty: true
