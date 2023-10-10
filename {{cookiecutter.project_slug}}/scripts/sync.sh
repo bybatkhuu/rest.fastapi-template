@@ -34,6 +34,10 @@ PROJECT_SLUG="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
 ## --- Main --- ##
 main()
 {
+	if [ ! -d "./${PROJECT_SLUG}" ]; then
+		echoError "Not found '${PROJECT_SLUG}' directory!"
+	fi
+
 	echoInfo "Syncing files..."
 	rsync -av "./${PROJECT_SLUG}/" ./
 	echoOk "Done."
