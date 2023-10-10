@@ -5,6 +5,7 @@ dev:
     [
       "*.pyc",
       "*.pyo",
+      "*.pyd",
       "__pycache__",
       "*.git",
       ".github",

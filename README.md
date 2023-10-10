@@ -25,7 +25,8 @@ For **docker** environment:
 For **standalone** environment:
 
 - Install **Python (>= v3.9)**:
-    - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/en/latest/miniconda.html>
+    - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/projects/miniconda/en/latest/index.html>
+    - *[arm64/aarch64] Miniforge (v3)* - <https://github.com/conda-forge/miniforge>
     - *[OPTIONAL] venv* - <https://docs.python.org/3/library/venv.html>
 
 For **development** environment:
@@ -45,15 +46,21 @@ mkdir -pv ~/workspaces/projects
 cd ~/workspaces/projects
 ```
 
-**2.2.** Follow one of the below options **[A]** or **[B]**:
+**2.2.** Follow one of the below options **[A]**, **[B]** or **[C]**:
 
-**A.** Or clone the repository (for development: git + ssh key):
+**A.** Clone the repository (for public: git + https):
+
+```sh
+git clone https://github.com/bybatkhuu/rest.fastapi-template.git && cd rest.fastapi-template
+```
+
+**B.** Clone the repository (for development: git + ssh key):
 
 ```sh
 git clone git@github.com:bybatkhuu/rest.fastapi-template.git && cd rest.fastapi-template
 ```
 
-**B.** Download source code: <https://github.com/bybatkhuu/rest.fastapi-template/releases>
+**C.** Or download source code: <https://github.com/bybatkhuu/rest.fastapi-template/releases>
 
 ### 3. Install python dependencies
 
@@ -249,17 +256,19 @@ You can use the following environment variables to configure:
 [**`.env.example`**](.env.example)
 
 ```sh
+## --- Environment variable --- ##
 ENV=local
 DEBUG=false
 # TZ=Asia/Seoul
 
-## FastAPI Template settings:
-FASTAPI_TEMPLATE_APP_PORT=8000
-FASTAPI_TEMPLATE_APP_DATA_DIR="/var/lib/fastapi-template"
-FASTAPI_TEMPLATE_LOGGER__FILE__LOGS_DIR="/var/log/fastapi-template"
+
+## -- API configs -- ##
+FASTAPI_TEMPLATE_PORT=8000
+FASTAPI_TEMPLATE_DATA_DIR="/var/lib/fastapi-template"
+FASTAPI_TEMPLATE_LOGS_DIR="/var/log/fastapi-template"
 
 
-## Docker build arguments:
+## -- Docker build args -- ##
 # HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
 ```
@@ -278,7 +287,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation
