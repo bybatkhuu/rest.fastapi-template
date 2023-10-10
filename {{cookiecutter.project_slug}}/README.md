@@ -51,13 +51,15 @@ cd ~/workspaces/projects
 **A.** Clone the repository (for public: git + https):
 
 ```sh
-git clone https://github.com/{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
+git clone https://github.com/{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && \
+    cd rest.{{cookiecutter.project_slug}}
 ```
 
 **B.** Clone the repository (for development: git + ssh key):
 
 ```sh
-git clone git@github.com:{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && cd rest.{{cookiecutter.project_slug}}
+git clone git@github.com:{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && \
+    cd rest.{{cookiecutter.project_slug}}
 ```
 
 **C.** Or download source code: <https://github.com/{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}/releases>
@@ -104,17 +106,17 @@ pip install -r ./requirements.gpu.txt
 
 ```sh
 # Copy `.env.example` file to `.env`:
-cp -v .env.example .env
+cp -v ./.env.example ./.env
 
 # Edit environment variables to fit in your environment:
-nano .env
+nano ./.env
 ```
 
 #### **B.** For **standalone** environment **[5.B ~ 5.F]**
 
 ```sh
 # Copy `.env.example file` into `.env` file:
-cp -v .env.example app/.env
+cp -v ./.env.example ./app/.env
 
 # Edit environment variables to fit in your environment:
 nano ./app/.env
@@ -143,10 +145,10 @@ export _ENV=[ENV]
 export _ENV=dev
 
 # Copy docker-compose.override.[ENV].yml into `docker-compose.override.yml` file:
-cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml docker-compose.override.yml
+cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml ./docker-compose.override.yml
 
 # Edit `docker-compose.override.yml` file to fit in your environment:
-nano docker-compose.override.yml
+nano ./docker-compose.override.yml
 
 
 ## 2. Check docker compose configuration is valid:
@@ -179,10 +181,10 @@ Before running, need to install **PM2**: <https://pm2.keymetrics.io/docs/usage/q
 # TIP: Skip this step, if you've already configured.
 
 # Copy example PM2 configuration file:
-cp -v pm2-process.json.example pm2-process.json
+cp -v ./pm2-process.json.example ./pm2-process.json
 
 # Edit PM2 configuration file to fit in your environment:
-nano pm2-process.json
+nano ./pm2-process.json
 
 
 ## 2. Start PM2 process:
@@ -212,7 +214,7 @@ python -u -m app
 cd app
 
 # Run server as python script:
-python -u main.py
+python -u ./main.py
 ```
 
 **E.** Run with **uvicorn**:

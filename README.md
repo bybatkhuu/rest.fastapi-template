@@ -79,8 +79,10 @@ pip install -r ./requirements.txt
 ### 4. Generate project with cookiecutter
 
 ```bash
-# Generate project (project name, project slug, repo owner, version, email, etc.):
+# Generate project (project name, project slug, repo owner, version, etc.):
 cookiecutter -f .
+# Or:
+./scripts/generate.sh
 ```
 
 ### 5. Start the project
@@ -91,10 +93,10 @@ cd [PROJECT_NAME]
 cd fastapi-template
 
 # Start:
-./commands.sh start -l
+./compose.sh start -l
 
 # Stop:
-./commands.sh stop
+./compose.sh stop
 ```
 
 :thumbsup: :sparkles:
