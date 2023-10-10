@@ -4,9 +4,10 @@ services:
   api:
     # env_file:
     #   - .env
-    # environment:
-    #   - FASTAPI_TEMPLATE_DATA_DIR=/var/lib/fastapi-template
-    #   - FASTAPI_TEMPLATE_LOGS_DIR=/var/log/fastapi-template
+    environment:
+      - DEBUG=${DEBUG:-false}
+      # - FASTAPI_TEMPLATE_DATA_DIR=/var/lib/fastapi-template
+      # - FASTAPI_TEMPLATE_LOGS_DIR=/var/log/fastapi-template
     volumes:
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
       - "./app:/app/fastapi-template"
