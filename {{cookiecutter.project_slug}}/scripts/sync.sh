@@ -36,6 +36,7 @@ main()
 {
 	if [ ! -d "./${PROJECT_SLUG}" ]; then
 		echoError "Not found '${PROJECT_SLUG}' directory!"
+		exit 1
 	fi
 
 	echoInfo "Syncing files..."
