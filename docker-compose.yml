@@ -7,8 +7,8 @@ services:
       context: .
     restart: unless-stopped
     environment:
-      - TZ=${TZ:-Asia/Seoul}
       - TERM=${TERM:-xterm}
+      - TZ=${TZ:-Asia/Seoul}
       - ENV=${ENV:-local}
       - FASTAPI_TEMPLATE_PORT=${FASTAPI_TEMPLATE_PORT:-8000}
     volumes:
