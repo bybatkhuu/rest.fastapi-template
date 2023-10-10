@@ -48,14 +48,14 @@ cd ~/workspaces/projects
 
 **2.2.** Follow one of the below options **[A]**, **[B]** or **[C]**:
 
-**A.** Clone the repository (for public: git + https):
+**A.** Clone the repository (for **public**: git + https):
 
 ```sh
 git clone https://github.com/{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && \
     cd rest.{{cookiecutter.project_slug}}
 ```
 
-**B.** Clone the repository (for development: git + ssh key):
+**B.** Clone the repository (for **development**: git + ssh key):
 
 ```sh
 git clone git@github.com:{{cookiecutter.github_owner}}/rest.{{cookiecutter.project_slug}}.git && \
@@ -115,7 +115,7 @@ nano ./.env
 #### **B.** For **standalone** environment **[5.B ~ 5.F]**
 
 ```sh
-# Copy `.env.example file` into `.env` file:
+# Copy `.env.example` file into `.env` file:
 cp -v ./.env.example ./app/.env
 
 # Edit environment variables to fit in your environment:
@@ -144,7 +144,7 @@ export _ENV=[ENV]
 # For example for development environment:
 export _ENV=dev
 
-# Copy docker-compose.override.[ENV].yml into `docker-compose.override.yml` file:
+# Copy `docker-compose.override.[ENV].yml` into `docker-compose.override.yml` file:
 cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml ./docker-compose.override.yml
 
 # Edit `docker-compose.override.yml` file to fit in your environment:
