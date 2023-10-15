@@ -3,11 +3,16 @@
 from enum import Enum
 
 
+ENV_PREFIX = "FASTAPI_TEMPLATE_"
+ENV_PREFIX_APP = f"{ENV_PREFIX}APP_"
+
+
 class EnvEnum(str, Enum):
     LOCAL = "local"
     DEVELOPMENT = "development"
     TEST = "test"
     DEMO = "demo"
+    DOCUMENTATION = "documentation"
     STAGING = "staging"
     PRODUCTION = "production"
 
@@ -37,4 +42,4 @@ class MethodEnum(str, Enum):
     TRACE = "TRACE"
 
 
-__all__ = ["EnvEnum", "CORSMethodEnum", "MethodEnum"]
+__all__ = ["ENV_PREFIX", "ENV_PREFIX_APP", "EnvEnum", "CORSMethodEnum", "MethodEnum"]

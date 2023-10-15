@@ -264,10 +264,10 @@ DEBUG=false
 # TZ=Asia/Seoul
 
 
-## -- API configs -- ##
-FASTAPI_TEMPLATE_PORT=8000
-FASTAPI_TEMPLATE_DATA_DIR="/var/lib/fastapi-template"
-FASTAPI_TEMPLATE_LOGS_DIR="/var/log/fastapi-template"
+## -- APP configs -- ##
+FASTAPI_TEMPLATE_APP_PORT=8000
+FASTAPI_TEMPLATE_APP_LOGS_DIR="/var/log/fastapi-template"
+FASTAPI_TEMPLATE_APP_DATA_DIR="/var/lib/fastapi-template"
 
 
 ## -- Docker build args -- ##
@@ -289,7 +289,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation

@@ -4,12 +4,10 @@ from pydantic import validate_arguments
 from fastapi import FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 
-from src.core.handlers.status import (
+from src.core.handlers import (
     not_found_handler,
     method_not_allowed_handler,
     server_error_handler,
-)
-from src.core.handlers.raises import (
     http_exception_handler,
     validation_error_handler,
 )

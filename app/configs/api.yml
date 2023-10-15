@@ -1,0 +1,8 @@
+api:
+  version: "v1"
+  prefix: "/api/{api_version}"
+  routes:
+    utils:
+      _tags: ["Utils"]
+      ping: "/ping" # GET
+      health: "/health" # GET

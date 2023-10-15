@@ -21,7 +21,7 @@ app = FastAPI(
     version=__version__,
     lifespan=lifespan,
     default_response_class=BaseResponse,
-    **config.docs.dict(exclude={"enabled"}),
+    **config.app.docs.dict(exclude={"enabled"}),
 )
 
 add_middlewares(app=app)
@@ -38,10 +38,8 @@ if __name__ == "__main__":
         access_log=False,
         server_header=False,
         proxy_headers=config.app.behind_proxy,
-        forwarded_allow_ips=config.secure.forwarded_allow_ips,
-        reload=config.dev.reload,
-        reload_includes=config.dev.reload_includes,
-        reload_excludes=config.dev.reload_excludes,
+        forwarded_allow_ips=config.app.forwarded_allow_ips,
+        **config.app.dev.dict(),
     )
 
 
