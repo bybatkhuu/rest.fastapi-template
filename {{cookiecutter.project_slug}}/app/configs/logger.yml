@@ -1,5 +1,5 @@
 logger:
-  app_name: "{{cookiecutter.project_slug}}"
+  app_name: "{app_slug}"
   level: "INFO"
   use_diagnose: false
   stream:
@@ -7,7 +7,7 @@ logger:
     std_handler:
       enabled: true
   file:
-    logs_dir: "/var/log/{{cookiecutter.project_slug}}"
+    logs_dir: "/var/log/{app_name}"
     rotate_size: 10000000 # 10MB
     rotate_time: "00:00:00"
     backup_count: 90

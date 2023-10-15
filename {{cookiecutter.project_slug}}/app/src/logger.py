@@ -29,7 +29,7 @@ if config.logger.extra.http_json_enabled:
 
 
 @validate_arguments(config=dict(arbitrary_types_allowed=True))
-async def log_http_error(request: Request, status_code: int):
+async def async_log_http_error(request: Request, status_code: int):
     """Log HTTP error for unhandled Exception.
 
     Args:
@@ -48,7 +48,7 @@ async def log_http_error(request: Request, status_code: int):
 
 
 @validate_arguments
-async def log_trace(message: str):
+async def async_log_trace(message: str):
     """Log trace message.
 
     Args:
@@ -59,7 +59,7 @@ async def log_trace(message: str):
 
 
 @validate_arguments
-async def log_debug(message: str):
+async def async_log_debug(message: str):
     """Log debug message.
 
     Args:
@@ -70,7 +70,7 @@ async def log_debug(message: str):
 
 
 @validate_arguments
-async def log_info(message: str):
+async def async_log_info(message: str):
     """Log info message.
 
     Args:
@@ -81,7 +81,7 @@ async def log_info(message: str):
 
 
 @validate_arguments
-async def log_success(message: str):
+async def async_log_success(message: str):
     """Log success message.
 
     Args:
@@ -92,7 +92,7 @@ async def log_success(message: str):
 
 
 @validate_arguments
-async def log_warning(message: str):
+async def async_log_warning(message: str):
     """Log warning message.
 
     Args:
@@ -103,7 +103,18 @@ async def log_warning(message: str):
 
 
 @validate_arguments
-async def log_critical(message: str):
+async def async_log_error(message: str):
+    """Log error message.
+
+    Args:
+        message (str, required): Message to log.
+    """
+
+    await run_in_threadpool(logger.error, message)
+
+
+@validate_arguments
+async def async_log_critical(message: str):
     """Log critical message.
 
     Args:
@@ -114,7 +125,7 @@ async def log_critical(message: str):
 
 
 @validate_arguments
-async def log_level(level: str, message: str):
+async def async_log_level(level: str, message: str):
     """Log level message.
 
     Args:
@@ -128,12 +139,13 @@ async def log_level(level: str, message: str):
 __all__ = [
     "logger_loader",
     "logger",
-    "log_http_error",
-    "log_trace",
-    "log_debug",
-    "log_info",
-    "log_success",
-    "log_warning",
-    "log_critical",
-    "log_level",
+    "async_log_http_error",
+    "async_log_trace",
+    "async_log_debug",
+    "async_log_info",
+    "async_log_success",
+    "async_log_warning",
+    "async_log_error",
+    "async_log_critical",
+    "async_log_level",
 ]

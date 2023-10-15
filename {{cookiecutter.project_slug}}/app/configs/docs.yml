@@ -1,22 +1,23 @@
-docs:
-  enabled: true
-  openapi_url: "{api_prefix}/openapi.json"
-  docs_url: "{api_prefix}/docs"
-  redoc_url: "{api_prefix}/redoc"
-  swagger_ui_oauth2_redirect_url: "{api_prefix}/docs/oauth2-redirect"
-  summary: "{{cookiecutter.project_summary}}"
-  description: ""
-  terms_of_service: "{{cookiecutter.term_url}}"
-  contact:
-    name: "{{cookiecutter.contact_name}}"
-    email: "{{cookiecutter.contact_email}}"
-    url: "{{cookiecutter.contact_url}}"
-  license_info:
-    name: "MIT License"
-    identifier: "MIT"
-    url: "https://opensource.org/licenses/MIT"
-  openapi_tags:
-    - name: "Utils"
-      description: "Useful utility endpoints."
-  swagger_ui_parameters:
-    syntaxHighlight.theme: nord
+app:
+  docs:
+    enabled: true
+    openapi_url: "{api_prefix}/openapi.json"
+    docs_url: "{api_prefix}/docs"
+    redoc_url: "{api_prefix}/redoc"
+    swagger_ui_oauth2_redirect_url: "{api_prefix}/docs/oauth2-redirect"
+    summary: "This is a {{cookiecutter.project_name}} project."
+    description: ""
+    terms_of_service: "https://{{cookiecutter.domain}}/terms"
+    contact:
+      name: "Support Team"
+      email: "support@{{cookiecutter.domain}}"
+      url: "https://{{cookiecutter.domain}}/contact"
+    license_info:
+      name: "MIT License"
+      identifier: "MIT"
+      url: "https://opensource.org/licenses/MIT"
+    openapi_tags:
+      - name: "Utils"
+        description: "Useful utility endpoints."
+    swagger_ui_parameters:
+      syntaxHighlight.theme: nord

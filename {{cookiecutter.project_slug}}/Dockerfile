@@ -1,9 +1,10 @@
 ARG BASE_IMAGE=debian:12.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG {{cookiecutter.env_prefix}}APP_DIR="/app/{{cookiecutter.project_slug}}"
-ARG {{cookiecutter.env_prefix}}DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
-ARG {{cookiecutter.env_prefix}}LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
+ARG {{cookiecutter.env_prefix}}APP_DIR="/app"
+ARG {{cookiecutter.env_prefix}}APP_HOME="{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR}/{{cookiecutter.project_slug}}"
+ARG {{cookiecutter.env_prefix}}APP_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
+ARG {{cookiecutter.env_prefix}}APP_LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
 
 
 # Here is the builder image
@@ -67,8 +68,9 @@ FROM ${BASE_IMAGE} as base
 
 ARG DEBIAN_FRONTEND
 ARG {{cookiecutter.env_prefix}}APP_DIR
-ARG {{cookiecutter.env_prefix}}DATA_DIR
-ARG {{cookiecutter.env_prefix}}LOGS_DIR
+ARG {{cookiecutter.env_prefix}}APP_HOME
+ARG {{cookiecutter.env_prefix}}APP_DATA_DIR
+ARG {{cookiecutter.env_prefix}}APP_LOGS_DIR
 
 # CHANGEME: Change hashed password:
 ARG HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
@@ -82,8 +84,9 @@ ENV UID=${UID} \
 	USER=${USER} \
 	GROUP=${GROUP} \
 	{{cookiecutter.env_prefix}}APP_DIR={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} \
-	{{cookiecutter.env_prefix}}DATA_DIR={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR} \
-	{{cookiecutter.env_prefix}}LOGS_DIR={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR}
+	{{cookiecutter.env_prefix}}APP_HOME={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_HOME} \
+	{{cookiecutter.env_prefix}}APP_DATA_DIR={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR} \
+	{{cookiecutter.env_prefix}}APP_LOGS_DIR={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_LOGS_DIR}
 
 ENV	PYTHONIOENCODING=utf-8 \
 	PATH=/opt/conda/bin:${PATH}
@@ -122,12 +125,12 @@ RUN rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/*
 	echo -e "alias ll='ls -alhF --group-directories-first --color=auto'\n" >> /home/${USER}/.bashrc && \
 	echo ". /opt/conda/etc/profile.d/conda.sh" >> /home/${USER}/.bashrc && \
 	echo "conda activate base" >> /home/${USER}/.bashrc && \
-	mkdir -pv {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR} && \
-	chown -Rc "${USER}:${GROUP}" {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR} && \
-	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR} -type d -exec chmod -c 770 {} + && \
-	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR} -type d -exec chmod -c ug+s {} + && \
-	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR} -type d -exec chmod -c 775 {} + && \
-	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}LOGS_DIR} -type d -exec chmod -c +s {} + && \
+	mkdir -pv {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_HOME} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_LOGS_DIR} && \
+	chown -Rc "${USER}:${GROUP}" {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_LOGS_DIR} && \
+	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR} -type d -exec chmod -c 770 {} + && \
+	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR} {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR} -type d -exec chmod -c ug+s {} + && \
+	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_LOGS_DIR} -type d -exec chmod -c 775 {} + && \
+	find {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_LOGS_DIR} -type d -exec chmod -c +s {} + && \
 	rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/* /home/${USER}/.cache/*
 
 ENV LANG=en_US.UTF-8 \
@@ -141,12 +144,12 @@ COPY --from=builder --chown=${UID}:${GID} /opt /opt
 # hadolint ignore=DL3006
 FROM base as app
 
-WORKDIR {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR}
-COPY --chown=${UID}:${GID} ./app {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DIR}
+WORKDIR {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_HOME}
+COPY --chown=${UID}:${GID} ./app {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_HOME}
 COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
-# VOLUME {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}DATA_DIR}
+# VOLUME {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_DATA_DIR}
 
 USER ${UID}:${GID}
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port='{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000}' --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+# CMD ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]

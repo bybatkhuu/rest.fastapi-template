@@ -7,7 +7,7 @@ from src.core.schemas.responses import BaseResPM
 from src.core.responses.base import BaseResponse
 
 
-router = APIRouter(tags=config.routes["utils"]["_tags"])
+router = APIRouter(tags=config.api.routes.utils["_tags"])
 
 
 @router.get(
@@ -23,7 +23,7 @@ async def get_base(request: Request):
 
 
 @router.get(
-    config.routes["utils"]["ping"],
+    config.api.routes.utils["ping"],
     summary="Ping",
     description="Check if the service is up and running.",
     response_model=BaseResPM,
@@ -35,7 +35,7 @@ async def get_ping(request: Request):
 
 
 @router.get(
-    config.routes["utils"]["health"],
+    config.api.routes.utils["health"],
     summary="Health",
     description="Check health of all related backend services.",
     response_model=BaseResPM,

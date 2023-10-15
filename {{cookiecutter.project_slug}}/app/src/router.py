@@ -17,7 +17,7 @@ def add_routers(app: FastAPI):
         app (FastAPI): FastAPI app instance.
     """
 
-    _api_router = APIRouter(prefix=config.app.api_prefix)
+    _api_router = APIRouter(prefix=config.api.prefix)
     _api_router.include_router(utils_router)
     # Add more API routers here...
 

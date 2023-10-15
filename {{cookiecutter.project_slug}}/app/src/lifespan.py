@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
     # Add startup code here...
     logger.success("Finished preparation to startup.")
     logger.opt(colors=True).info(f"App version: <c>{__version__}</c>")
-    logger.opt(colors=True).info(f"API version: <c>{config.app.api_version}</c>")
+    logger.opt(colors=True).info(f"API version: <c>{config.api.version}</c>")
 
     yield
     logger.info("Praparing to shutdown...")

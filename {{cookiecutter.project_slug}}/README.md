@@ -1,6 +1,6 @@
 # {{cookiecutter.project_name}}
 
-{{cookiecutter.project_summary}}
+This is a {{cookiecutter.project_name}} project.
 
 ## Features
 
@@ -264,10 +264,10 @@ DEBUG=false
 # TZ={{cookiecutter.timezone}}
 
 
-## -- API configs -- ##
-{{cookiecutter.env_prefix}}PORT=8000
-{{cookiecutter.env_prefix}}DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
-{{cookiecutter.env_prefix}}LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
+## -- APP configs -- ##
+{{cookiecutter.env_prefix}}APP_PORT=8000
+{{cookiecutter.env_prefix}}APP_LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
+{{cookiecutter.env_prefix}}APP_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
 
 
 ## -- Docker build args -- ##
@@ -289,7 +289,7 @@ For example as in [**`docker-compose.override.yml`**](templates/docker-compose/d
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
 ```
 
 ## Documentation
