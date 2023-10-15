@@ -134,6 +134,12 @@ _doImages()
 	docker compose images ${@:-} || exit 2
 }
 
+_doClean()
+{
+	# shellcheck disable=SC2068
+	docker compose down -v ${@:-} || exit 2
+}
+
 _doUpdate()
 {
 	if docker compose ps | grep 'Up' > /dev/null 2>&1; then
@@ -153,7 +159,7 @@ _doUpdate()
 ## --- Menu arguments --- ##
 _exitOnWrongParams()
 {
-	echoInfo "USAGE: ${0} build | validate | start | stop | restart | logs | list | ps | stats | exec | enter | images | update"
+	echoInfo "USAGE: ${0} build | validate | start | stop | restart | logs | list | ps | stats | exec | enter | images | clean | update"
 	exit 1
 }
 
@@ -200,6 +206,9 @@ main()
 		images)
 			shift
 			_doImages "${@:-}";;
+		clean)
+			shift
+			_doClean "${@:-}";;
 		update)
 			shift
 			_doUpdate "${@:-}";;

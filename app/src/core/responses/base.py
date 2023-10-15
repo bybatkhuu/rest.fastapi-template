@@ -86,7 +86,7 @@ class BaseResponse(JSONResponse):
             elif "X-Request-Id" not in headers:
                 headers["X-Request-Id"] = request.state.request_id
 
-        meta["api_version"]: str = config.app.api_version
+        meta["api_version"]: str = config.api.version
         meta["version"]: str = __version__
 
         if (
