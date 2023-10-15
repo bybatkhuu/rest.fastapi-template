@@ -16,7 +16,7 @@ class LinksResPM(ExtraBaseModel):
         alias="self",
         title="Self link",
         description="Link to the current resource.",
-        examples=["https://api.example.com/v1/ping"],
+        examples=["https://api.{{cookiecutter.domain}}/v1/ping"],
     )
 
 
