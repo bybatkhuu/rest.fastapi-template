@@ -6,7 +6,7 @@
   "repo_owner": "username",
   "github_owner": "{{cookiecutter.repo_owner}}",
   "docker_registry": "{{cookiecutter.repo_owner}}",
-  "version": "4.0.0-231015",
+  "version": "4.0.1-231017",
   "timezone": "UTC",
   "domain": "example.com"
 }
