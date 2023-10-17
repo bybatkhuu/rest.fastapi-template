@@ -11,12 +11,6 @@ cd "${_PROJECT_DIR}" || exit 2
 # shellcheck disable=SC1091
 source ./scripts/base.sh
 
-# Loading .env file (if exists):
-if [ -f ".env" ]; then
-	# shellcheck disable=SC1091
-	source .env
-fi
-
 
 if [ -z "$(which python)" ]; then
 	echoError "Python not found or not installed."
