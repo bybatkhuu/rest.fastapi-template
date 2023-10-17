@@ -1,5 +1,0 @@
-routes:
-  utils:
-    _tags: ["Utils"]
-    ping: "/ping" # GET
-    health: "/health" # GET
