@@ -105,7 +105,7 @@ pip install -r ./requirements.gpu.txt
 #### **A.** **[RECOMMENDED]** For **docker** environment **[5.A]**
 
 ```sh
-# Copy `.env.example` file to `.env`:
+# Copy `.env.example` file to `.env` file:
 cp -v ./.env.example ./.env
 
 # Edit environment variables to fit in your environment:
@@ -115,7 +115,7 @@ nano ./.env
 #### **B.** For **standalone** environment **[5.B ~ 5.F]**
 
 ```sh
-# Copy `.env.example` file into `.env` file:
+# Copy `.env.example` file to `.env` file:
 cp -v ./.env.example ./app/.env
 
 # Edit environment variables to fit in your environment:
@@ -144,7 +144,7 @@ export _ENV=[ENV]
 # For example for development environment:
 export _ENV=dev
 
-# Copy `docker-compose.override.[ENV].yml` into `docker-compose.override.yml` file:
+# Copy `docker-compose.override.[ENV].yml` file to `docker-compose.override.yml` file:
 cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml ./docker-compose.override.yml
 
 # Edit `docker-compose.override.yml` file to fit in your environment:
