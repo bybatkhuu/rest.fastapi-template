@@ -17,10 +17,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-VERSION_FILENAME="${VERSION_FILENAME:-__version__.py}"
-
-# Calculated variables:
-VERSION_FILE_PATH="app/${VERSION_FILENAME}"
+VERSION_FILE_PATH="${VERSION_FILE_PATH:-app/__version__.py}"
 ## --- Variables --- ##
 
 
