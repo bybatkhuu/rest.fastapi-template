@@ -105,7 +105,7 @@ pip install -r ./requirements.gpu.txt
 #### **A.** **[RECOMMENDED]** For **docker** environment **[5.A]**
 
 ```sh
-# Copy `.env.example` file to `.env` file:
+# Copy '.env.example' file to '.env' file:
 cp -v ./.env.example ./.env
 
 # Edit environment variables to fit in your environment:
@@ -115,7 +115,7 @@ nano ./.env
 #### **B.** For **standalone** environment **[5.B ~ 5.F]**
 
 ```sh
-# Copy `.env.example` file to `.env` file:
+# Copy '.env.example' file to '.env' file:
 cp -v ./.env.example ./app/.env
 
 # Edit environment variables to fit in your environment:
@@ -136,7 +136,7 @@ Follow the one of below instructions based on your environment **[A, B, C, D, E,
 **IMPORTANT:** Please, check **[arguments](#arguments)**!
 
 ```bash
-## 1. Configure `docker-compose.override.yml` file.
+## 1. Configure 'docker-compose.override.yml' file.
 # TIP: Skip this step, if you've already configured.
 
 # Set environment:
@@ -144,10 +144,10 @@ export _ENV=[ENV]
 # For example for development environment:
 export _ENV=dev
 
-# Copy `docker-compose.override.[ENV].yml` file to `docker-compose.override.yml` file:
+# Copy 'docker-compose.override.[ENV].yml' file to 'docker-compose.override.yml' file:
 cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml ./docker-compose.override.yml
 
-# Edit `docker-compose.override.yml` file to fit in your environment:
+# Edit 'docker-compose.override.yml' file to fit in your environment:
 nano ./docker-compose.override.yml
 
 
