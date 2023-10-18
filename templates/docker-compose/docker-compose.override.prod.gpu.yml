@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api:
-    image: bybatkhuu/fastapi-template:latest-gpu
+    image: bybatkhuu/fastapi-template:4.0.1-231017-gpu
     runtime: nvidia
     env_file:
       - .env

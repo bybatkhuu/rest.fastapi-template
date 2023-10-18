@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   api:
+    image: bybatkhuu/fastapi-template:4.0.1-231017
     env_file:
       - .env
     # deploy:
