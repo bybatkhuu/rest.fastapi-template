@@ -24,7 +24,7 @@ For **docker** environment:
 
 For **standalone** environment:
 
-- Install **Python (>= v3.9)**:
+- Install **Python (>= v3.9)** and **pip**:
     - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/projects/miniconda/en/latest/index.html>
     - *[arm64/aarch64] Miniforge (v3)* - <https://github.com/conda-forge/miniforge>
     - *[OPTIONAL] venv* - <https://docs.python.org/3/library/venv.html>
