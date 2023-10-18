@@ -9,10 +9,7 @@ on:
       - completed
   push:
     tags:
-      - "v*.*.*"
-  # pull_request:
-  #   branches:
-  #     - main
+      - "v*.*.*-*"
 
 jobs:
   build_publish:
