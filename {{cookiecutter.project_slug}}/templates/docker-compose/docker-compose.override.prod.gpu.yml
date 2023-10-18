@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api:
-    image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:latest-gpu
+    image: {{cookiecutter.docker_registry}}/{{cookiecutter.project_slug}}:{{cookiecutter.version}}-gpu
     runtime: nvidia
     env_file:
       - .env
