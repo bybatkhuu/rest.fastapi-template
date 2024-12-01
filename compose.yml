@@ -1,0 +1,16 @@
+services:
+  api:
+    image: bybatkhuu/rest.fastapi-template:latest
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      TERM: ${TERM:-xterm}
+      TZ: ${TZ:-Asia/Seoul}
+      FASTAPI_TEMPLATE_APP_PORT: ${FASTAPI_TEMPLATE_APP_PORT:-8000}
+    volumes:
+      - "./volumes/storage/rest.fastapi-template/logs:/var/log/rest.fastapi-template"
+      - "./volumes/storage/rest.fastapi-template/data:/var/lib/rest.fastapi-template"
+    ports:
+      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}"
+    tty: true

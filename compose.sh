@@ -12,7 +12,6 @@ cd "${_PROJECT_DIR}" || exit 2
 source ./scripts/base.sh
 
 exitIfNoDocker
-# exitIfNotExists ".env"
 
 # Loading .env file (if exists):
 if [ -f ".env" ]; then
@@ -24,9 +23,6 @@ fi
 
 ## --- Variables --- ##
 _DEFAULT_SERVICE="api"
-
-# Extending timeout of docker compose logs:
-export COMPOSE_HTTP_TIMEOUT=43200
 ## --- Variables --- ##
 
 
@@ -47,18 +43,18 @@ _doStart()
 	if [ "${1:-}" == "-l" ]; then
 		shift
 		# shellcheck disable=SC2068
-		docker compose up -d ${@:-} || exit 2
+		docker compose up -d --remove-orphans --force-recreate ${@:-} || exit 2
 		_doLogs "${@:-}"
 	else
 		# shellcheck disable=SC2068
-		docker compose up -d ${@:-} || exit 2
+		docker compose up -d --remove-orphans --force-recreate ${@:-} || exit 2
 	fi
 }
 
 _doStop()
 {
 	if [ -z "${1:-}" ]; then
-		docker compose down || exit 2
+		docker compose down --remove-orphans || exit 2
 	else
 		# shellcheck disable=SC2068
 		docker compose rm -sfv ${@:-} || exit 2
@@ -137,7 +133,7 @@ _doImages()
 _doClean()
 {
 	# shellcheck disable=SC2068
-	docker compose down -v ${@:-} || exit 2
+	docker compose down -v --remove-orphans ${@:-} || exit 2
 }
 
 _doUpdate()
@@ -174,7 +170,7 @@ main()
 		build)
 			shift
 			_doBuild;;
-		validate | config)
+		validate | valid | config)
 			shift
 			_doValidate;;
 		start | run | up)
@@ -206,7 +202,7 @@ main()
 		images)
 			shift
 			_doImages "${@:-}";;
-		clean)
+		clean | clear)
 			shift
 			_doClean "${@:-}";;
 		update)
