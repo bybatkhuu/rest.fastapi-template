@@ -1,5 +1,5 @@
 {
-	"name": "fastapi-template",
+	"name": "rest.fastapi-template",
 	"interpreter": "/usr/bin/env",
 	"script": "python",
 	"args": "-u -m src",
@@ -39,8 +39,6 @@
 		"**/data/**",
 		"**/dataset/**",
 		"**/datasets/**",
-		"**/model/**",
-		"**/models/**",
 		"**/result/**",
 		"**/results/**",
 		"**/output/**",

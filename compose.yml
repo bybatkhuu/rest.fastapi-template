@@ -7,10 +7,18 @@ services:
     environment:
       TERM: ${TERM:-xterm}
       TZ: ${TZ:-Asia/Seoul}
-      FASTAPI_TEMPLATE_APP_PORT: ${FASTAPI_TEMPLATE_APP_PORT:-8000}
+      FT_API_PORT: ${FT_API_PORT:-8000}
+    env_file:
+      - path: .env
+        required: false
     volumes:
-      - "./volumes/storage/rest.fastapi-template/logs:/var/log/rest.fastapi-template"
-      - "./volumes/storage/rest.fastapi-template/data:/var/lib/rest.fastapi-template"
+      - "api-logs:/var/log/rest.fastapi-template"
+      - "api-data:/var/lib/rest.fastapi-template"
     ports:
-      - "${FASTAPI_TEMPLATE_APP_PORT:-8000}:${FASTAPI_TEMPLATE_APP_PORT:-8000}"
+      - "${FT_API_PORT:-8000}:${FT_API_PORT:-8000}"
     tty: true
+
+
+volumes:
+  api-logs:
+  api-data:

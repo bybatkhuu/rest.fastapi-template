@@ -1,13 +1,9 @@
 services:
   api:
-    env_file:
-      - .env
     volumes:
-      - "./volumes/storage/rest.fastapi-template/logs:${FASTAPI_TEMPLATE_APP_LOGS_DIR:-/var/log/rest.fastapi-template}"
-      - "./volumes/storage/rest.fastapi-template/data:${FASTAPI_TEMPLATE_APP_DATA_DIR:-/var/lib/rest.fastapi-template}"
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
-      - "./app:/app/rest.fastapi-template"
-      - "./volumes/.vscode-server:/home/ft-user/.vscode-server"
+      - "./src:/workspaces/rest.fastapi-template"
+    #   - "api-vscode-server:/home/ft-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:
@@ -15,4 +11,15 @@ services:
     #       cpus: "0.5"
     #       memory: 512M
     # command: ["/bin/bash"]
-    # command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log --reload --reload-include='*.yml' --reload-include='*.yaml' --reload-include='*.json'"]
+    # command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log --reload --reload-include='*.yml' --reload-include='*.yaml' --reload-include='*.json'"]
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:${FT_API_PORT:-8000}/api/v${FT_API_VERSION:-1}/ping"]
+    #   start_period: 30s
+    #   start_interval: 1s
+    #   interval: 5m
+    #   timeout: 5s
+    #   retries: 3
+
+
+# volumes:
+#   api-vscode-server:

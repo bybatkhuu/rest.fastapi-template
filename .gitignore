@@ -473,8 +473,6 @@ backups/
 data/
 dataset/
 datasets/
-#model/
-#models/
 result/
 results/
 output/
@@ -491,8 +489,6 @@ backups
 data
 dataset
 datasets
-#model
-#models
 result
 results
 output

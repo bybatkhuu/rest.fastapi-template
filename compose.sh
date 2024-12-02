@@ -155,7 +155,7 @@ _doUpdate()
 ## --- Menu arguments --- ##
 _exitOnWrongParams()
 {
-	echoInfo "USAGE: ${0} build | validate | start | stop | restart | logs | list | ps | stats | exec | enter | images | clean | update"
+	echoInfo "USAGE: ${0}  build | validate | start | stop | restart | logs | list | ps | stats | exec | enter | images | clean | update"
 	exit 1
 }
 
