@@ -1,4 +1,9 @@
-paths:
-  data_dir: "/var/lib/{app_slug}"
-  uploads_dir: "{data_dir}/uploads"
-  # models_dir: "{data_dir}/models"
+api:
+  paths:
+    tmp_dir: "/tmp/{app_slug}"
+    uploads_dir: "{tmp_dir}/uploads"
+    data_dir: "/var/lib/{app_slug}"
+    credentials_dir: "{data_dir}/credentials"
+    rsa_keys_dir: "{data_dir}/credentials/rsa_keys"
+    # models_dir: "{data_dir}/models"
+    # model_dir: "{data_dir}/models/{{model_id}}"

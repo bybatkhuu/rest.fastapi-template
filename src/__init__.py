@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 
-## Standard libraries
 import os
 import sys
 
-os.chdir("./app")
-sys.path.append(os.getcwd())
+from dotenv import load_dotenv
 
-## Internal modules
-from .main import app
-from .__version__ import __version__
+load_dotenv(override=True)
+
+if os.path.isdir("./src"):
+    os.chdir("./src")
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.append(os.getcwd())
+
+from .app import app, __version__
 
 
 __all__ = ["app", "__version__"]

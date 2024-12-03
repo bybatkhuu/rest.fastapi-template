@@ -1,0 +1,27 @@
+api:
+  security:
+    allowed_hosts: ["*"]
+    forwarded_allow_ips: ["*"]
+    cors:
+      allow_origins: ["*"]
+      allow_origin_regex: null
+      allow_headers: ["*"]
+      allow_methods:
+        ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS", "CONNECT"]
+      allow_credentials: false
+      expose_headers: []
+      max_age: 600 # Seconds (10 minutes)
+    rsa:
+      algorithm: "RS256"
+      key_size: 2048
+      private_key_fname: "private_key.pem"
+      public_key_fname: "public_key.pem"
+    jwt:
+      secret: "FT_JWT_SECRET123" # This should be a random string, and read from an environment variable!
+      algorithm: "HS256"
+      access_duration: 600 # Seconds (10 minutes)
+      refresh_window: 300 # Seconds (5 minutes)
+      verify_duration: 1800 # Seconds (30 minutes)
+      reset_duration: 900 # Seconds (15 minutes)
+      refresh_duration: 604800 # Seconds (7 days)
+      remember_duration: 2592000 # Seconds (30 days)
