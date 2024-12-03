@@ -7,7 +7,7 @@ api:
   bind_host: "0.0.0.0"
   port: 8000
   version: "1"
-  prefix: "/api/{api_version}"
+  prefix: "/api/v{api_version}"
   gzip_min_size: 1024 # Bytes (1KB)
   behind_proxy: true
   behind_cf_proxy: true

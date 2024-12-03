@@ -12,7 +12,7 @@ from pydantic import validate_call, SecretStr
 from app.core import utils
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def encode(
     payload: Dict[str, Any], key: Union[SecretStr, PrivateKeyTypes], algorithm: str
 ) -> str:
@@ -51,7 +51,7 @@ def encode(
     return _jwt_token
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def decode(
     token: str,
     key: Union[SecretStr, PublicKeyTypes],

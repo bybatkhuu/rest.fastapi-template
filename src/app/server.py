@@ -5,7 +5,6 @@ import uvicorn
 from fastapi import FastAPI
 
 ## Internal modules
-from .__version__ import __version__
 from .config import config
 from .lifespan import lifespan
 from .middleware import add_middlewares
@@ -16,7 +15,7 @@ from .core.responses import BaseResponse
 
 app = FastAPI(
     title=config.api.name,
-    version=__version__,
+    version=config.version,
     lifespan=lifespan,
     default_response_class=BaseResponse,
     **config.api.docs.model_dump(exclude={"enabled"}),

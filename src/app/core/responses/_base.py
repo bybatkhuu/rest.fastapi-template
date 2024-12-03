@@ -23,7 +23,7 @@ class BaseResponse(JSONResponse):
         JSONResponse: JSON response class from FastAPI.
     """
 
-    @validate_call(config=dict(arbitrary_types_allowed=True))
+    @validate_call(config={"arbitrary_types_allowed": True})
     def __init__(
         self,
         content: Any = None,

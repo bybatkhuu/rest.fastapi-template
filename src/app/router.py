@@ -8,7 +8,7 @@ from .core.routers.utils import router as utils_router
 from .core.routers.default import router as default_router
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def add_routers(app: FastAPI) -> None:
     """Add routers to FastAPI app.
 

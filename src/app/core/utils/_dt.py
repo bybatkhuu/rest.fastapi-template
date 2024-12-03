@@ -20,7 +20,7 @@ class TSUnitEnum(str, Enum):
     NANOSECONDS = "NANOSECONDS"
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def add_tzinfo(dt: datetime, tz: Union[ZoneInfo, tzinfo, str]) -> datetime:
     """Add or replace timezone info to datetime object.
 
@@ -76,7 +76,7 @@ def datetime_to_iso(
     return _dt_str
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def convert_tz(
     dt: datetime,
     tz: Union[ZoneInfo, tzinfo, str],
@@ -138,7 +138,7 @@ def now_local_dt() -> datetime:
     return _local_dt
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def now_dt(tz: Union[ZoneInfo, tzinfo, str]) -> datetime:
     """Get current datetime in specified timezone with tzinfo.
 
@@ -203,7 +203,7 @@ def convert_ts(dt: datetime, unit: TSUnitEnum = TSUnitEnum.SECONDS) -> int:
     return _ts
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def calc_future_dt(
     delta: Union[timedelta, conint(ge=1)],  # type: ignore
     dt: Optional[datetime] = None,

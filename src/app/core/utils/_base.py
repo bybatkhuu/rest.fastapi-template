@@ -82,7 +82,7 @@ def clean_obj_dict(obj_dict: dict, cls_name: str) -> dict:
     return _self_dict
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def obj_to_repr(obj: object) -> str:
     """Modifying object default repr() to custom info.
 

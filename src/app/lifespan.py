@@ -6,7 +6,6 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from .__version__ import __version__
 from .config import config
 from .helpers.crypto import rsa as rsa_helper
 from .logger import logger
@@ -30,8 +29,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     )
     # Add startup code here...
     logger.success("Finished preparation to startup.")
-    logger.opt(colors=True).info(f"App version: <c>{__version__}</c>")
+    logger.opt(colors=True).info(f"App version: <c>{config.version}</c>")
     logger.opt(colors=True).info(f"API version: <c>{config.api.version}</c>")
+    logger.opt(colors=True).info(f"API prefix: <c>{config.api.prefix}</c>")
     logger.opt(colors=True).info(
         f"Listening on: <c>http://{config.api.bind_host}:{config.api.port}</c>"
     )

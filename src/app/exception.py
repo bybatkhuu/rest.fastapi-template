@@ -13,7 +13,7 @@ from .core.handlers import (
 )
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def add_exception_handlers(app: FastAPI) -> None:
     """Add exception handlers to FastAPI application.
 

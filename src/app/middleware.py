@@ -16,7 +16,7 @@ from .config import config
 from .core.middlewares import ProcessTimeMiddleware, RequestIdMiddleware
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def add_middlewares(app: FastAPI) -> None:
     """Add middlewares to FastAPI app.
 
@@ -37,7 +37,7 @@ def add_middlewares(app: FastAPI) -> None:
         has_cf_headers=config.api.behind_cf_proxy,
     )
     app.add_middleware(GZipMiddleware, minimum_size=config.api.gzip_min_size)
-    app.add_middleware(CORSMiddleware, **config.api.security.cors.dict())
+    app.add_middleware(CORSMiddleware, **config.api.security.cors.model_dump())
     app.add_middleware(
         TrustedHostMiddleware, allowed_hosts=config.api.security.allowed_hosts
     )

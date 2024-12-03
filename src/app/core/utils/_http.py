@@ -49,7 +49,7 @@ def get_http_status(status_code: int) -> Tuple[HTTPStatus, bool]:
     return (_http_status, _is_known_status)
 
 
-@validate_call(config=dict(arbitrary_types_allowed=True))
+@validate_call(config={"arbitrary_types_allowed": True})
 def get_relative_url(val: Union[Request, URL]) -> str:
     """Get relative url only path with query params from request object or URL object.
 
