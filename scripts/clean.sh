@@ -49,9 +49,16 @@ main()
 	## --- Menu arguments --- ##
 
 
-	if docker compose ps | grep 'Up' > /dev/null 2>&1; then
-		echoWarn "Docker is running, please stop it before cleaning."
-		exit 1
+	_is_docker_running=false
+	if [ -n "$(which docker)" ] && docker info > /dev/null 2>&1; then
+		_is_docker_running=true
+	fi
+
+	if [ "${_is_docker_running}" == true ]; then
+		if docker compose ps | grep 'Up' > /dev/null 2>&1; then
+			echoWarn "Docker is running, please stop it before cleaning."
+			exit 1
+		fi
 	fi
 
 
@@ -70,7 +77,9 @@ main()
 	rm -rfv "./${PROJECT_SLUG}" || exit 2
 
 	if [ "${_IS_ALL}" == true ]; then
-		docker compose down -v --remove-orphans || exit 2
+		if [ "${_is_docker_running}" == true ]; then
+			docker compose down -v --remove-orphans || exit 2
+		fi
 	fi
 
 	echoOk "Done."

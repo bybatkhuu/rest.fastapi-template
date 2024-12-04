@@ -44,7 +44,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-MODULE_NAME="${MODULE_NAME:-app}"
+MODULE_NAME="${MODULE_NAME:-api}"
 MODULE_DIR="${MODULE_DIR:-./src/${MODULE_NAME}}"
 OUTPUT_DIR="${OUTPUT_DIR:-./docs/diagrams}"
 
@@ -73,7 +73,7 @@ main()
 					shift;;
 				*)
 					echoError "Failed to parsing input -> ${_input}"
-					echoInfo "USAGE: ${0}  -m=*, --module-name=* [app] | -d=*, --module-dir=* [./src/app] | -o=*, --output-dir=* [./docs/diagrams]"
+					echoInfo "USAGE: ${0}  -m=*, --module-name=* [api] | -d=*, --module-dir=* [./src/api] | -o=*, --output-dir=* [./docs/diagrams]"
 					exit 1;;
 			esac
 		done

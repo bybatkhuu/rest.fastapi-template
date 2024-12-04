@@ -503,3 +503,6 @@ compose.override.yaml
 sample.py
 example.py
 test.py
+
+# Specific directories:
+volumes/**
