@@ -2,7 +2,7 @@ env: "LOCAL"
 debug: false
 
 api:
-  name: "FT REST API"
+  name: "FASTAPI TEMPLATE REST API"
   slug: "rest.fastapi-template"
   bind_host: "0.0.0.0"
   port: 8000
@@ -15,4 +15,4 @@ api:
     reload: false
     reload_includes: ["*.json", "*.yml", "*.yaml", "*.md", "*.html"]
     reload_excludes:
-      ["*.pyc", "*.pyo", "*.pyd", "__pycache__", "*.git", ".github", "*.log"]
+      [".*", "~*", ".py[cod]", ".sw.*", "__pycache__", "*.log", "logs"]

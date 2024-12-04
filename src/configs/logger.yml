@@ -1,5 +1,5 @@
 logger:
-  app_name: "{app_slug}"
+  app_name: "{api_slug}"
   level: "INFO"
   use_diagnose: false
   stream:

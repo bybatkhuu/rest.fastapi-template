@@ -16,6 +16,47 @@ from app.core.constants import (
 
 
 @validate_call
+def is_truthy(val: Union[str, bool, int, float, None]) -> bool:
+    """Check if the value is truthy.
+
+    Args:
+        val (Union[str, bool, int, float, None], required): Value to check.
+
+    Raises:
+        ValueError: If `val` argument type is string and value is invalid.
+
+    Returns:
+        bool: True if the value is truthy, False otherwise.
+    """
+
+    if isinstance(val, str):
+        val = val.strip().lower()
+
+        if val in ["0", "false", "f", "no", "n", "off"]:
+            return False
+        elif val in ["1", "true", "t", "yes", "y", "on"]:
+            return True
+        else:
+            raise ValueError(f"`val` argument value is invalid: '{val}'!")
+
+    return bool(val)
+
+
+@validate_call
+def is_falsy(val: Union[str, bool, int, float, None]) -> bool:
+    """Check if the value is falsy.
+
+    Args:
+        val (Union[str, bool, int, float, None], required): Value to check.
+
+    Returns:
+        bool: True if the value is falsy, False otherwise.
+    """
+
+    return not is_truthy(val)
+
+
+@validate_call
 def is_request_id(val: str) -> bool:
     """Check if the string is valid request ID.
 
@@ -102,6 +143,8 @@ def has_special_chars(val: str, mode: str = "LOW") -> bool:
 
 
 __all__ = [
+    "is_truthy",
+    "is_falsy",
     "is_request_id",
     "is_blacklisted",
     "is_valid",

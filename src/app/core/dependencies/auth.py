@@ -104,47 +104,6 @@ def is_auth(user_id: str = Depends(get_user_id)) -> bool:
     return True
 
 
-class AuthRoleDep:
-    def __init__(self, allow_level: int, allow_owner: bool = False):
-        self.allow_level = allow_level
-        self.allow_owner = allow_owner
-
-    def __call__(
-        self, request: Request, payload: Dict[str, Any] = Depends(auth_jwt)
-    ) -> Dict[str, Any]:
-        """Dependency function to check the role level of the user.
-
-        Args:
-            request (Request       , required): The FastAPI request object.
-            payload (Dict[str, Any], required): The decoded access token (JWT) payload.
-
-        Raises:
-            BaseHTTPException: If the user has insufficient role privileges.
-
-        Returns:
-            Dict[str, Any]: The decoded access token payload.
-        """
-
-        if self.allow_owner:
-            _auth_user_id: str = payload.get("sub")
-            _path_params: List[str] = list(request.path_params.values())
-            if _path_params and (_path_params[0] == _auth_user_id):
-                return payload
-
-        _token_level: int = payload.get("role_level")
-        if self.allow_level < _token_level:
-            raise BaseHTTPException(
-                error_enum=ErrorCodeEnum.FORBIDDEN,
-                message="You do not have enough role privileges!",
-                description="The request requires higher role privileges.",
-                headers={
-                    "WWW-Authenticate": 'Bearer error="insufficient_role", error_description="The request requires higher privileges."'
-                },
-            )
-
-        return payload
-
-
 class AuthScopeDep:
     def __init__(self, allow_scope: str, allow_owner: bool = False):
         self.allow_scope = allow_scope
@@ -187,67 +146,9 @@ class AuthScopeDep:
         return payload
 
 
-class AuthRoleOrScopeDep:
-    def __init__(self, allow_level: int, allow_scope: str, allow_owner: bool = False):
-        self.allow_level = allow_level
-        self.allow_scope = allow_scope
-        self.allow_owner = allow_owner
-
-    def __call__(
-        self, request: Request, payload: Dict[str, Any] = Depends(auth_jwt)
-    ) -> Dict[str, Any]:
-        """Dependency function to check the role level and scope permissions of the user.
-
-        Args:
-            request (Request       , required): The FastAPI request object.
-            payload (Dict[str, Any], required): The decoded access token (JWT) payload.
-
-        Raises:
-            BaseHTTPException: If the user has insufficient role privileges or scope permissions.
-
-        Returns:
-            Dict[str, Any]: The decoded access token payload.
-        """
-
-        if self.allow_owner:
-            _auth_user_id: str = payload.get("sub")
-            _path_params: List[str] = list(request.path_params.values())
-            if _path_params and (_path_params[0] == _auth_user_id):
-                return payload
-
-        _token_level: int = payload.get("role_level")
-        _token_all_scope: str = payload.get("scope")
-        _token_scope_list: List[str] = _token_all_scope.split(" ")
-        if (self.allow_level < _token_level) and (
-            self.allow_scope not in _token_scope_list
-        ):
-            raise BaseHTTPException(
-                error_enum=ErrorCodeEnum.FORBIDDEN,
-                message="You do not have enough permissions!",
-                description="The request requires higher role privileges or more scope permissions.",
-                headers={
-                    "WWW-Authenticate": 'Bearer error="insufficient_permissions", error_description="The request requires higher role privileges or more scope permissions."'
-                },
-            )
-
-        return payload
-
-
-get_superadmin = AuthRoleDep(allow_level=1)
-get_admin = AuthRoleDep(allow_level=10)
-get_normal_user = AuthRoleDep(allow_level=40)
-get_free_user = AuthRoleDep(allow_level=50)
-
-
 __all__ = [
     "auth_jwt",
     "get_user_id",
     "is_auth",
-    "get_superadmin",
-    "get_admin",
-    "get_normal_user",
-    "get_free_user",
-    "AuthRoleDep",
     "AuthScopeDep",
-    "AuthRoleOrScopeDep",
 ]

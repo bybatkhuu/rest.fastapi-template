@@ -2,6 +2,7 @@
 
 ## Third-party libraries
 import uvicorn
+from pydantic import validate_call
 from fastapi import FastAPI
 
 ## Internal modules
@@ -26,8 +27,13 @@ add_routers(app=app)
 add_exception_handlers(app=app)
 
 
-def run_server() -> None:
-    """Run uvicorn server."""
+@validate_call
+def run_server(app: str = "main:app") -> None:
+    """Run uvicorn server.
+
+    Args:
+        app (str, optional): Application instance. Defaults to "main:app".
+    """
 
     uvicorn.run(
         app=app,

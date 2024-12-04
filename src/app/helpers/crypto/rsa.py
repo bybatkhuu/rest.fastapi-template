@@ -13,7 +13,6 @@ from cryptography.hazmat.primitives.asymmetric.types import (
     PublicKeyTypes,
 )
 from pydantic import validate_call
-
 from beans_logging import logger
 
 from app.core.constants import WarnEnum

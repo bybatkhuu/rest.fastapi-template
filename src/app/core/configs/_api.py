@@ -3,12 +3,12 @@
 from pydantic import Field, constr, field_validator, ValidationInfo
 from pydantic_settings import SettingsConfigDict
 
+from app.core.constants import ENV_PREFIX_API
 from ._base import BaseConfig
 from ._dev import DevConfig
 from ._security import SecurityConfig
 from ._docs import DocsConfig, FrozenDocsConfig
 from ._paths import PathsConfig, FrozenPathsConfig
-from ._routes import RoutesConfig
 
 
 class ApiConfig(BaseConfig):
@@ -25,12 +25,11 @@ class ApiConfig(BaseConfig):
     security: SecurityConfig = Field(...)
     docs: DocsConfig = Field(...)
     paths: PathsConfig = Field(...)
-    routes: RoutesConfig = Field(default_factory=RoutesConfig)
 
     @field_validator("slug")
     @classmethod
     def _check_slug(cls, val: str, info: ValidationInfo) -> str:
-        if "name" in info.data:
+        if (not val) and ("name" in info.data):
             val = (
                 info.data["name"]
                 .lower()
@@ -79,20 +78,21 @@ class ApiConfig(BaseConfig):
     @classmethod
     def _check_paths(cls, val: PathsConfig, info: ValidationInfo) -> FrozenPathsConfig:
         if "slug" in info.data:
-            if "{app_slug}" in val.tmp_dir:
-                val.tmp_dir = val.tmp_dir.format(app_slug=info.data["slug"])
+            if "{api_slug}" in val.tmp_dir:
+                val.tmp_dir = val.tmp_dir.format(api_slug=info.data["slug"])
 
-            if "{app_slug}" in val.uploads_dir:
-                val.uploads_dir = val.uploads_dir.format(app_slug=info.data["slug"])
-
-            if "{app_slug}" in val.data_dir:
-                val.data_dir = val.data_dir.format(app_slug=info.data["slug"])
-
-            if "{tmp_dir}" in val.uploads_dir:
+            if "{api_slug}" in val.uploads_dir:
+                val.uploads_dir = val.uploads_dir.format(api_slug=info.data["slug"])
+            elif "{tmp_dir}" in val.uploads_dir:
                 val.uploads_dir = val.uploads_dir.format(tmp_dir=val.tmp_dir)
+
+            if "{api_slug}" in val.data_dir:
+                val.data_dir = val.data_dir.format(api_slug=info.data["slug"])
 
         val = FrozenPathsConfig(**val.model_dump())
         return val
+
+    model_config = SettingsConfigDict(env_prefix=ENV_PREFIX_API)
 
 
 class FrozenApiConfig(ApiConfig):

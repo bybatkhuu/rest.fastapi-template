@@ -7,4 +7,4 @@ from .logger import logger
 
 if __name__ == "__main__":
     logger.info(f"Starting server from '__main__.py'...")
-    run_server()
+    run_server(app="app:app")

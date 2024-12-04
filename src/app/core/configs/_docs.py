@@ -6,6 +6,8 @@ from typing import Any, Dict, List, Optional
 from pydantic import Field, constr, model_validator, field_validator
 from pydantic_settings import SettingsConfigDict
 
+from app.core.constants import ENV_PREFIX_API
+from app.core.utils import validator
 from ._base import BaseConfig
 
 
@@ -35,14 +37,16 @@ class DocsConfig(BaseConfig):
     openapi_tags: Optional[List[Dict[str, Any]]] = Field(default=None)
     swagger_ui_parameters: Optional[Dict[str, Any]] = Field(default=None)
 
+    model_config = SettingsConfigDict(env_prefix=f"{ENV_PREFIX_API}DOCS_")
+
 
 class FrozenDocsConfig(DocsConfig):
     @field_validator("description")
     @classmethod
     def _check_description(cls, val: str) -> str:
-        _desc_file_path = "./assets/description.md"
-        if (not val) and os.path.isfile(_desc_file_path):
-            with open(_desc_file_path, "r") as _file:
+        _description_path = "./assets/description.md"
+        if (not val) and os.path.isfile(_description_path):
+            with open(_description_path, "r") as _file:
                 val = _file.read()
 
         return val
@@ -63,7 +67,7 @@ class FrozenDocsConfig(DocsConfig):
         if values["swagger_ui_oauth2_redirect_url"] == "":
             values["swagger_ui_oauth2_redirect_url"] = None
 
-        if not values["enabled"]:
+        if validator.is_falsy(values["enabled"]):
             values["openapi_url"] = None
             values["docs_url"] = None
             values["redoc_url"] = None

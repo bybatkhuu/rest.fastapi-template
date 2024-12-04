@@ -1,7 +1,0 @@
-api:
-  routes:
-    utils:
-      tags: ["Utils"]
-      prefix: ""
-      ping: "/ping"
-      health: "/health"

@@ -1,8 +1,8 @@
 api:
   paths:
-    tmp_dir: "/tmp/{app_slug}"
+    tmp_dir: "/tmp/{api_slug}"
     uploads_dir: "{tmp_dir}/uploads"
-    data_dir: "/var/lib/{app_slug}"
+    data_dir: "/var/lib/{api_slug}"
     credentials_dir: "{data_dir}/credentials"
     rsa_keys_dir: "{data_dir}/credentials/rsa_keys"
     # models_dir: "{data_dir}/models"

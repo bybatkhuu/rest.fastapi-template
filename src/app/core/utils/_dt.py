@@ -7,7 +7,6 @@ from zoneinfo import ZoneInfo
 from datetime import datetime, timezone, tzinfo, timedelta
 
 from pydantic import validate_call, constr, conint
-
 from beans_logging import logger
 
 from app.core.constants import WarnEnum

@@ -9,7 +9,6 @@ from fastapi import Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from app.__version__ import __version__
 from app.config import config
 from app.core import utils
 from app.core.schemas import BaseResPM
@@ -87,7 +86,7 @@ class BaseResponse(JSONResponse):
                 headers["X-Request-Id"] = _request_id
 
         meta["api_version"] = config.api.version
-        meta["system_version"] = __version__
+        meta["system_version"] = config.version
 
         if error and isinstance(error, dict):
             if "code" in error:

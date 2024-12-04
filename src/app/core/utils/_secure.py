@@ -8,7 +8,6 @@ import hashlib
 from pydantic import validate_call, conint, constr
 
 from app.core.constants import HashAlgoEnum
-
 from ._dt import now_ts
 
 

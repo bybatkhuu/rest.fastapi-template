@@ -2,12 +2,11 @@
 
 from fastapi import APIRouter, Request
 
-from app.config import config
 from app.core.schemas import BaseResPM
 from app.core.responses import BaseResponse
 
 
-router = APIRouter(tags=config.api.routes.utils.tags)
+router = APIRouter(tags=["Utils"])
 
 
 @router.get(
@@ -21,7 +20,7 @@ async def get_base(request: Request):
 
 
 @router.get(
-    config.api.routes.utils.ping,
+    "/ping",
     summary="Ping",
     description="Check if the service is up and running.",
     response_model=BaseResPM,
@@ -33,7 +32,7 @@ async def get_ping(request: Request):
 
 
 @router.get(
-    config.api.routes.utils.health,
+    "/health",
     summary="Health",
     description="Check health of all related backend services.",
     response_model=BaseResPM,
