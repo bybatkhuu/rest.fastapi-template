@@ -5,6 +5,8 @@ services:
     environment:
       NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
       CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-all}
+    # volumes:
+    #   - "api-vscode-server:/home/ft-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:

@@ -1,6 +1,8 @@
 services:
   api:
     image: bybatkhuu/rest.fastapi-template:4.0.1-231017
+    # volumes:
+    #   - "api-vscode-server:/home/ft-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:
@@ -16,3 +18,7 @@ services:
     #   interval: 5m
     #   timeout: 5s
     #   retries: 3
+
+
+# volumes:
+#   api-vscode-server:

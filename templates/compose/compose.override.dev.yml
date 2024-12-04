@@ -1,9 +1,11 @@
 services:
   api:
     volumes:
+      - "./volumes/storage/rest.fastapi-template/logs:${FT_API_LOGS_DIR:-/var/log/rest.fastapi-template}"
+      - "./volumes/storage/rest.fastapi-template/data:${FT_API_DATA_DIR:-/var/lib/rest.fastapi-template}"
       - "./scripts/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh"
-      - "./src:/workspaces/rest.fastapi-template"
-    #   - "api-vscode-server:/home/ft-user/.vscode-server"
+      - "./src:/app/rest.fastapi-template"
+      - "./volumes/.vscode-server:/home/ft-user/.vscode-server"
     # deploy:
     #   replicas: 0
     #   resources:
@@ -19,7 +21,3 @@ services:
     #   interval: 5m
     #   timeout: 5s
     #   retries: 3
-
-
-# volumes:
-#   api-vscode-server:

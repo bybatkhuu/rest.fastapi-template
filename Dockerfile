@@ -70,7 +70,7 @@ FROM ${BASE_IMAGE} AS base
 ARG DEBIAN_FRONTEND
 ARG FT_API_SLUG
 
-ARG FT_HOME_DIR="/workspaces"
+ARG FT_HOME_DIR="/app"
 ARG FT_API_DIR="${FT_HOME_DIR}/${FT_API_SLUG}"
 ARG FT_API_DATA_DIR="/var/lib/${FT_API_SLUG}"
 ARG FT_API_LOGS_DIR="/var/log/${FT_API_SLUG}"
@@ -96,6 +96,7 @@ ENV FT_HOME_DIR="${FT_HOME_DIR}" \
 	USER=${USER} \
 	GROUP=${GROUP} \
 	PYTHONIOENCODING=utf-8 \
+	PYTHONUNBUFFERED=1 \
 	PATH="/opt/conda/bin:${PATH}"
 
 # ENV FT_API_MODELS_DIR="${FT_API_MODELS_DIR}"
@@ -157,7 +158,7 @@ COPY --chown=${UID}:${GID} ./src ${FT_API_DIR}
 COPY --chown=${UID}:${GID} --chmod=770 ./scripts/docker/*.sh /usr/local/bin/
 
 # VOLUME ["${FT_API_DATA_DIR}"]
-EXPOSE ${FT_API_PORT}
+# EXPOSE ${FT_API_PORT}
 
 USER ${UID}:${GID}
 # HEALTHCHECK --start-period=30s --start-interval=1s --interval=5m --timeout=5s --retries=3 \
