@@ -7,7 +7,7 @@ echo "INFO: Running 'rest.fastapi-template' docker-entrypoint.sh..."
 _doStart()
 {
 	exec python -u ./main.py || exit 2
-	# exec uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log || exit 2
+	# exec fastapi run --port=${FT_API_PORT:-8000} || exit 2
 	exit 0
 }
 

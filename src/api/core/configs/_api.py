@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 from pydantic import Field, constr, field_validator, ValidationInfo
 from pydantic_settings import SettingsConfigDict
 
@@ -38,6 +40,53 @@ class ApiConfig(BaseConfig):
                 .replace("_", "-")
                 .replace(".", "-")
             )
+
+        return val
+
+    @field_validator("bind_host")
+    @classmethod
+    def _check_bind_host(cls, val: str) -> str:
+        if (
+            sys.argv[0].endswith("fastapi")
+            or sys.argv[0].endswith("uvicorn")
+            or sys.argv[0].endswith("gunicorn")
+        ):
+            _has_host = False
+            for _i, _arg in enumerate(sys.argv):
+                if _arg.startswith("--host="):
+                    _has_host = True
+                    val = _arg.split("=")[1]
+                elif (_arg == "--host") and (_i + 1 < len(sys.argv)):
+                    _has_host = True
+                    val = sys.argv[_i + 1]
+
+            if not _has_host and sys.argv[0].endswith("fastapi"):
+                if sys.argv[1] == "run":
+                    val = "0.0.0.0"
+                elif sys.argv[1] == "dev":
+                    val = "127.0.0.1"
+
+        return val
+
+    @field_validator("port")
+    @classmethod
+    def _check_port(cls, val: int) -> int:
+        if (
+            sys.argv[0].endswith("fastapi")
+            or sys.argv[0].endswith("uvicorn")
+            or sys.argv[0].endswith("gunicorn")
+        ):
+            _has_port = False
+            for _i, _arg in enumerate(sys.argv):
+                if _arg.startswith("--port="):
+                    _has_port = True
+                    val = int(_arg.split("=")[1])
+                elif (_arg == "--port") and (_i + 1 < len(sys.argv)):
+                    _has_port = True
+                    val = int(sys.argv[_i + 1])
+
+            if not _has_port:
+                val = 8000
 
         return val
 

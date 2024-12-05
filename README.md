@@ -4,7 +4,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bybatkhuu/rest.fastapi-template/3.create-release.yml?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/actions/workflows/3.create-release.yml)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bybatkhuu/rest.fastapi-template?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/releases)
 
-This is a template repo for FastAPI web services.
+This is a template repo for FastAPI web service projects.
 
 ## ✨ Features
 
@@ -88,7 +88,7 @@ git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
 
 <!-- #### 3.1. Install base/common dependencies -->
 
-```bash
+```sh
 pip install -r ./requirements.txt
 ```
 
@@ -129,7 +129,7 @@ cp -v ./.env.example ./.env
 nano ./.env
 ```
 
-#### **OPTION B.** For **standalone** runtime **[5.B ~ 5.E]**
+#### **OPTION B.** For **standalone** runtime **[5.B ~ 5.F]**
 
 ```sh
 # Copy '.env.example' file to '.env' file:
@@ -142,13 +142,13 @@ nano ./src/.env
 ### 5. 🏁 Run the server
 
 > [!NOTE]
-> Follow the one of below instructions based on your environment **[A, B, C, D, E]**:
+> Follow the one of below instructions based on your environment **[A, B, C, D, E, F]**:
 
 #### Docker runtime
 
 **OPTION A.** **[RECOMMENDED]** Run with **docker compose**:
 
-```bash
+```sh
 ## 1. Configure 'compose.override.yml' file.
 
 # Copy 'compose.override.[ENV].yml' file to 'compose.override.yml' file:
@@ -182,7 +182,7 @@ docker compose up -d --remove-orphans --force-recreate && \
 > [!IMPORTANT]
 > Before running, need to install [**PM2**](https://pm2.keymetrics.io/docs/usage/quick-start):
 
-```bash
+```sh
 ## 1. Configure PM2 configuration file.
 
 # Copy example PM2 configuration file:
@@ -199,36 +199,56 @@ pm2 start ./pm2-process.json && \
 
 #### Standalone runtime (Python)
 
-**OPTION C.** Run server as **python module**:
+**OPTION C.** Run server as **python script**:
 
-```bash
-# Run server as python module:
-python -u -m src
-```
-
-**OPTION D.** Run server as **python script**:
-
-```bash
-# Enter into codebase directory:
+```sh
 cd src
-
-# Run server as python script:
 python -u ./main.py
 ```
 
-**OPTION E.** Run with **uvicorn**:
+**OPTION D.** Run server as **python module**:
 
-```bash
-# Run uvicorn server:
-uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-server-header --forwarded-allow-ips="*" --no-access-log
+```sh
+python -u -m src.api
 
-# For example:
-uvicorn src.main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log
-
-# For development:
-# Enter into codebase directory:
+# Or:
 cd src
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log --reload --reload-include="*.yml" --reload-include="*.yaml" --reload-include="*.json"
+python -u -m api
+```
+
+**OPTION E.** Run with **fastapi** cli:
+
+```sh
+fastpi run src --host=[BIND_HOST] --port=[PORT]
+# For example:
+fastapi run src --port=8000
+
+# For DEVELOPMENT:
+fastapi dev src --host=0.0.0.0 --port=8000
+
+
+# Or:
+cd src
+fastapi run --port=8000
+
+# For DEVELOPMENT:
+fastapi dev --host=0.0.0.0 --port=8000
+```
+
+**OPTION F.** Run with **uvicorn** cli:
+
+```sh
+uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+# For example:
+uvicorn src.main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+
+
+# Or:
+cd src
+uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+
+# For DEVELOPMENT:
+uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
 ```
 
 ### 6. ✅ Check service is running
@@ -278,21 +298,23 @@ pm2 stop ./pm2-process.json && \
 
 ```sh
 ## --- Environment variable --- ##
-ENV=local
+ENV=LOCAL
 DEBUG=false
 # TZ=Asia/Seoul
 
 
 ## -- API configs -- ##
 FT_API_PORT=8000
+FT_API_LOGS_DIR="/var/log/rest.fastapi-template"
+FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
+
 # FT_API_VERSION="1"
 # FT_API_PREFIX="/api/v{api_version}"
-FT_API_DOCS_ENABLED=true
+# FT_API_DOCS_ENABLED=true
 # FT_API_DOCS_OPENAPI_URL="{api_prefix}/openapi.json"
 # FT_API_DOCS_DOCS_URL="{api_prefix}/docs"
 # FT_API_DOCS_REDOC_URL="{api_prefix}/redoc"
-FT_API_LOGS_DIR="/var/log/rest.fastapi-template"
-FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
+
 
 
 ## -- Docker build args -- ##
@@ -309,7 +331,9 @@ You can customize the command arguments to debug or run the service with differe
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "python -u -m api"]
+    command: ["-b", "fastapi run --port=${FT_API_PORT:-8000}"]
+    command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
 ```
 
 ---

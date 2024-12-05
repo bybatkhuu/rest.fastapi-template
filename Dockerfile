@@ -166,4 +166,4 @@ USER ${UID}:${GID}
 # 	CMD curl -f http://localhost:${FT_API_PORT}/api/v${FT_API_VERSION:-1}/ping || exit 1
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+# CMD ["-b", "fastapi run --port=${FT_API_PORT:-8000}"]
