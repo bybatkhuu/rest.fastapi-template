@@ -26,7 +26,7 @@ fi
 # Load from envrionment variables:
 # BASE_IMAGE
 IMG_REGISTRY=${IMG_REGISTRY:-bybatkhuu}
-IMG_REPO=${PROJECT_SLUG:-fastapi-template}
+IMG_REPO=${PROJECT_SLUG:-rest.fastapi-template}
 IMG_VERSION=${IMG_VERSION:-$(./scripts/get-version.sh)}
 IMG_SUBTAG=${IMG_SUBTAG:-}
 IMG_PLATFORM=${IMG_PLATFORM:-$(uname -m)}

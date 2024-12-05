@@ -10,6 +10,7 @@ ARG FT_API_SLUG="rest.fastapi-template"
 FROM ${BASE_IMAGE} AS builder
 
 ARG DEBIAN_FRONTEND
+ARG FT_API_SLUG
 
 # ARG USE_GPU=false
 ARG PYTHON_VERSION=3.9.20
@@ -22,7 +23,7 @@ RUN --mount=type=cache,target=/opt/conda/pkgs,sharing=private \
 	--mount=type=cache,target=/root/.cache,sharing=locked \
 	_BUILD_TARGET_ARCH=$(uname -m) && \
 	echo "BUILDING TARGET ARCHITECTURE: ${_BUILD_TARGET_ARCH}" && \
-	rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/* && \
+	rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* && \
 	apt-get clean -y && \
 	apt-get update --fix-missing -o Acquire::CompressionTypes::Order::=gz && \
 	apt-get install -y --no-install-recommends \
