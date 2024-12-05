@@ -10,7 +10,7 @@ services:
     #       cpus: "0.5"
     #       memory: 512M
     # command: ["/bin/bash"]
-    # command: ["-b", "fastapi run --port=${FT_API_PORT:-8000}"]
+    # command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
     # healthcheck:
     #   test: ["CMD-SHELL", "curl -f http://localhost:${FT_API_PORT:-8000}/api/v${FT_API_VERSION:-1}/ping"]
     #   start_period: 30s

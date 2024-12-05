@@ -216,7 +216,23 @@ cd src
 python -u -m api
 ```
 
-**OPTION E.** Run with **fastapi** cli:
+**OPTION E.** Run with **uvicorn** cli:
+
+```sh
+uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+# For example:
+uvicorn src.main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+
+
+# Or:
+cd src
+uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+
+# For DEVELOPMENT:
+uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
+```
+
+**OPTION F.** Run with **fastapi** cli:
 
 ```sh
 fastpi run src --host=[BIND_HOST] --port=[PORT]
@@ -233,22 +249,6 @@ fastapi run --port=8000
 
 # For DEVELOPMENT:
 fastapi dev --host=0.0.0.0 --port=8000
-```
-
-**OPTION F.** Run with **uvicorn** cli:
-
-```sh
-uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
-# For example:
-uvicorn src.main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
-
-
-# Or:
-cd src
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
-
-# For DEVELOPMENT:
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
 ```
 
 ### 6. ✅ Check service is running
@@ -332,7 +332,6 @@ You can customize the command arguments to debug or run the service with differe
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
     command: ["-b", "python -u -m api"]
-    command: ["-b", "fastapi run --port=${FT_API_PORT:-8000}"]
     command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
 ```
 
