@@ -4,14 +4,15 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, constr, ConfigDict
 
-from api.core import utils
+# from api.core import utils
 
 
 class BasePM(BaseModel):
-    model_config = ConfigDict(json_encoders={datetime: utils.datetime_to_iso})
+    # model_config = ConfigDict(json_encoders={datetime: utils.datetime_to_iso})
+    pass
 
 
-class ExtraBasePM(BasePM):
+class ExtraBasePM(BaseModel):
     model_config = ConfigDict(extra="allow")
 
 

@@ -8,7 +8,7 @@ from typing import List
 
 import aioshutil
 import aiofiles.os
-from pydantic import validate_arguments, conint, constr
+from pydantic import validate_call, conint, constr
 from beans_logging import logger
 
 from api.core.constants import WarnEnum, HashAlgoEnum
@@ -18,7 +18,7 @@ _path_max_length = 1024
 
 
 ## Async:
-@validate_arguments
+@validate_call
 async def async_create_dir(
     create_dir: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -58,7 +58,7 @@ async def async_create_dir(
     return
 
 
-@validate_arguments
+@validate_call
 async def async_remove_dir(
     remove_dir: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -98,7 +98,7 @@ async def async_remove_dir(
     return
 
 
-@validate_arguments
+@validate_call
 async def async_remove_dirs(
     remove_dirs: List[constr(strip_whitespace=True, min_length=1, max_length=_path_max_length)],  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -116,7 +116,7 @@ async def async_remove_dirs(
     return
 
 
-@validate_arguments
+@validate_call
 async def async_remove_file(
     file_path: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -156,7 +156,7 @@ async def async_remove_file(
     return
 
 
-@validate_arguments
+@validate_call
 async def async_remove_files(
     file_paths: List[constr(strip_whitespace=True, min_length=1, max_length=_path_max_length)],  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -174,7 +174,7 @@ async def async_remove_files(
     return
 
 
-@validate_arguments
+@validate_call
 async def async_get_file_checksum(
     file_path: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     hash_method: HashAlgoEnum = HashAlgoEnum.md5,
@@ -217,7 +217,7 @@ async def async_get_file_checksum(
 
 
 ## Sync:
-@validate_arguments
+@validate_call
 def create_dir(
     create_dir: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -257,7 +257,7 @@ def create_dir(
     return
 
 
-@validate_arguments
+@validate_call
 def remove_dir(
     remove_dir: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -297,7 +297,7 @@ def remove_dir(
     return
 
 
-@validate_arguments
+@validate_call
 def remove_dirs(
     remove_dirs: List[constr(strip_whitespace=True, min_length=1, max_length=_path_max_length)],  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -315,7 +315,7 @@ def remove_dirs(
     return
 
 
-@validate_arguments
+@validate_call
 def remove_file(
     file_path: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -355,7 +355,7 @@ def remove_file(
     return
 
 
-@validate_arguments
+@validate_call
 def remove_files(
     file_paths: List[constr(strip_whitespace=True, min_length=1, max_length=_path_max_length)],  # type: ignore
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -373,7 +373,7 @@ def remove_files(
     return
 
 
-@validate_arguments
+@validate_call
 def get_file_checksum(
     file_path: constr(strip_whitespace=True, min_length=1, max_length=_path_max_length),  # type: ignore
     hash_method: HashAlgoEnum = HashAlgoEnum.md5,
