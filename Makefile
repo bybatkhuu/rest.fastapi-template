@@ -1,4 +1,4 @@
-.PHONY: help validate start stop compose clean get-version test bump-version build docs changelog diagrams
+.PHONY: help validate start stop compose clean get-version test bump-version build docs changelog
 
 help:
 	@echo "make help         -- show this help"
@@ -13,7 +13,6 @@ help:
 	@echo "make build        -- build docker image"
 	@echo "make docs         -- build documentation"
 	@echo "make changelog    -- update changelog"
-	@echo "make diagrams     -- generate diagrams"
 
 validate:
 	./compose.sh validate
@@ -47,6 +46,3 @@ docs:
 
 changelog:
 	./scripts/changelog.sh $(MAKEFLAGS)
-
-diagrams:
-	./scripts/diagrams.sh $(MAKEFLAGS)
