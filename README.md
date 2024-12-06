@@ -1,8 +1,12 @@
 # FastAPI Template
 
-This is a FastAPI Template project.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bybatkhuu/rest.fastapi-template/3.create-release.yml?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/actions/workflows/3.create-release.yml)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bybatkhuu/rest.fastapi-template?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/releases)
 
-## Features
+This is a template repo for FastAPI web service projects.
+
+## ✨ Features
 
 - FastAPI
 - REST API
@@ -14,27 +18,36 @@ This is a FastAPI Template project.
 
 ---
 
-## Getting started
+## 🐤 Getting Started
 
-### 1. Prerequisites
+### 1. 🚧 Prerequisites
 
-For **docker** environment:
+<!-- *[OPTIONAL]* For **GPU (NVIDIA)**:
 
-- Install **docker** and **docker compose** - <https://docs.docker.com/engine/install>
+- Install **NVIDIA GPU driver (>= v453)** -->
 
-For **standalone** environment:
+[RECOMMENDED] For **docker** runtime:
 
-- Install **Python (>= v3.9)** and **pip**:
-    - **[RECOMMENDED] Miniconda (v3)** - <https://docs.conda.io/projects/miniconda/en/latest/index.html>
-    - *[arm64/aarch64] Miniforge (v3)* - <https://github.com/conda-forge/miniforge>
-    - *[OPTIONAL] venv* - <https://docs.python.org/3/library/venv.html>
+- Install [**docker** and **docker compose**](https://docs.docker.com/engine/install)
+    - Docker image: [**bybatkhuu/rest.fastapi-template**](https://hub.docker.com/repository/docker/bybatkhuu/rest.fastapi-template)
+<!-- - *[OPTIONAL]* For **GPU (NVIDIA)**:
+    - Install **[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) (>= v1)** -->
 
-For **development** environment:
+For **standalone** runtime:
 
-- Install **git** - <https://git-scm.com/downloads>
-- Setup an **SSH key** - <https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh>
+- Install **Python (>= v3.9)** and **pip (>= 23)**:
+    - **[RECOMMENDED] [Miniconda (v3)](https://docs.anaconda.com/miniconda)**
+    - *[arm64/aarch64] [Miniforge (v3)](https://github.com/conda-forge/miniforge)*
+    - *[Python virutal environment] [venv](https://docs.python.org/3/library/venv.html)*
+<!-- - *[OPTIONAL]* For **GPU (NVIDIA)**:
+    - Install **NVIDIA CUDA (>= v11)** and **cuDNN (>= v8)** -->
 
-### 2. Download or clone the repository
+[OPTIONAL] For **DEVELOPMENT** environment:
+
+- Install [**git**](https://git-scm.com/downloads)
+- Setup an [**SSH key**](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) ([video tutorial](https://www.youtube.com/watch?v=snCP3c7wXw0))
+
+### 2. 📥 Download or clone the repository
 
 **2.1.** Prepare projects directory (if not exists):
 
@@ -48,61 +61,68 @@ cd ~/workspaces/projects
 
 **2.2.** Follow one of the below options **[A]**, **[B]** or **[C]**:
 
-**A.** Clone the repository (for **public**: git + https):
+**OPTION A.** Clone the repository:
 
 ```sh
 git clone https://github.com/bybatkhuu/rest.fastapi-template.git && \
     cd rest.fastapi-template
 ```
 
-**B.** Clone the repository (for **development**: git + ssh key):
+**OPTION B.** Clone the repository (for **DEVELOPMENT**: git + ssh key):
 
 ```sh
 git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
     cd rest.fastapi-template
 ```
 
-**C.** Or download source code: <https://github.com/bybatkhuu/rest.fastapi-template/releases>
+**OPTION C.** Download source code:
 
-### 3. Install python dependencies
+1. Download archived **zip** or **tar.gz** file from [**releases**](https://github.com/bybatkhuu/rest.fastapi-template/releases).
+2. Extract it into the projects directory.
+3. Enter into the project directory.
 
-**TIP:** Skip this step, if you're going to use **docker** environment.
+### 3. 📦 Install dependencies
+
+> [!TIP]
+> Skip this step, if you're going to use **docker** runtime
 
 <!-- #### 3.1. Install base/common dependencies -->
 
-```bash
+```sh
 pip install -r ./requirements.txt
+
+# For DEVELOPMENT:
+pip install -r ./requirements/requirements.dev.txt
 ```
 
 <!-- #### 3.2. Install hardware specific dependencies
 
 Follow the one of below instructions based on your environment (A is recommended for most cases):
 
-**A.** For Intel/AMD **x86_64** CPU:
+**OPTION A.** For Intel/AMD **x86_64** CPU:
 
-```bash
-pip install -r ./requirements.amd64.txt
+```sh
+pip install -r ./requirements/requirements.amd64.txt
 ```
 
-**B.** For **arm64/aarch64** CPU:
+**OPTION B.** For **arm64/aarch64** CPU:
 
-```bash
-pip install -r ./requirements.arm64.txt
+```sh
+pip install -r ./requirements/requirements.arm64.txt
 ```
 
-**C.** For **NVIDIA GPU** and **x86_64** CPU:
+**OPTION C.** For **NVIDIA GPU** and **x86_64** CPU:
 
-```bash
-pip install -r ./requirements.gpu.txt
+```sh
+pip install -r ./requirements/requirements.gpu.txt
 ``` -->
 
-### 4. Configure environment variables
+### 4. 🌎 Configure environment variables
 
-**TIP:** Skip this step, if you've already configured environment.
+> [!NOTE]
+> Please, check **[environment variables](#-environment-variables)** section for more details.
 
-**IMPORTANT:** Please, check **[environment variables](#environment-variables)**!
-
-#### **A.** **[RECOMMENDED]** For **docker** environment **[5.A]**
+#### **OPTION A.** **[RECOMMENDED]** For **docker** runtime **[5.A]**
 
 ```sh
 # Copy '.env.example' file to '.env' file:
@@ -112,43 +132,37 @@ cp -v ./.env.example ./.env
 nano ./.env
 ```
 
-#### **B.** For **standalone** environment **[5.B ~ 5.F]**
+#### **OPTION B.** For **standalone** runtime **[5.B ~ 5.F]**
 
 ```sh
 # Copy '.env.example' file to '.env' file:
-cp -v ./.env.example ./app/.env
+cp -v ./.env.example ./src/.env
 
 # Edit environment variables to fit in your environment:
-nano ./app/.env
-
-# Enter into app directory:
-cd app
+nano ./src/.env
 ```
 
-### 5. Run the server
+### 5. 🏁 Start the server
 
-Follow the one of below instructions based on your environment **[A, B, C, D, E, F]**:
+> [!NOTE]
+> Follow the one of below instructions based on your environment **[A, B, C, D, E, F]**:
 
-#### Docker environment
+#### Docker runtime
 
-**A.** **[RECOMMENDED]** Run with **Docker Compose**:
+**OPTION A.** **[RECOMMENDED]** Run with **docker compose**:
 
-**IMPORTANT:** Please, check **[arguments](#arguments)**!
+```sh
+## 1. Configure 'compose.override.yml' file.
 
-```bash
-## 1. Configure 'docker-compose.override.yml' file.
-# TIP: Skip this step, if you've already configured.
+# Copy 'compose.override.[ENV].yml' file to 'compose.override.yml' file:
+cp -v ./templates/compose/compose.override.[ENV].yml ./compose.override.yml
+# For example, DEVELOPMENT environment:
+cp -v ./templates/compose/compose.override.dev.yml ./compose.override.yml
+# For example, STATGING or PRODUCTION environment:
+cp -v ./templates/compose/compose.override.prod.yml ./compose.override.yml
 
-# Set environment:
-export _ENV=[ENV]
-# For example for development environment:
-export _ENV=dev
-
-# Copy 'docker-compose.override.[ENV].yml' file to 'docker-compose.override.yml' file:
-cp -v ./templates/docker-compose/docker-compose.override.${_ENV}.yml ./docker-compose.override.yml
-
-# Edit 'docker-compose.override.yml' file to fit in your environment:
-nano ./docker-compose.override.yml
+# Edit 'compose.override.yml' file to fit in your environment:
+nano ./compose.override.yml
 
 
 ## 2. Check docker compose configuration is valid:
@@ -160,25 +174,19 @@ docker compose config
 ## 3. Start docker compose:
 ./compose.sh start -l
 # Or:
-docker compose up -d && \
+docker compose up -d --remove-orphans --force-recreate && \
     docker compose logs -f --tail 100
-
-
-## 3. Stop docker compose:
-./compose.sh stop
-# Or:
-docker compose down
 ```
 
-#### Standalone environment (Process Manager)
+#### Standalone runtime (PM2)
 
-**B.** Or run with **PM2**:
+**OPTION B.** Run with **PM2**:
 
-Before running, need to install **PM2**: <https://pm2.keymetrics.io/docs/usage/quick-start>
+> [!IMPORTANT]
+> Before running, need to install [**PM2**](https://pm2.keymetrics.io/docs/usage/quick-start):
 
-```bash
+```sh
 ## 1. Configure PM2 configuration file.
-# TIP: Skip this step, if you've already configured.
 
 # Copy example PM2 configuration file:
 cp -v ./pm2-process.json.example ./pm2-process.json
@@ -189,119 +197,241 @@ nano ./pm2-process.json
 
 ## 2. Start PM2 process:
 pm2 start ./pm2-process.json && \
-    pm2 logs --lines 50 fastapi-template
+    pm2 logs --lines 50 rest.fastapi-template
+```
+
+#### Standalone runtime (Python)
+
+**OPTION C.** Run server as **python script**:
+
+```sh
+cd src
+python -u ./main.py
+```
+
+**OPTION D.** Run server as **python module**:
+
+```sh
+python -u -m src.api
+
+# Or:
+cd src
+python -u -m api
+```
+
+**OPTION E.** Run with **uvicorn** cli:
+
+```sh
+uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+# For example:
+uvicorn src.main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
 
 
-## 3. Stop PM2 process:
+# Or:
+cd src
+uvicorn main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+
+# For DEVELOPMENT:
+uvicorn main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
+```
+
+**OPTION F.** Run with **fastapi** cli:
+
+```sh
+fastpi run src --host=[BIND_HOST] --port=[PORT]
+# For example:
+fastapi run src --port=8000
+
+# For DEVELOPMENT:
+fastapi dev src --host="0.0.0.0" --port=8000
+
+
+# Or:
+cd src
+fastapi run --port=8000
+
+# For DEVELOPMENT:
+fastapi dev --host="0.0.0.0" --port=8000
+```
+
+### 6. ✅ Check server is running
+
+Check with CLI (curl):
+
+```sh
+# Send a ping request with 'curl' to REST API server and parse JSON response with 'jq':
+curl -s http://localhost:8000/api/v1/ping | jq
+```
+
+Check with web browser:
+
+- Health check: <http://localhost:8000/api/v1/health>
+- Swagger: <http://localhost:8000/docs>
+- Redoc: <http://localhost:8000/redoc>
+- OpenAPI JSON: <http://localhost:8000/openapi.json>
+
+### 7. 🛑 Stop the server
+
+Docker runtime:
+
+```sh
+# Stop docker compose:
+./compose.sh stop
+# Or:
+docker compose down --remove-orphans
+```
+
+Standalone runtime (Only for **PM2**):
+
+```sh
 pm2 stop ./pm2-process.json && \
     pm2 flush && \
     pm2 delete ./pm2-process.json
 ```
 
-#### Standalone environment (Python)
-
-**C.** Or run server as **Python module**:
-
-```bash
-# Run server as python module:
-python -u -m app
-```
-
-**D.** Or run server as **Python script**:
-
-```bash
-# Enter into project directory:
-cd app
-
-# Run server as python script:
-python -u ./main.py
-```
-
-**E.** Run with **uvicorn**:
-
-```bash
-# Run uvicorn server:
-uvicorn app.main:app --host=[BIND_HOST] --port=[PORT] --no-server-header --forwarded-allow-ips="*" --no-access-log
-
-# For example:
-uvicorn app.main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log
-
-# For development:
-# Enter into project directory:
-cd app
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-server-header --forwarded-allow-ips="*" --no-access-log --reload --reload-include="*.yml" --reload-include="*.yaml" --reload-include="*.json"
-```
-
-**F.** Or run with **gunicorn**:
-
-```bash
-# Or run gunicorn server:
-gunicorn -k=uvicorn.workers.UvicornWorker app.main:app -b=[BIND_HOST]:[PORT] --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
-
-# For example:
-gunicorn -k=uvicorn.workers.UvicornWorker app.main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*"
-
-# For development:
-# Enter into project directory:
-cd app
-gunicorn -k=uvicorn.workers.UvicornWorker main:app -b=0.0.0.0:8000 --proxy-protocol --forwarded-allow-ips="*" --proxy-allow-from="*" --reload
-```
-
-:thumbsup: :sparkles:
+👍
 
 ---
 
-## Environment Variables
+## ⚙️ Configuration
 
-You can use the following environment variables to configure:
+### 🌎 Environment Variables
 
-[**`.env.example`**](.env.example)
+[**`.env.example`**](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/.env.example):
 
 ```sh
 ## --- Environment variable --- ##
-ENV=local
+ENV=LOCAL
 DEBUG=false
 # TZ=Asia/Seoul
 
 
-## -- APP configs -- ##
-FASTAPI_TEMPLATE_APP_PORT=8000
-FASTAPI_TEMPLATE_APP_LOGS_DIR="/var/log/fastapi-template"
-FASTAPI_TEMPLATE_APP_DATA_DIR="/var/lib/fastapi-template"
+## -- API configs -- ##
+FT_API_PORT=8000
+FT_API_LOGS_DIR="/var/log/rest.fastapi-template"
+FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
+
+# FT_API_VERSION="1"
+# FT_API_PREFIX="/api/v{api_version}"
+# FT_API_DOCS_ENABLED=true
+# FT_API_DOCS_OPENAPI_URL="{api_prefix}/openapi.json"
+# FT_API_DOCS_DOCS_URL="{api_prefix}/docs"
+# FT_API_DOCS_REDOC_URL="{api_prefix}/redoc"
+
 
 
 ## -- Docker build args -- ##
-# HASH_PASSWORD="\$1\$K4Iyj0KF\$SyXMbO1NTSeKzng1TBzHt."
+# HASH_PASSWORD="\$5\$UN1S7dZEa/qDoijJ\$hJ5o.Wpp5aP2kp.46Y7lWgcsRE8/oRLVswU6Swi13fB"
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
 ```
 
-## Arguments
+### 🔧 Command arguments
 
-You can use the following arguments to configure:
+You can customize the command arguments to debug or run the service with different commands.
 
-```txt
--b, --bash, bash, /bin/bash
-    Run only bash shell.
-```
-
-For example as in [**`docker-compose.override.yml`**](templates/docker-compose/docker-compose.override.dev.gpu.yml) file:
+[**`compose.override.yml`**](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/templates/compose/compose.override.dev.yml):
 
 ```yml
     command: ["/bin/bash"]
     command: ["-b", "pwd && ls -al && /bin/bash"]
-    command: ["-b", "sleep 1 && uvicorn main:app --host=0.0.0.0 --port=${FASTAPI_TEMPLATE_APP_PORT:-8000} --no-server-header --proxy-headers --forwarded-allow-ips='*' --no-access-log"]
+    command: ["-b", "python -u -m api"]
+    command: ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
 ```
-
-## Documentation
-
-- [Build docker image](docs/docker-build.md)
-
-## Roadmap
-
-...
 
 ---
 
-## References
+## 🧪 Running Tests
+
+To run tests, run the following command:
+
+```sh
+# Install python test dependencies:
+pip install -r ./requirements/requirements.test.txt
+
+# Run tests:
+./scripts/test.sh -l -v -c
+# Or:
+python -m pytest -sv -o log_cli=true
+```
+
+## 🏗️ Build Docker Image
+
+To build the docker image, run the following command:
+
+```sh
+# Build docker image:
+./scripts/build.sh
+# Or:
+docker compose build
+```
+
+## 📝 Generate Docs
+
+To build the documentation, run the following command:
+
+```sh
+# Install python documentation dependencies:
+pip install -r ./requirements/requirements.docs.txt
+
+# Serve documentation locally (for development):
+./scripts/docs.sh
+# Or:
+mkdocs serve
+
+# Or build documentation:
+./scripts/docs.sh -b
+# Or:
+mkdocs build
+```
+
+## 📚 Documentation
+
+- [Docs](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs)
+- [Home](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/README.md)
+
+### Getting Started
+
+- [Prerequisites](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/prerequisites.md)
+- [Installation](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/installation.md)
+- [Configuration](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/configuration.md)
+- [Examples](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/examples.md)
+- [Error Codes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/error-codes.md)
+
+### [API Documentation](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/README.md)
+
+### Development
+
+- [Test](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/test.md)
+- [Build](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/build.md)
+- [Docs](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/docs.md)
+- [CI/CD](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/cicd.md)
+- [Scripts](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/scripts/README.md)
+- [File Structure](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/file-structure.md)
+- [Sitemap](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/sitemap.md)
+- [Contributing](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/contributing.md)
+- [Roadmap](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/roadmap.md)
+
+### Research
+
+- [Reports](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/research/reports.md)
+- [Benchmarks](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/research/benchmarks.md)
+- [References](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/research/references.md)
+
+### [Release Notes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/release-notes.md)
+
+### [Blog](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/blog/index.md)
+
+### About
+
+- [FAQ](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/about/faq.md)
+- [Authors](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/about/authors.md)
+- [Contact](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/about/contact.md)
+- [License](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/about/license.md)
+
+---
+
+## 📑 References
 
 - FastAPI - <https://fastapi.tiangolo.com>
+- Docker - <https://docs.docker.com>
+- Docker Compose - <https://docs.docker.com/compose>
