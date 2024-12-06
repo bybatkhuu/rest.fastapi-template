@@ -1,20 +1,6 @@
-# 🚸 Examples
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-## CLI
-
-Send request to the server using `curl` and parse the response using `jq`:
-
-```sh
-curl -s http://localhost:8000/api/v1/ping | jq
-```
-
-## Simple
-
-Using python `requests` library to send request to the server:
-
-[**`examples/simple/main.py`**](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/examples/simple/main.py):
-
-```python
 ## Standard libraries
 import sys
 import logging
@@ -46,4 +32,3 @@ if __name__ == "__main__":
     logger.info("Done!\n")
 
     logging.info(f"\n{pprint.pformat(response.json())}")
-```
