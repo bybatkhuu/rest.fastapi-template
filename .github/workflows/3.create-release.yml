@@ -1,12 +1,6 @@
 name: 3. Create Release
 
 on:
-  workflow_run:
-    branches:
-      - main
-    workflows: ["2. Build and Publish"]
-    types:
-      - completed
   workflow_dispatch:
 
 jobs:

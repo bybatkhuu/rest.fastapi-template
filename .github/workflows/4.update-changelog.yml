@@ -1,4 +1,4 @@
-name: 3. Update Changelog
+name: 4. Update Changelog
 
 on:
   workflow_run:
