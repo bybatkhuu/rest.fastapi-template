@@ -61,7 +61,6 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 plugins:
   - search
-  - mkdocstrings
   - render_swagger
   - blog:
       blog_dir: pages/blog
