@@ -8,6 +8,7 @@
     - [Configuration](../getting-started/configuration.md)
     - [Examples](../getting-started/examples.md)
 - API Documentation
+    - [API Reference](../api-docs/api-reference.md)
     - [Error codes](../api-docs/error-codes.md)
 - Development
     - [Test](../dev/test.md)
@@ -23,8 +24,6 @@
         - [build.sh](../dev/scripts/6.build.md)
         - [changelog.sh](../dev/scripts/7.changelog.md)
         - [docs.sh](../dev/scripts/8.docs.md)
-        - [diagrams.sh](../dev/scripts/9.diagrams.md)
-    - [Diagrams](../dev/diagrams.md)
     - [File structure](../dev/file-structure.md)
     - [Sitemap](../dev/sitemap.md)
     - [Related projects](../dev/related-projects.md)

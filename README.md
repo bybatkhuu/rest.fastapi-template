@@ -393,11 +393,14 @@ mkdocs build
 
 - [Prerequisites](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/prerequisites.md)
 - [Installation](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/installation.md)
+- [Quick start](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/quick-start.md)
 - [Configuration](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/configuration.md)
 - [Examples](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/examples.md)
-- [Error Codes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/getting-started/error-codes.md)
 
-### [API Documentation](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/README.md)
+### API Documentation
+
+- [API Reference](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/api-reference.md)
+- [Error Codes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/error-codes.md)
 
 ### Development
 
@@ -408,8 +411,9 @@ mkdocs build
 - [Scripts](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/scripts/README.md)
 - [File Structure](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/file-structure.md)
 - [Sitemap](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/sitemap.md)
-- [Contributing](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/contributing.md)
+- [Related projects](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/related-projects.md)
 - [Roadmap](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/roadmap.md)
+- [Contributing](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/dev/contributing.md)
 
 ### Research
 
