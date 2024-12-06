@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.0.3-241206 (2024-12-06)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 👷 CI/CD
+* Update GitHub workflows for manual triggering and permissions adjustments by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/29
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v5.0.2-241206...v5.0.3-241206
+
 ## v5.0.1-241206 (2024-12-06)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
