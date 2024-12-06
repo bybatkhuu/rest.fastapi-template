@@ -90,6 +90,9 @@ git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
 
 ```sh
 pip install -r ./requirements.txt
+
+# For DEVELOPMENT:
+pip install -r ./requirements/requirements.dev.txt
 ```
 
 <!-- #### 3.2. Install hardware specific dependencies
@@ -139,7 +142,7 @@ cp -v ./.env.example ./src/.env
 nano ./src/.env
 ```
 
-### 5. 🏁 Run the server
+### 5. 🏁 Start the server
 
 > [!NOTE]
 > Follow the one of below instructions based on your environment **[A, B, C, D, E, F]**:
@@ -221,15 +224,15 @@ python -u -m api
 ```sh
 uvicorn src.main:app --host=[BIND_HOST] --port=[PORT] --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
 # For example:
-uvicorn src.main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+uvicorn src.main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
 
 
 # Or:
 cd src
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
+uvicorn main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*"
 
 # For DEVELOPMENT:
-uvicorn main:app --host=0.0.0.0 --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
+uvicorn main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips="*" --reload --reload-include="*.yml" --reload-include=".env"
 ```
 
 **OPTION F.** Run with **fastapi** cli:
@@ -240,7 +243,7 @@ fastpi run src --host=[BIND_HOST] --port=[PORT]
 fastapi run src --port=8000
 
 # For DEVELOPMENT:
-fastapi dev src --host=0.0.0.0 --port=8000
+fastapi dev src --host="0.0.0.0" --port=8000
 
 
 # Or:
@@ -248,15 +251,15 @@ cd src
 fastapi run --port=8000
 
 # For DEVELOPMENT:
-fastapi dev --host=0.0.0.0 --port=8000
+fastapi dev --host="0.0.0.0" --port=8000
 ```
 
-### 6. ✅ Check service is running
+### 6. ✅ Check server is running
 
 Check with CLI (curl):
 
 ```sh
-# Send a ping request with 'curl' to REST API service and parse JSON response with 'jq':
+# Send a ping request with 'curl' to REST API server and parse JSON response with 'jq':
 curl -s http://localhost:8000/api/v1/ping | jq
 ```
 
@@ -267,7 +270,7 @@ Check with web browser:
 - Redoc: <http://localhost:8000/redoc>
 - OpenAPI JSON: <http://localhost:8000/openapi.json>
 
-### 7. 🛑 Stop the service
+### 7. 🛑 Stop the server
 
 Docker runtime:
 

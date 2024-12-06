@@ -6,14 +6,14 @@ hide:
 
 # Introduction
 
-This is a template repo for AI/ML model module.
+This is a template repo for FastAPI web service projects.
 
 ## ✨ Features
 
-- AI/ML model
-- Python module/package
-- Jupyter notebook
-- Research
-- Project Structure
+- FastAPI
+- REST API
+- Web service
+- Microservice
 - Template
 - CI/CD
+- Docker and docker compose

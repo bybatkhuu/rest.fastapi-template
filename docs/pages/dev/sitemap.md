@@ -4,10 +4,11 @@
 - Getting Started
     - [Prerequisites](../getting-started/prerequisites.md)
     - [Installation](../getting-started/installation.md)
+    - [Quick start](../getting-started/quick-start.md)
     - [Configuration](../getting-started/configuration.md)
     - [Examples](../getting-started/examples.md)
-    - [Error Codes](../getting-started/error-codes.md)
-- [API Documentation](../api-docs/README.md)
+- API Documentation
+    - [Error codes](../api-docs/error-codes.md)
 - Development
     - [Test](../dev/test.md)
     - [Build](../dev/build.md)
@@ -23,16 +24,17 @@
         - [changelog.sh](../dev/scripts/7.changelog.md)
         - [docs.sh](../dev/scripts/8.docs.md)
         - [diagrams.sh](../dev/scripts/9.diagrams.md)
-    - [File Structure](../dev/file-structure.md)
+    - [Diagrams](../dev/diagrams.md)
+    - [File structure](../dev/file-structure.md)
     - [Sitemap](../dev/sitemap.md)
-    - [Related Projects](../dev/related-projects.md)
-    - [Contributing](../dev/contributing.md)
+    - [Related projects](../dev/related-projects.md)
     - [Roadmap](../dev/roadmap.md)
+    - [Contributing](../dev/contributing.md)
 - Research
     - [Reports](../research/reports.md)
     - [Benchmarks](../research/benchmarks.md)
     - [References](../research/references.md)
-- [Release Notes](../release-notes.md)
+- [Release notes](../release-notes.md)
 - [Blog](../blog/index.md)
 - About
     - [FAQ](../about/faq.md)

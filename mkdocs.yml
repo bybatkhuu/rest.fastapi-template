@@ -1,8 +1,8 @@
-site_name: Simple Model
-site_description: "'simple_model' is a template module for python AI/ML model."
-site_url: https://bybatkhuu.github.io/model.python-template
-repo_name: bybatkhuu/model.python-template
-repo_url: https://github.com/bybatkhuu/model.python-template
+site_name: FastAPI Template
+site_description: "This is a template repo for FastAPI web service projects."
+site_url: https://bybatkhuu.github.io/rest.fastapi-template
+repo_name: bybatkhuu/rest.fastapi-template
+repo_url: https://github.com/bybatkhuu/rest.fastapi-template
 theme:
   name: material
   # name: readthedocs
@@ -75,14 +75,12 @@ nav:
       # - pages/getting-started/README.md
       - Prerequisites: pages/getting-started/prerequisites.md
       - Installation: pages/getting-started/installation.md
+      - Quick start: pages/getting-started/quick-start.md
       - Configuration: pages/getting-started/configuration.md
       - Examples: pages/getting-started/examples.md
-      - Error codes: pages/getting-started/error-codes.md
   - API Documentation:
       # - pages/api-docs/README.md
-      - SimpleModel: pages/api-docs/SimpleModel.md
-      - ModelConfigPM: pages/api-docs/ModelConfigPM.md
-      - Diagrams: pages/api-docs/diagrams.md
+      - Error codes: pages/api-docs/error-codes.md
   - Development:
       # - pages/dev/README.md
       - Test: pages/dev/test.md
@@ -100,11 +98,12 @@ nav:
           - changelog.sh: pages/dev/scripts/7.changelog.md
           - docs.sh: pages/dev/scripts/8.docs.md
           - diagrams.sh: pages/dev/scripts/9.diagrams.md
+      - Diagrams: pages/dev/diagrams.md
       - File stucture: pages/dev/file-structure.md
       - Sitemap: pages/dev/sitemap.md
       - Related projects: pages/dev/related-projects.md
-      - Contributing: pages/dev/contributing.md
       - Roadmap: pages/dev/roadmap.md
+      - Contributing: pages/dev/contributing.md
   - Research:
       # - pages/research/README.md
       - Reports: pages/research/reports.md

@@ -8,6 +8,6 @@ For a quick start, follow the steps below.
 
 - [Prerequisites](./prerequisites.md)
 - [Installation](./installation.md)
+- [Quick Start](./quick-start.md)
 - [Configuration](./configuration.md)
 - [Examples](./examples.md)
-- [Error Codes](./error-codes.md)

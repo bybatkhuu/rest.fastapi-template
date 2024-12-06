@@ -7,14 +7,14 @@ To build the documentation, run the following command:
 pip install -r ./requirements/requirements.docs.txt
 
 # Serve documentation locally (for development):
-mkdocs serve
-# Or use the docs script:
 ./scripts/docs.sh
+# Or:
+mkdocs serve
 
 # Or build documentation:
-mkdocs build
-# Or use the docs script:
 ./scripts/docs.sh -b
+# Or:
+mkdocs build
 ```
 
 ## Diagrams

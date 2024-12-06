@@ -12,67 +12,60 @@ mkdir -pv ~/workspaces/projects
 cd ~/workspaces/projects
 ```
 
-**1.2.** Follow one of the below options **[A]** or **[B]**:
+**1.2.** Follow one of the below options **[A]**, **[B]** or **[C]**:
 
 **OPTION A.** Clone the repository:
 
 ```sh
-git clone git@github.com:bybatkhuu/model.python-template.git simple_model && \
-    cd simple_model
+git clone https://github.com/bybatkhuu/rest.fastapi-template.git && \
+    cd rest.fastapi-template
 ```
 
-**OPTION B.** Download source code:
+**OPTION B.** Clone the repository (for **DEVELOPMENT**: git + ssh key):
 
-1. Download archived **zip** file from [**releases**](https://github.com/bybatkhuu/model.python-template/releases).
+```sh
+git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
+    cd rest.fastapi-template
+```
+
+**OPTION C.** Download source code:
+
+1. Download archived **zip** or **tar.gz** file from [**releases**](https://github.com/bybatkhuu/rest.fastapi-template/releases).
 2. Extract it into the projects directory.
-3. Rename the extracted directory from **`model.python-template`** to **`simple_model`**.
+3. Enter into the project directory.
 
-## 2. 📦 Install the module
+## 2. 📦 Install dependencies
 
-> [!NOTE]
-> Choose one of the following methods to install the module **[A ~ E]**:
+> [!TIP]
+> Skip this step, if you're going to use **docker** runtime
 
-**OPTION A.** Install directly from **git** repository:
-
-```sh
-pip install git+https://github.com/bybatkhuu/model.python-template.git
-```
-
-**OPTION B.** Install from the downloaded **source code**:
+<!-- #### 3.1. Install base/common dependencies -->
 
 ```sh
-# Install directly from the source code:
-pip install .
-# Or install with editable mode:
-pip install -e .
-```
+pip install -r ./requirements.txt
 
-**OPTION C.** Install for **DEVELOPMENT** environment:
-
-```sh
+# For DEVELOPMENT:
 pip install -r ./requirements/requirements.dev.txt
 ```
 
-**OPTION D.** Install from **pre-built package** files (for **PRODUCTION**):
+<!-- #### 3.2. Install hardware specific dependencies
 
-1. Download **`.whl`** or **`.tar.gz`** file from [**releases**](https://github.com/bybatkhuu/model.python-template/releases).
-2. Install with pip:
+Follow the one of below instructions based on your environment (A is recommended for most cases):
 
-```sh
-# Install from .whl file:
-pip install ./simple_model-[VERSION]-py3-none-any.whl
-# Or install from .tar.gz file:
-pip install ./simple_model-[VERSION].tar.gz
-```
-
-**OPTION E.** Copy the **module** into the project directory (for **testing**):
+**OPTION A.** For Intel/AMD **x86_64** CPU:
 
 ```sh
-# Install python dependencies:
-pip install -r ./requirements.txt
-
-# Copy the module source code into the project:
-cp -r ./src/simple_model [PROJECT_DIR]
-# For example:
-cp -r ./src/simple_model /some/path/project/
+pip install -r ./requirements/requirements.amd64.txt
 ```
+
+**OPTION B.** For **arm64/aarch64** CPU:
+
+```sh
+pip install -r ./requirements/requirements.arm64.txt
+```
+
+**OPTION C.** For **NVIDIA GPU** and **x86_64** CPU:
+
+```sh
+pip install -r ./requirements/requirements.gpu.txt
+``` -->

@@ -7,9 +7,9 @@ To run tests, run the following command:
 pip install -r ./requirements/requirements.test.txt
 
 # Run tests:
-python -m pytest -sv -o log_cli=true
-# Or use the test script:
 ./scripts/test.sh -l -v -c
+# Or:
+python -m pytest -sv -o log_cli=true
 ```
 
 ## Pytest
