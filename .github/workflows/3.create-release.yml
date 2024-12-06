@@ -7,6 +7,7 @@ on:
     workflows: ["2. Build and Publish"]
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   create_release:
