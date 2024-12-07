@@ -38,12 +38,17 @@
 		"*.env.*": "dotenv",
 		"*.json": "jsonc",
 		"*.json.example": "jsonc",
-		"requirements*.txt": "pip-requirements",
+		"*.json.bak": "jsonc",
+		"*.yml.bak": "yaml",
+		"*.yaml.bak": "yaml",
+		"*.conf.template": "nginx",
+		"*.conf.bak": "nginx",
+		".gitignore": "ignore",
+		".dockerignore": "ignore",
 		"*Dockerfile*": "dockerfile",
 		"*.py.bak": "python",
-		"*.conf.template": "nginx",
-		".dockerignore": "ignore",
-		".gitignore": "ignore"
+		"requirements*.txt": "pip-requirements",
+		"*.sh.bak": "shellscript"
 	},
 	"files.watcherExclude": {
 		"**/.git/objects/**": true,
@@ -146,7 +151,7 @@
 	"python.languageServer": "Pylance",
 	"python.analysis.extraPaths": [
 		"${workspaceFolder}/src"
-		// "${workspaceFolder}/src/app/modules"
+		// "${workspaceFolder}/src/api/modules"
 	],
 	"yaml.schemas": {
 		"https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"

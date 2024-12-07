@@ -399,7 +399,7 @@ mkdocs build
 
 ### API Documentation
 
-- [API Reference](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/api-reference.md)
+<!-- - [API Reference](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/api-reference.md) -->
 - [Error Codes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/error-codes.md)
 
 ### Development
