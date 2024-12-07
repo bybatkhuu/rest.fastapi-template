@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.0.10-241207 (2024-12-07)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 👷 CI/CD
+* Add environment variables for versioning and workflow state in GitHub workflows by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/36
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v5.0.9-241207...v5.0.10-241207
+
 ## v5.0.9-241207 (2024-12-07)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
