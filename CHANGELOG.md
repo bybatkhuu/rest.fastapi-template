@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.0.9-241207 (2024-12-07)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 👷 CI/CD
+* Add GITHUB_TOKEN to workflow for checking workflow state by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/35
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v5.0.8-241207...v5.0.9-241207
+
 ## v5.0.7-241207 (2024-12-07)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
