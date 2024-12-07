@@ -23,7 +23,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create v$(./scripts/get-version.sh) --generate-notes
-      # - name: Trigger Changelog
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: gh workflow run 4.update-changelog.yml
+      - name: Trigger Changelog
+        run: gh workflow run 4.update-changelog.yml
