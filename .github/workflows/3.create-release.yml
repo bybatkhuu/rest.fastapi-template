@@ -1,10 +1,12 @@
 name: 3. Create Release
 
 on:
-  # workflow_run:
-  #   workflows: ["2. Build and Publish"]
-  #   types:
-  #     - completed
+  workflow_run:
+    workflows: ["2. Build and Publish"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -21,7 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create v$(./scripts/get-version.sh) --generate-notes
-      - name: Trigger release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run 4.update-changelog.yml
+      # - name: Trigger Changelog
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: gh workflow run 4.update-changelog.yml
