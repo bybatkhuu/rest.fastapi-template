@@ -2,7 +2,7 @@ env: "LOCAL"
 debug: false
 
 api:
-  name: "FASTAPI TEMPLATE REST API"
+  name: "FastAPI Template"
   slug: "rest.fastapi-template"
   bind_host: "0.0.0.0"
   port: 8000
