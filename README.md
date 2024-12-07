@@ -285,7 +285,7 @@ Standalone runtime (Only for **PM2**):
 
 ```sh
 pm2 stop ./pm2-process.json && \
-    pm2 flush && \
+    pm2 flush ft && \
     pm2 delete ./pm2-process.json
 ```
 
