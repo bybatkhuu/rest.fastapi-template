@@ -60,7 +60,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/rest.fastapi-template:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/rest.fastapi-template:${{ env._VERSION }}
           push: true
-      # - name: Trigger release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: gh workflow run 3.create-release.yml
+      - name: Trigger release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run 3.create-release.yml
