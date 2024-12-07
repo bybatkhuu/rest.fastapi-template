@@ -11,6 +11,9 @@ on:
     tags:
       - "v*.*.*-*"
 
+env:
+  _VERSION: 0.0.0-240101
+
 jobs:
   build_publish:
     name: Build and Publish
