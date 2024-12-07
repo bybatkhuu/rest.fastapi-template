@@ -1,12 +1,28 @@
 {
-  "project_name": "FastAPI Template",
-  "project_abbr": "ft",
-  "project_slug": "{{cookiecutter.project_name.lower().strip().replace(' ', '-').replace('_', '-').replace('.', '-')}}",
-  "env_prefix": "{{cookiecutter.project_slug.upper().replace('-', '_')}}_",
-  "repo_owner": "username",
-  "github_owner": "{{cookiecutter.repo_owner}}",
-  "docker_registry": "{{cookiecutter.repo_owner}}",
-  "version": "4.0.1-231017",
-  "timezone": "UTC",
-  "domain": "example.com"
+	"project_name": "FastAPI Template",
+	"project_slug": "{{cookiecutter.project_name.strip().lower().replace(' ', '-').replace('_', '-')}}",
+	"project_description": "This is a short description of the project.",
+	"project_abbr": "ft",
+	"env_prefix": "{{cookiecutter.project_abbr.upper().replace('-', '_')}}_",
+	"author_username": "username",
+	"repo_owner": "{{cookiecutter.author_username}}",
+	"docker_registry": "{{cookiecutter.repo_owner}}",
+	"repo_name": "{{cookiecutter.project_slug}}",
+	"domain": "example.com",
+	"author_email": "user@{{cookiecutter.domain}}",
+	"author_fullname": "Full Name",
+	"python_version": "3.9",
+	"version": "0.0.0-241201",
+	"timezone": "UTC",
+	"language": "en",
+	"copyright_year": "2024",
+	"license": [
+		"MIT License",
+		"Apache License 2.0",
+		"GNU GPLv3",
+		"BSD License",
+		"ISC License",
+		"Proprietary License",
+		"No License"
+	]
 }

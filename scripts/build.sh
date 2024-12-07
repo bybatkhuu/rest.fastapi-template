@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+
 ## --- Base --- ##
 # Getting path of this script file:
 _SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
@@ -22,10 +23,8 @@ fi
 ## --- Main --- ##
 main()
 {
-	echoInfo "Generating project..."
-
+	echoInfo "Generating cookiecutter project..."
 	cookiecutter -f .
-
 	echoOk "Done."
 }
 
