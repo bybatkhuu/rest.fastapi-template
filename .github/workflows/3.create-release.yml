@@ -9,6 +9,9 @@ on:
   #     - main
   workflow_dispatch:
 
+env:
+  _WORKFLOW_STATE: active
+
 jobs:
   create_release:
     name: Create Release
