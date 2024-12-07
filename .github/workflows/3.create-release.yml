@@ -25,6 +25,8 @@ jobs:
         run: gh release create v$(./scripts/get-version.sh) --generate-notes
       - name: Check Workflow
         id: check_workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           _WORKFLOW_STATE=$(gh api repos/$(gh repo view --json nameWithOwner -q .nameWithOwner)/actions/workflows/4.update-changelog.yml | jq -r '.state')
           echo "_WORKFLOW_STATE=${_WORKFLOW_STATE}" >> ${GITHUB_ENV}
