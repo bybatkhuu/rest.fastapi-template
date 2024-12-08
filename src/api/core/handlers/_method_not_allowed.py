@@ -20,7 +20,7 @@ async def method_not_allowed_handler(
         BaseResponse: Response object.
     """
 
-    _error = ErrorCodeEnum.METHOD_NOT_ALLOWED.value.dict()
+    _error = ErrorCodeEnum.METHOD_NOT_ALLOWED.value.model_dump()
     _message: str = _error.get("message")
 
     return BaseResponse(

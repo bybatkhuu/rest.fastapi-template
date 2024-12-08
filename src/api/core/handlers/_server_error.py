@@ -32,7 +32,7 @@ async def server_error_handler(request: Request, exc: Exception) -> BaseResponse
     _request_id: str = request.state.request_id
     _exc_str = str(exc)
     _status_code = _error_enum.value.status_code
-    _error = _error_enum.value.dict()
+    _error = _error_enum.value.model_dump()
     _error["detail"] = _exc_str
     _message: str = _error.get("message")
 

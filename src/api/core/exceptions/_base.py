@@ -38,7 +38,7 @@ class BaseHTTPException(HTTPException):
             headers     (Optional[Dict[str, str]], optional): Headers. Defaults to None.
         """
 
-        _error = error_enum.value.dict()
+        _error = error_enum.value.model_dump()
 
         if not status_code:
             status_code: int = _error.get("status_code")

@@ -18,7 +18,7 @@ async def not_found_handler(request: Request, exc: HTTPException) -> BaseRespons
         BaseResponse: Response object.
     """
 
-    _error = ErrorCodeEnum.NOT_FOUND.value.dict()
+    _error = ErrorCodeEnum.NOT_FOUND.value.model_dump()
     _message: str = _error.get("message")
 
     if hasattr(exc, "detail") and isinstance(exc.detail, dict):

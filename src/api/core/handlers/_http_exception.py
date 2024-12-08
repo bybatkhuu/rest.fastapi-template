@@ -40,7 +40,7 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> BaseRe
 
         _error_code_enum = ErrorCodeEnum.get_by_status_code(status_code=exc.status_code)
         if _error_code_enum:
-            _error = _error_code_enum.value.dict()
+            _error = _error_code_enum.value.model_dump()
 
     return BaseResponse(
         request=request,
