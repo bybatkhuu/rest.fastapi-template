@@ -197,7 +197,7 @@ nano ./pm2-process.json
 
 ## 2. Start PM2 process:
 pm2 start ./pm2-process.json && \
-    pm2 logs --lines 50 rest.fastapi-template
+    pm2 logs --lines 50 ft
 ```
 
 #### Standalone runtime (Python)
