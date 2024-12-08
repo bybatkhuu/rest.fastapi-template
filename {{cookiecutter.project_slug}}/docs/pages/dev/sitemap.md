@@ -1,0 +1,42 @@
+# 🗺️ Sitemap
+
+- [Home](../../README.md)
+- Getting Started
+    - [Prerequisites](../getting-started/prerequisites.md)
+    - [Installation](../getting-started/installation.md)
+    - [Quick start](../getting-started/quick-start.md)
+    - [Configuration](../getting-started/configuration.md)
+    - [Examples](../getting-started/examples.md)
+- API Documentation
+    - [API Reference](../api-docs/api-reference.md)
+    - [Error codes](../api-docs/error-codes.md)
+- Development
+    - [Test](../dev/test.md)
+    - [Build](../dev/build.md)
+    - [Docs](../dev/docs.md)
+    - [CI/CD](../dev/cicd.md)
+    - [Scripts](../dev/scripts/README.md)
+        - [base.sh](../dev/scripts/1.base.md)
+        - [clean.sh](../dev/scripts/2.clean.md)
+        - [get-version.sh](../dev/scripts/3.get-version.md)
+        - [test.sh](../dev/scripts/4.test.md)
+        - [bump-version.sh](../dev/scripts/5.bump-version.md)
+        - [build.sh](../dev/scripts/6.build.md)
+        - [changelog.sh](../dev/scripts/7.changelog.md)
+        - [docs.sh](../dev/scripts/8.docs.md)
+    - [File structure](../dev/file-structure.md)
+    - [Sitemap](../dev/sitemap.md)
+    - [Related projects](../dev/related-projects.md)
+    - [Roadmap](../dev/roadmap.md)
+    - [Contributing](../dev/contributing.md)
+- Research
+    - [Reports](../research/reports.md)
+    - [Benchmarks](../research/benchmarks.md)
+    - [References](../research/references.md)
+- [Release notes](../release-notes.md)
+- [Blog](../blog/index.md)
+- About
+    - [FAQ](../about/faq.md)
+    - [Authors](../about/authors.md)
+    - [Contact](../about/contact.md)
+    - [License](../about/license.md)

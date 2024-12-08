@@ -480,6 +480,7 @@ output/
 outputs/
 .benchmarks/
 rest.fastapi-template/
+rest-fastapi-template/
 
 # Files:
 log
@@ -495,6 +496,7 @@ output
 outputs
 .benchmarks
 rest.fastapi-template
+rest-fastapi-template
 *.bak
 pm2-process.json
 compose.override.yml

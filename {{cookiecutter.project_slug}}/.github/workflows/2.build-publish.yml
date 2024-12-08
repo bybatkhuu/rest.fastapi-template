@@ -2,14 +2,17 @@ name: 2. Build and Publish
 
 on:
   workflow_run:
-    branches:
-      - main
     workflows: ["1. Bump Version"]
     types:
       - completed
+    branches:
+      - main
   push:
     tags:
       - "v*.*.*-*"
+
+env:
+  _VERSION: 0.0.0-240101
 
 jobs:
   build_publish:
@@ -19,57 +22,48 @@ jobs:
       contents: read
       actions: write
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Lint dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up docker buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to docker hub
-        uses: docker/login-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to docker hub
+        uses: docker/login-action@v3
         with:
           username: {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}
           password: {% raw %}${{ secrets.DOCKERHUB_TOKEN }}{% endraw %}
-      -
-        name: Set version
+      - name: Get version
         run: echo "_VERSION=$(./scripts/get-version.sh)" >> ${GITHUB_ENV}
-      -
-        name: Build and export
-        uses: docker/build-push-action@v4
+      - name: Build and export
+        uses: docker/build-push-action@v6
         with:
           context: .
+          build-args: |
+            "HASH_PASSWORD={% raw %}${{ secrets.DOCKER_UID_HASH_PASSWORD }}{% endraw %}"
           load: true
-          cache-from: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:cache-latest
-          tags: {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:test
-      -
-        name: Test docker image
+          cache-from: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:cache-latest
+          tags: {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:test
+      - name: Test docker image
         run: |
-          docker run --rm -dt -p 8000:8000 {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:test
+          docker run --rm -dt -p 8000:8000 {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:test
           sleep 3
-          curl -s http://localhost:8000/api/v1/health | grep "OK"
-      -
-        name: Build and push
-        uses: docker/build-push-action@v4
+          curl -s http://localhost:8000/api/v1/ping | grep "Pong"
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
           context: .
+          build-args: |
+            "HASH_PASSWORD={% raw %}${{ secrets.DOCKER_UID_HASH_PASSWORD }}{% endraw %}"
+          # platforms: linux/amd64
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:cache-latest
-          cache-to: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:cache-latest,mode=max
+          cache-from: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:cache-latest
+          cache-to: type=registry,ref={% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:cache-latest,mode=max
           tags: |
-            {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:latest
-            {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.project_slug}}:{% raw %}${{ env._VERSION }}{% endraw %}
+            {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:latest
+            {% raw %}${{ secrets.DOCKERHUB_USERNAME }}{% endraw %}/{{cookiecutter.docker_repo_name}}:{% raw %}${{ env._VERSION }}{% endraw %}
           push: true
-      -
-        name: Trigger release
+      - name: Trigger release
         env:
           GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-        run: gh workflow run 3.create-release.yml -r v$(./scripts/get-version.sh)
+        run: gh workflow run 3.create-release.yml

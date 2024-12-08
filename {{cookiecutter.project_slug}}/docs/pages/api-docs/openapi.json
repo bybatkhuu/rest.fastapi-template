@@ -1,0 +1,413 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "{{cookiecutter.project_name}}",
+		"summary": "This is a REST API service.",
+		"termsOfService": "https://{{cookiecutter.domain}}/terms",
+		"contact": {
+			"name": "Support Team",
+			"url": "https://{{cookiecutter.domain}}/contact",
+			"email": "support@{{cookiecutter.domain}}"
+		},
+		"version": "{{cookiecutter.version}}"
+	},
+	"paths": {
+		"/api/v1/": {
+			"get": {
+				"tags": [
+					"Utils"
+				],
+				"summary": "Base",
+				"description": "Base path for all API endpoints.",
+				"operationId": "get_base_api_v1__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResPM"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/ping": {
+			"get": {
+				"tags": [
+					"Utils"
+				],
+				"summary": "Ping",
+				"description": "Check if the service is up and running.",
+				"operationId": "get_ping_api_v1_ping_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResPM"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/health": {
+			"get": {
+				"tags": [
+					"Utils"
+				],
+				"summary": "Health",
+				"description": "Check health of all related backend services.",
+				"operationId": "get_health_api_v1_health_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResPM"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/": {
+			"get": {
+				"tags": [
+					"Default"
+				],
+				"summary": "Root",
+				"description": "Redirect to base endpoint: '/api/v1/'",
+				"operationId": "get_root__get",
+				"responses": {
+					"307": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/openapi.json": {
+			"get": {
+				"tags": [
+					"Default"
+				],
+				"summary": "OpenAPI JSON",
+				"description": "Redirect to OpenAPI JSON: '/api/v1/openapi.json'",
+				"operationId": "get_openapi_json_openapi_json_get",
+				"responses": {
+					"307": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/docs": {
+			"get": {
+				"tags": [
+					"Default"
+				],
+				"summary": "Swagger UI docs",
+				"description": "Redirect to Swagger UI docs: '/api/v1/docs'",
+				"operationId": "get_docs_docs_get",
+				"responses": {
+					"307": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/redoc": {
+			"get": {
+				"tags": [
+					"Default"
+				],
+				"summary": "Redoc",
+				"description": "Redirect to Redoc: '/api/v1/redoc'",
+				"operationId": "get_redoc_redoc_get",
+				"responses": {
+					"307": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"BaseResPM": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"maxLength": 256,
+						"minLength": 1,
+						"title": "Message",
+						"description": "Response message about the current request.",
+						"examples": [
+							"Successfully processed the request."
+						]
+					},
+					"data": {
+						"anyOf": [
+							{},
+							{
+								"type": "object"
+							},
+							{
+								"items": {},
+								"type": "array"
+							}
+						],
+						"title": "Data",
+						"description": "Resource data or any data related to response.",
+						"examples": [
+							"Any data: dict, list, str, int, float, null, etc."
+						]
+					},
+					"links": {
+						"$ref": "#/components/schemas/LinksResPM",
+						"title": "Links",
+						"description": "Links related to the current request or resource."
+					},
+					"meta": {
+						"$ref": "#/components/schemas/MetaResPM",
+						"title": "Meta",
+						"description": "Meta information about the current request."
+					},
+					"error": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/ErrorResPM"
+							},
+							{}
+						],
+						"title": "Error",
+						"description": "Error information about the current request.",
+						"examples": [
+							null
+						]
+					}
+				},
+				"type": "object",
+				"required": [
+					"message"
+				],
+				"title": "BaseResPM"
+			},
+			"ErrorResPM": {
+				"properties": {
+					"code": {
+						"type": "string",
+						"maxLength": 36,
+						"minLength": 3,
+						"title": "Error code",
+						"description": "Code that represents the error.",
+						"examples": [
+							"400_00000"
+						]
+					},
+					"description": {
+						"anyOf": [
+							{
+								"type": "string",
+								"maxLength": 1024
+							},
+							{
+								"type": "null"
+							}
+						],
+						"title": "Error description",
+						"description": "Description of the error.",
+						"examples": [
+							"Bad request syntax or unsupported method."
+						]
+					},
+					"detail": {
+						"anyOf": [
+							{},
+							{
+								"type": "object"
+							},
+							{
+								"items": {},
+								"type": "array"
+							}
+						],
+						"title": "Error detail",
+						"description": "Detail of the error.",
+						"examples": [
+							{
+								"ctx": {
+									"constraint": "value"
+								},
+								"loc": [
+									"body",
+									"field"
+								],
+								"msg": "Error message.",
+								"type": "Error type."
+							}
+						]
+					}
+				},
+				"type": "object",
+				"required": [
+					"code"
+				],
+				"title": "ErrorResPM"
+			},
+			"LinksResPM": {
+				"properties": {
+					"self": {
+						"anyOf": [
+							{
+								"type": "string",
+								"maxLength": 2048
+							},
+							{
+								"type": "null"
+							}
+						],
+						"title": "Self link",
+						"description": "Link to the current resource.",
+						"examples": [
+							"/api/v1/resources"
+						]
+					}
+				},
+				"additionalProperties": true,
+				"type": "object",
+				"title": "LinksResPM"
+			},
+			"MetaResPM": {
+				"properties": {
+					"request_id": {
+						"anyOf": [
+							{
+								"type": "string",
+								"maxLength": 64,
+								"minLength": 8
+							},
+							{
+								"type": "null"
+							}
+						],
+						"title": "Request ID",
+						"description": "Current request ID.",
+						"examples": [
+							"211203afa2844d55b1c9d38b9f8a7063"
+						]
+					},
+					"base_url": {
+						"anyOf": [
+							{
+								"type": "string",
+								"maxLength": 256,
+								"minLength": 2
+							},
+							{
+								"type": "null"
+							}
+						],
+						"title": "Base URL",
+						"description": "Current request base URL.",
+						"examples": [
+							"https://api.{{cookiecutter.domain}}"
+						]
+					},
+					"method": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/MethodEnum"
+							},
+							{
+								"type": "null"
+							}
+						],
+						"title": "Method",
+						"description": "Current request method.",
+						"examples": [
+							"GET"
+						]
+					},
+					"api_version": {
+						"type": "string",
+						"maxLength": 16,
+						"minLength": 1,
+						"title": "API version",
+						"description": "Current API version.",
+						"default": "1",
+						"examples": [
+							"1"
+						]
+					},
+					"version": {
+						"type": "string",
+						"maxLength": 32,
+						"minLength": 5,
+						"title": "Version",
+						"description": "Current system version.",
+						"default": "{{cookiecutter.version}}",
+						"examples": [
+							"{{cookiecutter.version}}"
+						]
+					}
+				},
+				"additionalProperties": true,
+				"type": "object",
+				"title": "MetaResPM"
+			},
+			"MethodEnum": {
+				"type": "string",
+				"enum": [
+					"GET",
+					"POST",
+					"PUT",
+					"PATCH",
+					"DELETE",
+					"HEAD",
+					"OPTIONS",
+					"CONNECT",
+					"TRACE"
+				],
+				"title": "MethodEnum"
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "Utils",
+			"description": "Useful utility endpoints."
+		},
+		{
+			"name": "Default",
+			"description": "Redirection of default endpoints."
+		}
+	]
+}

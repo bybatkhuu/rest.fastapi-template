@@ -1,4 +1,0 @@
-paths:
-  data_dir: "/var/lib/{app_slug}"
-  uploads_dir: "{data_dir}/uploads"
-  # models_dir: "{data_dir}/models"

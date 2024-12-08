@@ -1,0 +1,24 @@
+services:
+  api:
+    image: {{cookiecutter.docker_registry}}/{{cookiecutter.docker_repo_name}}:latest
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      TERM: ${TERM:-xterm}
+      TZ: ${TZ:-{{cookiecutter.timezone}}}
+      {{cookiecutter.env_prefix}}API_PORT: {% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT:-8000}
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - "api-logs:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_LOGS_DIR:-/var/log/{{cookiecutter.project_slug}}}"
+      - "api-data:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_DATA_DIR:-/var/lib/{{cookiecutter.project_slug}}}"
+    ports:
+      - "{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT:-8000}:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT:-8000}"
+    tty: true
+
+
+volumes:
+  api-logs:
+  api-data:
