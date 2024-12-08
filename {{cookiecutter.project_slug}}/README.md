@@ -404,6 +404,7 @@ mkdocs build
 ### API Documentation
 
 <!-- - [API Reference](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/main/docs/pages/api-docs/api-reference.md) -->
+- [openapi.json](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/main/docs/pages/api-docs/openapi.json)
 - [Error Codes](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/main/docs/pages/api-docs/error-codes.md)
 
 ### Development
