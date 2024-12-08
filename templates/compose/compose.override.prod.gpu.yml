@@ -1,6 +1,6 @@
 services:
   api:
-    image: bybatkhuu/rest.fastapi-template:4.0.1-231017-gpu
+    image: bybatkhuu/rest.fastapi-template:5.0.10-241207-gpu
     runtime: nvidia
     environment:
       NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
