@@ -22,7 +22,7 @@ async def validation_error_handler(
     """
 
     _message = "Validation error!"
-    _error = ErrorCodeEnum.UNPROCESSABLE_ENTITY.value.dict()
+    _error = ErrorCodeEnum.UNPROCESSABLE_ENTITY.value.model_dump()
     _error["description"] = str(exc)
     _error["detail"] = exc.errors()
 
