@@ -1,6 +1,6 @@
 {
 	"project_name": "FastAPI Template",
-	"project_slug": "{{cookiecutter.project_name.strip().lower().replace(' ', '-').replace('_', '-')}}",
+	"project_slug": "rest.fastapi-template",
 	"project_description": "This is a short description of the project.",
 	"project_abbr": "ft",
 	"env_prefix": "{{cookiecutter.project_abbr.upper().replace('-', '_')}}_",
@@ -16,7 +16,7 @@
 	"version": "0.0.0-241201",
 	"timezone": "UTC",
 	"language": "en",
-	"copyright_year": "2024",
+	"copyright_year": "2025",
 	"license": [
 		"MIT License",
 		"Apache License 2.0",

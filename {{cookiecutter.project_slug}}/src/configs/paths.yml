@@ -6,4 +6,4 @@ api:
     credentials_dir: "{data_dir}/credentials"
     rsa_keys_dir: "{data_dir}/credentials/rsa_keys"
     # models_dir: "{data_dir}/models"
-    # model_dir: "{data_dir}/models/{{model_id}}"
+    # model_dir: "{data_dir}/models/{% raw %}{{model_id}}{% endraw %}"
