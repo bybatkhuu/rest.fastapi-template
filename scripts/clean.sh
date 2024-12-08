@@ -58,7 +58,6 @@ main()
 		rm -rfv ./site || exit 2
 		find . -type d -name "*.egg-info" -exec rm -rfv {} + || exit 2
 		rm -rfv ./rest.fastapi-template || exit 2
-		rm -rfv ./rest-fastapi-template || exit 2
 	fi
 
 	echoOk "Done."
