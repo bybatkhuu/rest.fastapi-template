@@ -17,29 +17,12 @@ mkdocs serve
 mkdocs build
 ```
 
-## Diagrams
-
-Prerequisites:
-
-- Install [Graphviz](https://graphviz.org/download)
-
-To generate diagrams, run the following command:
-
-```sh
-# Install python documentation dependencies:
-pip install -r ./requirements/requirements.docs.txt
-
-# Generate diagrams:
-./scripts/diagrams.sh
-```
-
 ## MkDocs Material
 
 ### Installation
 
 ```sh
-# Install mkdocs-material and mkdocstrings:
-pip install -U mkdocs-material mkdocstrings[python]
+pip install -U mkdocs-material mkdocs-render-swagger-plugin
 ```
 
 ### Commands
@@ -62,4 +45,5 @@ docs/
 
 - [MkDocs Documentation](https://www.mkdocs.org)
 - [MkDocs Material Documentation](https://squidfunk.github.io/mkdocs-material)
+- [MkDocs Swagger Renderer Plugin](https://github.com/bharel/mkdocs-render-swagger-plugin)
 - [mkdocstrings Documentation](https://mkdocstrings.github.io)

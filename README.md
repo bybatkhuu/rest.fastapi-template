@@ -400,6 +400,7 @@ mkdocs build
 ### API Documentation
 
 <!-- - [API Reference](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/api-reference.md) -->
+- [openapi.json](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/openapi.json)
 - [Error Codes](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/docs/pages/api-docs/error-codes.md)
 
 ### Development
