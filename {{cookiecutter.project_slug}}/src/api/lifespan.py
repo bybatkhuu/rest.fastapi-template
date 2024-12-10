@@ -20,12 +20,13 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
 
     logger.info("Preparing to startup...")
-    await asymmetric_keys_helper.async_create_keys(
-        asymmetric_keys_dir=config.api.paths.asymmetric_keys_dir,
-        key_size=config.api.security.asymmetric_keys.key_size,
-        private_key_fname=config.api.security.asymmetric_keys.private_key_fname,
-        public_key_fname=config.api.security.asymmetric_keys.public_key_fname,
-    )
+    if config.api.security.asymmetric_keys.auto_generate:
+        await asymmetric_keys_helper.async_create_keys(
+            asymmetric_keys_dir=config.api.paths.asymmetric_keys_dir,
+            key_size=config.api.security.asymmetric_keys.key_size,
+            private_key_fname=config.api.security.asymmetric_keys.private_key_fname,
+            public_key_fname=config.api.security.asymmetric_keys.public_key_fname,
+        )
     # Add startup code here...
     logger.success("Finished preparation to startup.")
     logger.opt(colors=True).info(f"Version: <c>{config.version}</c>")

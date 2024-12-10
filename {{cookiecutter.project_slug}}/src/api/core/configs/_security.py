@@ -58,6 +58,7 @@ class PasswordConfig(FrozenBaseConfig):
 
 
 class AsymmetricKeysConfig(FrozenBaseConfig):
+    auto_generate: bool = Field(...)
     algorithm: constr(strip_whitespace=True) = Field(..., pattern=ASYMMETRIC_ALGORITHM_REGEX)  # type: ignore
     key_size: int = Field(..., ge=2048, le=8192)
     private_key_fname: constr(strip_whitespace=True) = Field(  # type: ignore
