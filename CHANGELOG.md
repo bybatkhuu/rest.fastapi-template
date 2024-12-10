@@ -1,5 +1,20 @@
 # Changelog
 
+## v6.0.0-241210 (2024-12-10)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 💥 Breaking Changes
+* Add password hashing modules and enhance security options by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/39
+### 🐛 Fixes
+* Update error handling for consistent response formatting by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/38
+### 📝 Documentation
+* Refactor PM2 process name and update script arguments in examples by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/37
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v5.0.10-241207...v6.0.0-241210
+
 ## v5.0.10-241207 (2024-12-07)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
