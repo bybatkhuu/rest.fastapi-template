@@ -80,6 +80,8 @@ main()
 		if [ "${_is_docker_running}" == true ]; then
 			docker compose down -v --remove-orphans || exit 2
 		fi
+
+		rm -rfv "./volumes/storage/${PROJECT_SLUG}/data" || exit 2
 	fi
 
 	echoOk "Done."
