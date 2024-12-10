@@ -2,12 +2,13 @@
 
 import os
 import errno
-from typing import Tuple
+import base64
+from typing import Tuple, Union
 
 import aiofiles
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric.types import (
     PrivateKeyTypes,
     PublicKeyTypes,
@@ -21,27 +22,27 @@ from api.core import utils
 
 @validate_call
 async def async_create_keys(
-    rsa_keys_dir: str,
+    asymmetric_keys_dir: str,
     key_size: int,
     private_key_fname: str,
     public_key_fname: str,
     warn_mode: WarnEnum = WarnEnum.DEBUG,
 ) -> None:
-    """Async create RSA keys and save them to files.
+    """Async create asymmetric keys and save them to files.
 
     Args:
-        rsa_keys_dir      (str     , required): RSA keys directory.
-        key_size          (int     , required): RSA key size.
-        private_key_fname (str     , required): RSA private key filename.
-        public_key_fname  (str     , required): RSA public key filename.
-        warn_mode         (WarnEnum, optional): Warning mode. Defaults to WarnEnum.DEBUG.
+        asymmetric_keys_dir (str     , required): Asymmetric keys directory.
+        key_size            (int     , required): Asymmetric key size.
+        private_key_fname   (str     , required): Asymmetric private key filename.
+        public_key_fname    (str     , required): Asymmetric public key filename.
+        warn_mode           (WarnEnum, optional): Warning mode. Defaults to WarnEnum.DEBUG.
 
     Raises:
-        OSError: If failed to create RSA keys.
+        OSError: If failed to create asymmetric keys.
     """
 
-    _private_key_path = os.path.join(rsa_keys_dir, private_key_fname)
-    _public_key_path = os.path.join(rsa_keys_dir, public_key_fname)
+    _private_key_path = os.path.join(asymmetric_keys_dir, private_key_fname)
+    _public_key_path = os.path.join(asymmetric_keys_dir, public_key_fname)
     if await aiofiles.os.path.isfile(
         _private_key_path
     ) and await aiofiles.os.path.isfile(_public_key_path):
@@ -65,7 +66,7 @@ async def async_create_keys(
         format=serialization.PublicFormat.SubjectPublicKeyInfo,
     )
 
-    await utils.async_create_dir(create_dir=rsa_keys_dir, warn_mode=warn_mode)
+    await utils.async_create_dir(create_dir=asymmetric_keys_dir, warn_mode=warn_mode)
 
     if not await aiofiles.os.path.isfile(_private_key_path):
         try:
@@ -96,16 +97,16 @@ async def async_create_keys(
 
 @validate_call
 async def async_get_private_key(private_key_path: str) -> PrivateKeyTypes:
-    """Async read RSA private key from file.
+    """Async read asymmetric private key from file.
 
     Args:
-        private_key_path (str, required): RSA private key path.
+        private_key_path (str, required): Asymmetric private key path.
 
     Raises:
-        FileNotFoundError: If RSA private key file not found.
+        FileNotFoundError: If Asymmetric private key file not found.
 
     Returns:
-        PrivateKeyTypes: RSA private key.
+        PrivateKeyTypes: Asymmetric private key.
     """
 
     if not await aiofiles.os.path.isfile(private_key_path):
@@ -123,16 +124,16 @@ async def async_get_private_key(private_key_path: str) -> PrivateKeyTypes:
 
 @validate_call
 async def async_get_public_key(public_key_path: str) -> PublicKeyTypes:
-    """Async read RSA public key from file.
+    """Async read asymmetric public key from file.
 
     Args:
-        public_key_path (str, required): RSA public key path.
+        public_key_path (str, required): Asymmetric public key path.
 
     Raises:
-        FileNotFoundError: If RSA public key file not found.
+        FileNotFoundError: If asymmetric public key file not found.
 
     Returns:
-        PublicKeyTypes: RSA public key.
+        PublicKeyTypes: Asymmetric public key.
     """
 
     if not await aiofiles.os.path.isfile(public_key_path):
@@ -152,11 +153,11 @@ async def async_get_public_key(public_key_path: str) -> PublicKeyTypes:
 async def async_get_keys(
     private_key_path: str, public_key_path: str
 ) -> Tuple[PrivateKeyTypes, PublicKeyTypes]:
-    """Async read RSA keys from file.
+    """Async read asymmetric keys from file.
 
     Args:
-        private_key_path (str, required): RSA private key path.
-        public_key_path  (str, required): RSA public key path.
+        private_key_path (str, required): Asymmetric private key path.
+        public_key_path  (str, required): Asymmetric public key path.
 
     Returns:
         Tuple[PrivateKeyTypes, PublicKeyTypes]: Private and public keys.
@@ -170,27 +171,27 @@ async def async_get_keys(
 
 @validate_call
 def create_keys(
-    rsa_keys_dir: str,
+    asymmetric_keys_dir: str,
     key_size: int,
     private_key_fname: str,
     public_key_fname: str,
     warn_mode: WarnEnum = WarnEnum.DEBUG,
 ) -> None:
-    """Create RSA keys and save them to files.
+    """Create asymmetric keys and save them to files.
 
     Args:
-        rsa_keys_dir      (str     , required): RSA keys directory.
-        key_size          (int     , required): RSA key size.
-        private_key_fname (str     , required): RSA private key filename.
-        public_key_fname  (str     , required): RSA public key filename.
-        warn_mode         (WarnEnum, optional): Warning mode. Defaults to WarnEnum.DEBUG.
+        asymmetric_keys_dir (str     , required): Asymmetric keys directory.
+        key_size            (int     , required): Asymmetric key size.
+        private_key_fname   (str     , required): Asymmetric private key filename.
+        public_key_fname    (str     , required): Asymmetric public key filename.
+        warn_mode           (WarnEnum, optional): Warning mode. Defaults to WarnEnum.DEBUG.
 
     Raises:
-        OSError: If failed to create RSA keys.
+        OSError: If failed to create asymmetric keys.
     """
 
-    _private_key_path = os.path.join(rsa_keys_dir, private_key_fname)
-    _public_key_path = os.path.join(rsa_keys_dir, public_key_fname)
+    _private_key_path = os.path.join(asymmetric_keys_dir, private_key_fname)
+    _public_key_path = os.path.join(asymmetric_keys_dir, public_key_fname)
     if os.path.isfile(_private_key_path) and os.path.isfile(_public_key_path):
         return
 
@@ -212,7 +213,7 @@ def create_keys(
         format=serialization.PublicFormat.SubjectPublicKeyInfo,
     )
 
-    utils.create_dir(create_dir=rsa_keys_dir, warn_mode=warn_mode)
+    utils.create_dir(create_dir=asymmetric_keys_dir, warn_mode=warn_mode)
 
     if not os.path.isfile(_private_key_path):
         try:
@@ -243,16 +244,16 @@ def create_keys(
 
 @validate_call
 def get_private_key(private_key_path: str) -> PrivateKeyTypes:
-    """Read RSA private key from file.
+    """Read asymmetric private key from file.
 
     Args:
-        private_key_path (str, required): RSA private key path.
+        private_key_path (str, required): Asymmetric private key path.
 
     Raises:
-        FileNotFoundError: If RSA private key file not found.
+        FileNotFoundError: If asymmetric private key file not found.
 
     Returns:
-        PrivateKeyTypes: RSA private key.
+        PrivateKeyTypes: Asymmetric private key.
     """
 
     if not os.path.isfile(private_key_path):
@@ -270,16 +271,16 @@ def get_private_key(private_key_path: str) -> PrivateKeyTypes:
 
 @validate_call
 def get_public_key(public_key_path: str) -> PublicKeyTypes:
-    """Read RSA public key from file.
+    """Read asymmetric public key from file.
 
     Args:
-        public_key_path (str, required): RSA public key path.
+        public_key_path (str, required): Asymmetric public key path.
 
     Raises:
-        FileNotFoundError: If RSA public key file not found.
+        FileNotFoundError: If asymmetric public key file not found.
 
     Returns:
-        PublicKeyTypes: RSA public key.
+        PublicKeyTypes: Asymmetric public key.
     """
 
     if not os.path.isfile(public_key_path):
@@ -299,11 +300,11 @@ def get_public_key(public_key_path: str) -> PublicKeyTypes:
 def get_keys(
     private_key_path: str, public_key_path: str
 ) -> Tuple[PrivateKeyTypes, PublicKeyTypes]:
-    """Read RSA keys from file.
+    """Read asymmetric keys from file.
 
     Args:
-        private_key_path (str, required): RSA private key path.
-        public_key_path  (str, required): RSA public key path.
+        private_key_path (str, required): Asymmetric private key path.
+        public_key_path  (str, required): Asymmetric public key path.
 
     Returns:
         Tuple[PrivateKeyTypes, PublicKeyTypes]: Private and public keys.
@@ -315,6 +316,68 @@ def get_keys(
     return _private_key, _public_key
 
 
+@validate_call(config={"arbitrary_types_allowed": True})
+def encrypt_with_public_key(
+    plaintext: str, public_key: PublicKeyTypes, base64_encode: bool = False
+) -> Union[str, bytes]:
+    """Encrypt plaintext with public key.
+
+    Args:
+        plaintext     (str           , required): Plaintext to encrypt.
+        public_key    (PublicKeyTypes, required): Public key.
+        base64_encode (bool          , optional): Encode ciphertext with base64. Defaults to False.
+
+    Returns:
+        Union[str, bytes]: Encrypted ciphertext.
+    """
+
+    _ciphertext: bytes = public_key.encrypt(
+        plaintext=plaintext.encode("utf-8"),
+        padding=padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None,
+        ),
+    )
+
+    if base64_encode:
+        return base64.b64encode(_ciphertext).decode()
+
+    return _ciphertext
+
+
+@validate_call(config={"arbitrary_types_allowed": True})
+def decrypt_with_private_key(
+    ciphertext: Union[str, bytes],
+    private_key: PrivateKeyTypes,
+    base64_decode: bool = False,
+) -> str:
+    """Decrypt ciphertext with private key.
+
+    Args:
+        ciphertext    (Union[str, bytes], required): Ciphertext to decrypt.
+        private_key   (PrivateKeyTypes  , required): Private key.
+        base64_decode (bool             , optional): Decode ciphertext with base64. Defaults to False.
+
+    Returns:
+        str: Decrypted plaintext.
+    """
+
+    if base64_decode and isinstance(ciphertext, str):
+        ciphertext = base64.b64decode(ciphertext.encode())
+
+    _plaintext: bytes = private_key.decrypt(
+        ciphertext=ciphertext,
+        padding=padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None,
+        ),
+    )
+
+    return _plaintext.decode()
+
+
 __all__ = [
     "async_create_keys",
     "async_get_private_key",
@@ -324,4 +387,6 @@ __all__ = [
     "get_private_key",
     "get_public_key",
     "get_keys",
+    "encrypt_with_public_key",
+    "decrypt_with_private_key",
 ]

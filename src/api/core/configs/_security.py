@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
-from pydantic import Field, constr, SecretStr
+from pydantic import Field, constr, SecretStr, model_validator
 from pydantic_settings import SettingsConfigDict
 
 from api.core.constants import (
     ENV_PREFIX_API,
     HTTP_METHOD_REGEX,
-    RSA_ALGORITHM_REGEX,
+    ASYMMETRIC_ALGORITHM_REGEX,
     JWT_ALGORITHM_REGEX,
 )
 from ._base import FrozenBaseConfig
@@ -39,8 +39,26 @@ class CorsConfig(FrozenBaseConfig):
     model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}CORS_")
 
 
-class RSAConfig(FrozenBaseConfig):
-    algorithm: constr(strip_whitespace=True) = Field(..., pattern=RSA_ALGORITHM_REGEX)  # type: ignore
+class PasswordConfig(FrozenBaseConfig):
+    pepper: SecretStr = Field(..., min_length=8, max_length=32)
+    min_length: int = Field(..., ge=8, le=128)
+    max_length: int = Field(..., ge=8, le=128)
+
+    @model_validator(mode="before")
+    @classmethod
+    def _check_all(cls, values: Dict[str, Any]) -> Dict[str, Any]:
+        if values["max_length"] < values["min_length"]:
+            raise ValueError(
+                "`min_length` is greater than `max_length`, should be vice versa!"
+            )
+
+        return values
+
+    model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}PASSWORD_")
+
+
+class AsymmetricKeysConfig(FrozenBaseConfig):
+    algorithm: constr(strip_whitespace=True) = Field(..., pattern=ASYMMETRIC_ALGORITHM_REGEX)  # type: ignore
     key_size: int = Field(..., ge=2048, le=8192)
     private_key_fname: constr(strip_whitespace=True) = Field(  # type: ignore
         ..., min_length=2, max_length=256
@@ -49,7 +67,9 @@ class RSAConfig(FrozenBaseConfig):
         ..., min_length=2, max_length=256
     )
 
-    model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}RSA_")
+    model_config = SettingsConfigDict(
+        env_prefix=f"{_ENV_PREFIX_SECURITY}ASYMMETRIC_KEYS_"
+    )
 
 
 class JWTConfig(FrozenBaseConfig):
@@ -67,10 +87,11 @@ class SecurityConfig(FrozenBaseConfig):
         constr(strip_whitespace=True, min_length=1, max_length=256)  # type: ignore
     ] = Field(...)
     cors: CorsConfig = Field(...)
-    rsa: RSAConfig = Field(...)
+    password: PasswordConfig = Field(default_factory=PasswordConfig)
+    asymmetric_keys: AsymmetricKeysConfig = Field(...)
     jwt: JWTConfig = Field(...)
 
     model_config = SettingsConfigDict(env_prefix=_ENV_PREFIX_SECURITY)
 
 
-__all__ = ["SecurityConfig", "CorsConfig", "RSAConfig", "JWTConfig"]
+__all__ = ["SecurityConfig", "CorsConfig", "AsymmetricKeysConfig", "JWTConfig"]
