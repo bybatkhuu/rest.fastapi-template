@@ -11,7 +11,11 @@ api:
       allow_credentials: false
       expose_headers: []
       max_age: 600 # Seconds (10 minutes)
-    rsa:
+    password:
+      pepper: "FT_PASSWORD_PEPPER123" # This should be a random string, and read from an environment variable!
+      min_length: 8
+      max_length: 128
+    asymmetric_keys:
       algorithm: "RS256"
       key_size: 2048
       private_key_fname: "private_key.pem"

@@ -18,10 +18,10 @@ class PathsConfig(BaseConfig):
     data_dir: constr(strip_whitespace=True) = Field(  # type: ignore
         ..., min_length=2, max_length=1024
     )
-    credentials_dir: constr(strip_whitespace=True) = Field(  # type: ignore
+    security_dir: constr(strip_whitespace=True) = Field(  # type: ignore
         ..., min_length=2, max_length=1024
     )
-    rsa_keys_dir: constr(strip_whitespace=True) = Field(  # type: ignore
+    asymmetric_keys_dir: constr(strip_whitespace=True) = Field(  # type: ignore
         ..., min_length=2, max_length=1024
     )
     # models_dir: constr(strip_whitespace=True) = Field(  # type: ignore
