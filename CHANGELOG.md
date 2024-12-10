@@ -1,5 +1,16 @@
 # Changelog
 
+## v6.0.1-241210 (2024-12-10)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Add auto-generate option for asymmetric keys and update Docker image version by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/40
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v6.0.0-241210...v6.0.1-241210
+
 ## v6.0.0-241210 (2024-12-10)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
