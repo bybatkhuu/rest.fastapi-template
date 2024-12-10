@@ -16,4 +16,4 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from .api import app, __version__
 
 
-__all__ = ["api", "__version__"]
+__all__ = ["app", "__version__"]
