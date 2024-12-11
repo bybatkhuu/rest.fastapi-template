@@ -470,6 +470,7 @@ log/
 logs/
 backup/
 backups/
+tmp/
 data/
 dataset/
 datasets/
@@ -485,6 +486,7 @@ log
 logs
 backup
 backups
+tmp
 data
 dataset
 datasets
