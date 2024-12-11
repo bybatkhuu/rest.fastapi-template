@@ -496,6 +496,7 @@ output
 outputs
 .benchmarks
 rest.fastapi-template
+env
 *.bak
 pm2-process.json
 compose.override.yml
