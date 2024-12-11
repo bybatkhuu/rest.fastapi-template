@@ -8,7 +8,7 @@ logger:
     std_handler:
       enabled: true
   file:
-    logs_dir: "/var/log/{app_name}"
+    logs_dir: "../logs"
     rotate_size: 10000000 # 10MB
     rotate_time: "00:00:00"
     backup_count: 90
