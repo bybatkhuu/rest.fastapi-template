@@ -7,7 +7,7 @@ echo "INFO: Running '{{cookiecutter.project_slug}}' docker-entrypoint.sh..."
 _doStart()
 {
 	exec python -u ./main.py || exit 2
-	# exec fastapi run --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT:-8000} || exit 2
+	# exec uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*' || exit 2
 	exit 0
 }
 

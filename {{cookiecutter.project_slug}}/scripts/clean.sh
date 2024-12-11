@@ -22,7 +22,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-PROJECT_SLUG="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
+PROJECT_SLUG="${PROJECT_SLUG:-rest.fastapi-template}"
 
 # Flags:
 _IS_ALL=false
@@ -74,6 +74,7 @@ main()
 
 	find . -type d -name ".git" -prune -o -type d -name "logs" -exec rm -rfv {} + || exit 2
 
+	rm -rfv "./tmp" || exit 2
 	rm -rfv "./${PROJECT_SLUG}" || exit 2
 
 	if [ "${_IS_ALL}" == true ]; then
@@ -81,6 +82,7 @@ main()
 			docker compose down -v --remove-orphans || exit 2
 		fi
 
+		rm -rfv "./data" || exit 2
 		rm -rfv "./volumes/storage/${PROJECT_SLUG}/data" || exit 2
 	fi
 

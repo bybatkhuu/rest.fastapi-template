@@ -470,6 +470,7 @@ log/
 logs/
 backup/
 backups/
+tmp/
 data/
 dataset/
 datasets/
@@ -485,6 +486,7 @@ log
 logs
 backup
 backups
+tmp
 data
 dataset
 datasets
@@ -494,6 +496,7 @@ output
 outputs
 .benchmarks
 {{cookiecutter.project_slug}}
+env
 *.bak
 pm2-process.json
 compose.override.yml

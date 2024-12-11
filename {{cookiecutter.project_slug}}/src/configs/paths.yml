@@ -1,9 +1,9 @@
 api:
   paths:
-    tmp_dir: "/tmp/{api_slug}"
+    tmp_dir: "../tmp"
     uploads_dir: "{tmp_dir}/uploads"
-    data_dir: "/var/lib/{api_slug}"
+    data_dir: "../data"
     security_dir: "{data_dir}/security"
     asymmetric_keys_dir: "{data_dir}/security/asymmetric_keys"
     # models_dir: "{data_dir}/models"
-    # model_dir: "{data_dir}/models/{{model_id}}"
+    # model_dir: "{data_dir}/models/{% raw %}{{model_id}}{% endraw %}"
