@@ -48,11 +48,11 @@ if __name__ == "__main__":
     logging.info(f"\n{pprint.pformat(response.json())}")
 ```
 
-## Advanced
+## Async
 
 Using python `aiohttp` library to send request to the server:
 
-[**`examples/advanced/main.py`**](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/main/examples/advanced/main.py):
+[**`examples/async/main.py`**](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/main/examples/async/main.py):
 
 ```python
 ## Standard libraries
