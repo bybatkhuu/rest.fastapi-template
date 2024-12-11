@@ -48,11 +48,11 @@ if __name__ == "__main__":
     logging.info(f"\n{pprint.pformat(response.json())}")
 ```
 
-## Advanced
+## Async
 
 Using python `aiohttp` library to send request to the server:
 
-[**`examples/advanced/main.py`**](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/examples/advanced/main.py):
+[**`examples/async/main.py`**](https://github.com/bybatkhuu/rest.fastapi-template/blob/main/examples/async/main.py):
 
 ```python
 ## Standard libraries
