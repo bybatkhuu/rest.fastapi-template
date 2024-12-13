@@ -10,6 +10,7 @@ from .config import config
 from .lifespan import lifespan
 from .middleware import add_middlewares
 from .router import add_routers
+from .mount import add_mounts
 from .exception import add_exception_handlers
 from .core.responses import BaseResponse
 
@@ -24,6 +25,7 @@ app = FastAPI(
 
 add_middlewares(app=app)
 add_routers(app=app)
+add_mounts(app=app)
 add_exception_handlers(app=app)
 
 
