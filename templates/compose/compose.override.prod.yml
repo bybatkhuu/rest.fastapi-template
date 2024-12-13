@@ -1,6 +1,6 @@
 services:
   api:
-    image: bybatkhuu/rest.fastapi-template:6.0.2-241211
+    image: bybatkhuu/rest.fastapi-template:6.0.3-241213
     # volumes:
     #   - "api-vscode-server:/home/ft-user/.vscode-server"
     # deploy:
