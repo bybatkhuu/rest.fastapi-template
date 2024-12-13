@@ -1,5 +1,16 @@
 # Changelog
 
+## v6.0.3-241213 (2024-12-13)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Disable automatic key generation in security configuration by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/43
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v6.0.2-241211...v6.0.3-241213
+
 ## v6.0.2-241211 (2024-12-11)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
