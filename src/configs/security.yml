@@ -15,8 +15,8 @@ api:
       pepper: "FT_PASSWORD_PEPPER123" # This should be a random string, and read from an environment variable!
       min_length: 8
       max_length: 128
-    asymmetric_keys:
-      auto_generate: false
+    asymmetric:
+      generate: true
       algorithm: "RS256"
       key_size: 2048
       private_key_fname: "private_key.pem"
