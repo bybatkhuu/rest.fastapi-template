@@ -1,5 +1,18 @@
 # Changelog
 
+## v7.0.0-241214 (2024-12-14)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 💥 Breaking Changes
+* Update security configuration and add AES-CBC decryption helper by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/45
+### ✨ Features
+* Add mount functionality to FastAPI app and update Docker images to version '6.0.3-241213' by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/44
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v6.0.3-241213...v7.0.0-241214
+
 ## v6.0.3-241213 (2024-12-13)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
