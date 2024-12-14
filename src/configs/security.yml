@@ -16,7 +16,7 @@ api:
       min_length: 8
       max_length: 128
     asymmetric:
-      generate: true
+      generate: false
       algorithm: "RS256"
       key_size: 2048
       private_key_fname: "private_key.pem"
