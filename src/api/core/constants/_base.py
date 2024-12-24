@@ -45,6 +45,11 @@ class HashAlgoEnum(str, Enum):
     sha512 = "sha512"
 
 
+class HTTPProtocolEnum(str, Enum):
+    http = "http"
+    https = "https"
+
+
 __all__ = [
     "ENV_PREFIX",
     "ENV_PREFIX_API",
@@ -53,4 +58,5 @@ __all__ = [
     "LanguageEnum",
     "CurrencyEnum",
     "HashAlgoEnum",
+    "HTTPProtocolEnum",
 ]

@@ -39,22 +39,29 @@ class CorsConfig(FrozenBaseConfig):
     model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}CORS_")
 
 
-class PasswordConfig(FrozenBaseConfig):
-    pepper: SecretStr = Field(..., min_length=8, max_length=32)
-    min_length: int = Field(..., ge=8, le=128)
-    max_length: int = Field(..., ge=8, le=128)
+class X509AttrsConfig(FrozenBaseConfig):
+    C: constr(strip_whitespace=True, to_upper=True) = Field(default="US", min_length=2, max_length=2)  # type: ignore
+    ST: constr(strip_whitespace=True) = Field(default="Washington", min_length=2, max_length=256)  # type: ignore
+    L: constr(strip_whitespace=True) = Field(default="Seattle", min_length=2, max_length=256)  # type: ignore
+    O: constr(strip_whitespace=True) = Field(default="Organization", min_length=2, max_length=256)  # type: ignore
+    OU: constr(strip_whitespace=True) = Field(default="Organization Unit", min_length=2, max_length=256)  # type: ignore
+    CN: constr(strip_whitespace=True) = Field(default="localhost", min_length=2, max_length=256)  # type: ignore
+    DNS: constr(strip_whitespace=True) = Field(default="localhost", min_length=2, max_length=256)  # type: ignore
 
-    @model_validator(mode="before")
-    @classmethod
-    def _check_all(cls, values: Dict[str, Any]) -> Dict[str, Any]:
-        if values["max_length"] < values["min_length"]:
-            raise ValueError(
-                "`min_length` is greater than `max_length`, should be vice versa!"
-            )
+    model_config = SettingsConfigDict(
+        env_prefix=f"{_ENV_PREFIX_SECURITY}SSL_X509_ATTRS_"
+    )
 
-        return values
 
-    model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}PASSWORD_")
+class SSLConfig(FrozenBaseConfig):
+    enabled: bool = Field(...)
+    generate: bool = Field(...)
+    key_size: int = Field(..., ge=2048, le=8192)
+    key_fname: constr(strip_whitespace=True) = Field(..., min_length=2, max_length=256)  # type: ignore
+    cert_fname: constr(strip_whitespace=True) = Field(..., min_length=2, max_length=256)  # type: ignore
+    x509_attrs: X509AttrsConfig = Field(default_factory=X509AttrsConfig)
+
+    model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}SSL_")
 
 
 class AsymmetricConfig(FrozenBaseConfig):
@@ -78,6 +85,24 @@ class JWTConfig(FrozenBaseConfig):
     model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}JWT_")
 
 
+class PasswordConfig(FrozenBaseConfig):
+    pepper: SecretStr = Field(..., min_length=8, max_length=32)
+    min_length: int = Field(..., ge=8, le=128)
+    max_length: int = Field(..., ge=8, le=128)
+
+    @model_validator(mode="before")
+    @classmethod
+    def _check_all(cls, values: Dict[str, Any]) -> Dict[str, Any]:
+        if values["max_length"] < values["min_length"]:
+            raise ValueError(
+                "`min_length` is greater than `max_length`, should be vice versa!"
+            )
+
+        return values
+
+    model_config = SettingsConfigDict(env_prefix=f"{_ENV_PREFIX_SECURITY}PASSWORD_")
+
+
 class SecurityConfig(FrozenBaseConfig):
     allowed_hosts: List[constr(strip_whitespace=True, min_length=1, max_length=256)] = (  # type: ignore
         Field(...)
@@ -86,11 +111,20 @@ class SecurityConfig(FrozenBaseConfig):
         constr(strip_whitespace=True, min_length=1, max_length=256)  # type: ignore
     ] = Field(...)
     cors: CorsConfig = Field(...)
-    password: PasswordConfig = Field(default_factory=PasswordConfig)
+    ssl: SSLConfig = Field(...)
     asymmetric: AsymmetricConfig = Field(...)
     jwt: JWTConfig = Field(...)
+    password: PasswordConfig = Field(default_factory=PasswordConfig)
 
     model_config = SettingsConfigDict(env_prefix=_ENV_PREFIX_SECURITY)
 
 
-__all__ = ["SecurityConfig", "CorsConfig", "AsymmetricConfig", "JWTConfig"]
+__all__ = [
+    "SecurityConfig",
+    "CorsConfig",
+    "X509AttrsConfig",
+    "SSLConfig",
+    "AsymmetricConfig",
+    "JWTConfig",
+    "PasswordConfig",
+]

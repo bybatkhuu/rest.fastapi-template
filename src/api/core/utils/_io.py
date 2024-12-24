@@ -28,6 +28,10 @@ async def async_create_dir(
     Args:
         create_dir (str, required): Create directory path.
         warn_mode  (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and directory already exists.
+        OSError: If failed to create directory.
     """
 
     if not await aiofiles.os.path.isdir(create_dir):
@@ -68,6 +72,10 @@ async def async_remove_dir(
     Args:
         remove_dir (str, required): Remove directory path.
         warn_mode  (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and directory doesn't exist.
+        OSError: If failed to remove directory.
     """
 
     if await aiofiles.os.path.isdir(remove_dir):
@@ -126,6 +134,10 @@ async def async_remove_file(
     Args:
         file_path (str, required): Remove file path.
         warn_mode (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and file doesn't exist.
+        OSError: If failed to remove file.
     """
 
     if await aiofiles.os.path.isfile(file_path):
@@ -189,6 +201,9 @@ async def async_get_file_checksum(
         chunk_size  (int         , optional): Chunk size. Defaults to 4096.
         warn_mode   (str         , optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
 
+    Raises:
+        OSError: When warning mode is set to ERROR and file doesn't exist.
+
     Returns:
         str: File checksum.
     """
@@ -227,6 +242,10 @@ def create_dir(
     Args:
         create_dir (str, required): Create directory path.
         warn_mode  (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and directory already exists.
+        OSError: If failed to create directory.
     """
 
     if not os.path.isdir(create_dir):
@@ -267,6 +286,10 @@ def remove_dir(
     Args:
         remove_dir (str, required): Remove directory path.
         warn_mode  (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and directory doesn't exist.
+        OSError: If failed to remove directory.
     """
 
     if os.path.isdir(remove_dir):
@@ -325,6 +348,10 @@ def remove_file(
     Args:
         file_path (str, required): Remove file path.
         warn_mode (str, optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and file doesn't exist.
+        OSError: If failed to remove file.
     """
 
     if os.path.isfile(file_path):
@@ -387,6 +414,9 @@ def get_file_checksum(
         hash_method (HashAlgoEnum, optional): Hash method. Defaults to `HashAlgoEnum.md5`.
         chunk_size  (int         , optional): Chunk size. Defaults to 4096.
         warn_mode   (str         , optional): Warning message mode, for example: 'ERROR', 'ALWAYS', 'DEBUG', 'IGNORE'. Defaults to 'DEBUG'.
+
+    Raises:
+        OSError: When warning mode is set to ERROR and file doesn't exist.
 
     Returns:
         str: File checksum.

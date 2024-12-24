@@ -11,10 +11,12 @@ api:
       allow_credentials: false
       expose_headers: []
       max_age: 600 # Seconds (10 minutes)
-    password:
-      pepper: "FT_PASSWORD_PEPPER123" # This should be a random string, and read from an environment variable!
-      min_length: 8
-      max_length: 128
+    ssl:
+      enabled: false
+      generate: false
+      key_size: 2048
+      key_fname: "key.pem"
+      cert_fname: "cert.pem"
     asymmetric:
       generate: false
       algorithm: "RS256"
@@ -24,3 +26,7 @@ api:
     jwt:
       secret: "FT_JWT_SECRET123" # This should be a random string, and read from an environment variable!
       algorithm: "HS256"
+    password:
+      pepper: "FT_PASSWORD_PEPPER123" # This should be a random string, and read from an environment variable!
+      min_length: 8
+      max_length: 128

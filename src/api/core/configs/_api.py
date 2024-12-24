@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from typing import Any, Dict
 
-from pydantic import Field, constr, field_validator, ValidationInfo
+from pydantic import Field, constr, field_validator, ValidationInfo, model_validator
 from pydantic_settings import SettingsConfigDict
 
-from api.core.constants import ENV_PREFIX_API
+from api.core.constants import ENV_PREFIX_API, HTTPProtocolEnum
 from ._base import BaseConfig
 from ._dev import DevConfig
 from ._security import SecurityConfig
@@ -18,6 +19,7 @@ class ApiConfig(BaseConfig):
     slug: constr(strip_whitespace=True) = Field(..., min_length=2, max_length=128)  # type: ignore
     bind_host: constr(strip_whitespace=True) = Field(..., min_length=2, max_length=128)  # type: ignore
     port: int = Field(..., ge=80, lt=65536)
+    protocol: HTTPProtocolEnum = Field(default=HTTPProtocolEnum.http)
     version: constr(strip_whitespace=True) = Field(..., min_length=1, max_length=16)  # type: ignore
     prefix: constr(strip_whitespace=True) = Field(..., max_length=128)  # type: ignore
     gzip_min_size: int = Field(..., ge=0, le=10_485_760)  # 512 bytes
@@ -142,6 +144,28 @@ class ApiConfig(BaseConfig):
         return val
 
     model_config = SettingsConfigDict(env_prefix=ENV_PREFIX_API)
+
+    @model_validator(mode="before")
+    @classmethod
+    def _check_protocol(cls, values: Dict[str, Any]) -> Dict[str, Any]:
+        if (
+            sys.argv[0].endswith("fastapi")
+            or sys.argv[0].endswith("uvicorn")
+            or sys.argv[0].endswith("gunicorn")
+        ):
+            _is_https = False
+            for _, _arg in enumerate(sys.argv):
+                if _arg.startswith("--ssl"):
+                    _is_https = True
+
+            if _is_https:
+                values["protocol"] = HTTPProtocolEnum.https
+
+        else:
+            if values["security"]["ssl"]["enabled"]:
+                values["protocol"] = HTTPProtocolEnum.https
+
+        return values
 
 
 class FrozenApiConfig(ApiConfig):
