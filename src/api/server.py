@@ -17,7 +17,6 @@ from .router import add_routers
 from .mount import add_mounts
 from .exception import add_exception_handlers
 from .core.responses import BaseResponse
-from .logger import logger
 
 
 pre_check()
