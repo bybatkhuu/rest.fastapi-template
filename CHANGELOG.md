@@ -1,5 +1,18 @@
 # Changelog
 
+## v7.1.0-241224 (2024-12-24)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### ✨ Features
+* Add SSL configuration and HTTPS protocol handling by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/47
+### 🐛 Fixes
+* Disable key generation for asymmetric configuration in security.yml by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/46
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.0.0-241214...v7.1.0-241224
+
 ## v7.0.0-241214 (2024-12-14)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
