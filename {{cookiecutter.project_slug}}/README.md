@@ -6,7 +6,7 @@
 {% elif cookiecutter.license == "BSD License" %}[![BSD License](https://img.shields.io/badge/License-BSD-blue.svg)](https://choosealicense.com/licenses/bsd-3-clause-clear)
 {% elif cookiecutter.license == "ISC License" %}[![ISC License](https://img.shields.io/badge/License-ISC-blue.svg)](https://choosealicense.com/licenses/isc)
 {% endif %}{% if cookiecutter.license != "Proprietary License" %}[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/3.create-release.yml?logo=GitHub)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/3.create-release.yml)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}?logo=GitHub)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}?logo=GitHub&color=blue)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/releases)
 
 {% endif %}{{cookiecutter.project_description}}
 
@@ -19,6 +19,24 @@
 - Template
 - CI/CD
 - Docker and docker compose
+
+## 🧩 Template
+
+- You can use this template repository as reference to create a new repository with the same structure or clone the repository to start a new project. It will help you to organize your project structure and files. It works out of the box for most REST API service projects.
+- You can customize (remove, modify or add) the files and directories as needed to meet your project requirements.
+- If you want to use the template repository directly, just click the **[Use this template](https://github.com/new?template_name={{cookiecutter.repo_name}}&template_owner={{cookiecutter.repo_owner}})** button and follow the instructions.
+- You can use **cookiecutter** to generate a new project from **[cookiecutter](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/tree/cookiecutter)** branch:
+
+    ```sh
+    # Clone the cookiecutter branch:
+    git clone -b cookiecutter https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}.git
+
+    # Install cookiecutter:
+    pip install cookiecutter
+
+    # Generate a new project from the cookiecutter template:
+    cookiecutter -f .
+    ```
 
 ---
 

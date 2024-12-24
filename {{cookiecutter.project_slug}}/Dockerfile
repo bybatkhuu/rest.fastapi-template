@@ -166,4 +166,4 @@ USER ${UID}:${GID}
 # 	CMD curl -f http://localhost:{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT}/api/v{% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_VERSION:-1}/ping || exit 1
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-# CMD ["-b", "uvicorn main:app --host=0.0.0.0 --port=${FT_API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
+# CMD ["-b", "uvicorn main:app --host=0.0.0.0 --port={% raw %}${{% endraw %}{{cookiecutter.env_prefix}}API_PORT:-8000} --no-access-log --no-server-header --proxy-headers --forwarded-allow-ips='*'"]
