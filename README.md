@@ -2,9 +2,9 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bybatkhuu/rest.fastapi-template/3.create-release.yml?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/actions/workflows/3.create-release.yml)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bybatkhuu/rest.fastapi-template?logo=GitHub)](https://github.com/bybatkhuu/rest.fastapi-template/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/bybatkhuu/rest.fastapi-template?logo=GitHub&color=blue)](https://github.com/bybatkhuu/rest.fastapi-template/releases)
 
-This is a template repo for FastAPI web service projects.
+This is a template repository for FastAPI web service projects.
 
 ## ✨ Features
 
@@ -15,6 +15,24 @@ This is a template repo for FastAPI web service projects.
 - Template
 - CI/CD
 - Docker and docker compose
+
+## 🧩 Template
+
+- You can use this template repository as reference to create a new repository with the same structure or clone the repository to start a new project. It will help you to organize your project structure and files. It works out of the box for most REST API service projects.
+- You can customize (remove, modify or add) the files and directories as needed to meet your project requirements.
+- If you want to use the template repository directly, just click the **[Use this template](https://github.com/new?template_name=rest.fastapi-template&template_owner=bybatkhuu)** button and follow the instructions.
+- You can use **cookiecutter** to generate a new project from **[cookiecutter](https://github.com/bybatkhuu/rest.fastapi-template/tree/cookiecutter)** branch:
+
+    ```sh
+    # Clone the cookiecutter branch:
+    git clone -b cookiecutter https://github.com/bybatkhuu/rest.fastapi-template.git
+
+    # Install cookiecutter:
+    pip install cookiecutter
+
+    # Generate a new project from the cookiecutter template:
+    cookiecutter -f .
+    ```
 
 ---
 
