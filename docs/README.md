@@ -14,7 +14,15 @@ This is a template repo for FastAPI web service projects.
 - REST API
 - Web service
 - Microservice
-- Template
+- Project structure
+- Boilerplate/template
+- Best practices
+- Configuration
+- Tests
+- Build
+- Scripts
+- Examples
+- Documentation
 - CI/CD
 - Docker and docker compose
 
