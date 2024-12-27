@@ -55,6 +55,7 @@
 		"**/*.editorconfig",
 		"**/*.gitignore",
 		"**/*.markdownlint.json",
+		"**/*.pre-commit-config.yaml",
 		"**/*CHANGELOG.md",
 		"**/*compose.sh",
 		"**/*compose.yml",
