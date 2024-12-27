@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND
 ARG FT_API_SLUG
 
 # ARG USE_GPU=false
-ARG PYTHON_VERSION=3.9.20
+ARG PYTHON_VERSION=3.9
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

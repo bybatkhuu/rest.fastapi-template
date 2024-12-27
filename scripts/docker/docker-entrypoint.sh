@@ -17,13 +17,13 @@ main()
 	umask 0002 || exit 2
 	sudo chown -Rc "${USER}:${GROUP}" "${FT_HOME_DIR}" "${FT_API_DATA_DIR}" "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" || exit 2
 	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type d -exec chmod 770 {} + || exit 2
-	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type f -exec chmod 660 {} + || exit 2
+	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type f -not -path "*/scripts/*" -not -path "*/main.py" -exec chmod 660 {} + || exit 2
 	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type d -exec chmod ug+s {} + || exit 2
 	find "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" -type d -exec chmod 775 {} + || exit 2
 	find "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" -type f -exec chmod 664 {} + || exit 2
 	find "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" -type d -exec chmod +s {} + || exit 2
 	chmod ug+x "${FT_API_DIR}/main.py" || exit 2
-	echo "${USER} ALL=(ALL) ALL" | sudo tee -a "/etc/sudoers.d/${USER}" > /dev/null || exit 2
+	# echo "${USER} ALL=(ALL) ALL" | sudo tee -a "/etc/sudoers.d/${USER}" > /dev/null || exit 2
 	echo ""
 
 	## Parsing input:
