@@ -1,8 +1,14 @@
 # 🚨 Error Codes
 
-This document provides a comprehensive list of REST API error codes implemented in the application. Each error code includes details such as its unique code, name, HTTP status code, message, and description.
+This document provides a comprehensive list of REST API error codes implemented in the application. Each error code includes details such as its unique code, name, HTTP status code, message, and description. It helps in identifying and debugging issues effectively while interacting with the API.
 
----
+## Notes
+
+- **Code**: A unique identifier for the error.
+- **Name**: A descriptive name for the error.
+- **HTTP Status Code**: The corresponding HTTP status code.
+- **Message**: A short message explaining the error.
+- **Description**: A detailed explanation of the error.
 
 ## List of Error Codes
 
@@ -34,15 +40,3 @@ This document provides a comprehensive list of REST API error codes implemented 
 | `503_00000`   | SERVICE_UNAVAILABLE       | 503                   | Service Unavailable!        | The server is currently unavailable.        |
 | `503_10000`   | DB_CONNECT_ERROR          | 503                   | Service Unavailable!        | Failed to connect to the database.          |
 | `503_20000`   | SMTP_CONNECT_ERROR        | 503                   | Service Unavailable!        | Failed to connect to the SMTP server.       |
-
----
-
-## Notes
-
-- **Code**: A unique identifier for the error.
-- **Name**: A descriptive name for the error.
-- **HTTP Status Code**: The corresponding HTTP status code.
-- **Message**: A short message explaining the error.
-- **Description**: A detailed explanation of the error.
-
-This documentation helps in identifying and debugging issues effectively while interacting with the API.

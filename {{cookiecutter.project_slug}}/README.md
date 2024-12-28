@@ -385,6 +385,8 @@ python -m pytest -sv -o log_cli=true
 
 ## 🏗️ Build Docker Image
 
+Before building the docker image, make sure you have installed **docker** and **docker compose**.
+
 To build the docker image, run the following command:
 
 ```sh
