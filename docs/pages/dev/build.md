@@ -1,5 +1,9 @@
 # 🐳 Build and publish docker image
 
+## Prerequisites
+
+- Install **Docker** and **Docker Compose**.
+
 ## Build and push image
 
 **A.** **[RECOMMENDED]** Run **`build.sh`** script to build images:
