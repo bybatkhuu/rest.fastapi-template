@@ -31,7 +31,6 @@ main()
 		"" | -s | --start | start | --run | run)
 			_doStart;;
 			# shift;;
-
 		-b | --bash | bash | /bin/bash)
 			shift
 			if [ -z "${*:-}" ]; then

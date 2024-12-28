@@ -336,7 +336,6 @@ DEBUG=false
 FT_API_PORT=8000
 FT_API_LOGS_DIR="/var/log/rest.fastapi-template"
 FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
-
 # FT_API_VERSION="1"
 # FT_API_PREFIX="/api/v{api_version}"
 # FT_API_DOCS_ENABLED=true
@@ -347,7 +346,7 @@ FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
 
 
 ## -- Docker build args -- ##
-# HASH_PASSWORD="\$5\$UN1S7dZEa/qDoijJ\$hJ5o.Wpp5aP2kp.46Y7lWgcsRE8/oRLVswU6Swi13fB"
+# HASH_PASSWORD="\$5\$UN1S7dZEa/qDoijJ\$hJ5o.Wpp5aP2kp.46Y7lWgcsRE8/oRLVswU6Swi13fB" # !!! CHANGE THIS TO REAL HASHED PASSWORD! DEFAULT: "FT_USER_PASSWORD123" !!!
 # IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
 ```
 
@@ -381,6 +380,8 @@ python -m pytest -sv -o log_cli=true
 ```
 
 ## 🏗️ Build Docker Image
+
+Before building the docker image, make sure you have installed **docker** and **docker compose**.
 
 To build the docker image, run the following command:
 
