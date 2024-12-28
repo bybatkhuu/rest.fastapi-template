@@ -100,7 +100,7 @@ docker compose push
 ## References
 
 - <https://docs.docker.com/engine/reference/commandline/build>
-- <https://docs.docker.com/get-started/02_our_api>
+- <https://docs.docker.com/get-started/02_our_app>
 - <https://docs.docker.com/develop/develop-images/dockerfile_best-practices>
 - <https://docs.docker.com/language/python/build-images>
 - <https://codefresh.io/docker-tutorial/build-docker-image-dockerfiles>
