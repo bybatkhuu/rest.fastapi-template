@@ -62,7 +62,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logger.opt(colors=True).info(f"API version: <c>{config.api.version}</c>")
     logger.opt(colors=True).info(f"API prefix: <c>{config.api.prefix}</c>")
     logger.opt(colors=True).info(
-        f"Listening on: <c>{config.api.protocol}://{config.api.bind_host}:{config.api.port}</c>"
+        f"Listening on: <c>{config.api.http_scheme}://{config.api.bind_host}:{config.api.port}</c>"
     )
 
     yield
