@@ -1,5 +1,20 @@
 # Changelog
 
+## v7.1.1-241229 (2024-12-29)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Update HTTP protocol handling and logging enhancements by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/51
+### 🔨 Scripts
+* Update Docker configuration and permissions by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/49
+### 💬 Other
+* Add pre-commit dependency to development requirements by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/48
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.0-241224...v7.1.1-241229
+
 ## v7.1.0-241224 (2024-12-24)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
