@@ -29,10 +29,9 @@ logger:
       only_base: false
       ignore_modules: []
     include_modules: []
-    mute_modules:
-      [
+    mute_modules: [
         "uvicorn.access",
-        "uvicorn.error",
+        # "uvicorn.error",
         "multipart",
         "watchfiles",
         "watchfiles.main",

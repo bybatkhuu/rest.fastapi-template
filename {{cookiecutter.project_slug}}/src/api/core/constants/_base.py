@@ -45,7 +45,7 @@ class HashAlgoEnum(str, Enum):
     sha512 = "sha512"
 
 
-class HTTPProtocolEnum(str, Enum):
+class HTTPSchemeEnum(str, Enum):
     http = "http"
     https = "https"
 
@@ -58,5 +58,5 @@ __all__ = [
     "LanguageEnum",
     "CurrencyEnum",
     "HashAlgoEnum",
-    "HTTPProtocolEnum",
+    "HTTPSchemeEnum",
 ]
