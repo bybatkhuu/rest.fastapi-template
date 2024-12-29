@@ -44,7 +44,7 @@ class FrozenDocsConfig(DocsConfig):
     @field_validator("description")
     @classmethod
     def _check_description(cls, val: str) -> str:
-        _description_path = "./assets/description.md"
+        _description_path = "./assets/docs/description.md"
         if (not val) and os.path.isfile(_description_path):
             with open(_description_path, "r") as _file:
                 val = _file.read()
