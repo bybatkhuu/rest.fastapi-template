@@ -96,8 +96,6 @@ class ApiConfig(BaseConfig):
         val = FrozenPathsConfig(**val.model_dump())
         return val
 
-    model_config = SettingsConfigDict(env_prefix=ENV_PREFIX_API)
-
     @model_validator(mode="before")
     @classmethod
     def _check_args(cls, values: Dict[str, Any]) -> Dict[str, Any]:
@@ -133,6 +131,8 @@ class ApiConfig(BaseConfig):
             values["http_scheme"] = HTTPSchemeEnum.https
 
         return values
+
+    model_config = SettingsConfigDict(env_prefix=ENV_PREFIX_API)
 
 
 class FrozenApiConfig(ApiConfig):
