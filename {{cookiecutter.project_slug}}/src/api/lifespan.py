@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from .core import utils
 from .config import config
 from .helpers.crypto import asymmetric as asymmetric_helper
 from .helpers.crypto import ssl as ssl_helper
@@ -13,7 +14,7 @@ from .logger import logger
 
 
 def pre_check() -> None:
-    """Pre-check function before creating and starting FastAPI application."""
+    """Pre-check function before creating FastAPI application."""
 
     if config.api.security.ssl.generate:
         ssl_helper.create_ssl_certs(
@@ -39,6 +40,23 @@ def pre_check() -> None:
     return
 
 
+async def _async_create_dirs() -> None:
+    """Create directories before starting FastAPI application.
+
+    Raises:
+        SystemExit: If failed to create directories.
+    """
+
+    try:
+        await utils.async_create_dir(config.api.paths.data_dir)
+        ## Add directories needs to be created here...
+    except Exception:
+        logger.exception("Failed to create directories:")
+        raise SystemExit(1)
+
+    return
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Lifespan context manager for FastAPI application.
@@ -49,6 +67,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
 
     logger.info("Preparing to startup...")
+    # await _async_create_dirs()
     if config.api.security.asymmetric.generate:
         await asymmetric_helper.async_create_keys(
             asymmetric_keys_dir=config.api.paths.asymmetric_keys_dir,
@@ -56,7 +75,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
             private_key_fname=config.api.security.asymmetric.private_key_fname,
             public_key_fname=config.api.security.asymmetric.public_key_fname,
         )
-    # Add startup code here...
+
+    ## Add startup code here...
     logger.success("Finished preparation to startup.")
     logger.opt(colors=True).info(f"Version: <c>{config.version}</c>")
     logger.opt(colors=True).info(f"API version: <c>{config.api.version}</c>")
@@ -68,7 +88,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     yield
 
     logger.info("Praparing to shutdown...")
-    # Add shutdown code here...
+    ## Add shutdown code here...
     logger.success("Finished preparation to shutdown.")
 
 
