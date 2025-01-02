@@ -26,7 +26,7 @@ def add_exception_handlers(app: FastAPI) -> None:
     app.add_exception_handler(500, server_error_handler)
     app.add_exception_handler(HTTPException, http_exception_handler)
     app.add_exception_handler(RequestValidationError, validation_error_handler)
-    # Add more exception handlers here...
+    ## Add more exception handlers here...
 
 
 __all__ = ["add_exception_handlers"]

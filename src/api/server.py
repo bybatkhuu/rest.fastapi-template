@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Standard libraries
+## Standard libraries
 import os
 from typing import Union
 
@@ -66,6 +66,8 @@ def run_server(app: str = "main:app") -> None:
         ssl_certfile=_ssl_certfile,
         **config.api.dev.model_dump(),
     )
+
+    return
 
 
 __all__ = ["app", "run_server"]

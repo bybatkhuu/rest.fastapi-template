@@ -24,7 +24,7 @@ def add_middlewares(app: FastAPI) -> None:
         app (FastAPI): FastAPI app instance.
     """
 
-    # Add more middlewares here...
+    ## Add more middlewares here...
     app.add_middleware(ResponseHTTPInfoMiddleware)
     app.add_middleware(
         HttpAccessLogMiddleware,

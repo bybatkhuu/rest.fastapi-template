@@ -9,7 +9,7 @@ from .core.configs import MainConfig
 config: MainConfig
 try:
     _config_loader = ConfigLoader(config_schema=MainConfig)
-    # Main config object:
+    ## Main config object:
     config: MainConfig = _config_loader.load()
 except Exception:
     logger.exception("Failed to load config:")
