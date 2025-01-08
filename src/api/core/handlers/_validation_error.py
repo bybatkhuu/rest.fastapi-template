@@ -24,7 +24,12 @@ async def validation_error_handler(
     _message = "Validation error!"
     _error = ErrorCodeEnum.UNPROCESSABLE_ENTITY.value.model_dump()
     _error["description"] = str(exc)
-    _error["detail"] = exc.errors()
+    _details = exc.errors()
+    for _detail in _details:
+        if ("ctx" in _detail) and ("error" in _detail["ctx"]):
+            _detail["ctx"]["error"] = str(_detail["ctx"]["error"])
+
+    _error["detail"] = _details
 
     return BaseResponse(
         request=request, status_code=422, message=_message, error=_error
