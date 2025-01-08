@@ -1,5 +1,16 @@
 # Changelog
 
+## v7.1.2-250108 (2025-01-08)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Improve validation error handling and context management by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/52
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.1-241229...v7.1.2-250108
+
 ## v7.1.1-241229 (2024-12-29)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
