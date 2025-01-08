@@ -71,7 +71,7 @@ git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
 
 ### 3. 📦 Install cookiecutter
 
-```bash
+```sh
 # Install cookiecutter:
 pip install -U cookiecutter
 # Or:
@@ -80,7 +80,7 @@ pip install -r ./requirements.txt
 
 ### 4. 🏗️ Generate project with cookiecutter
 
-```bash
+```sh
 # Generate project:
 cookiecutter -f .
 # Or:
@@ -89,7 +89,7 @@ cookiecutter -f .
 
 ### 5. 🏁 Start the project
 
-```bash
+```sh
 cd [PROJECT_NAME]
 # For example:
 cd rest.fastapi-template
