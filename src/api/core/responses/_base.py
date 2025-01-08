@@ -89,9 +89,8 @@ class BaseResponse(JSONResponse):
         meta["version"] = config.version
 
         if error and isinstance(error, dict):
-            if "code" in error:
-                if "X-Error-Code" not in headers:
-                    headers["X-Error-Code"] = error.get("code")
+            if ("code" in error) and ("X-Error-Code" not in headers):
+                headers["X-Error-Code"] = error.get("code")
 
             if (not config.debug) and (500 <= status_code) and ("detail" in error):
                 error["detail"] = None

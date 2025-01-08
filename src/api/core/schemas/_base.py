@@ -13,7 +13,9 @@ class BasePM(BaseModel):
 
 
 class ExtraBasePM(BaseModel):
-    model_config = ConfigDict(extra="allow")
+    model_config = ConfigDict(
+        extra="allow", json_schema_extra={"additionalProperties": False}
+    )
 
 
 class IdPM(BasePM):
