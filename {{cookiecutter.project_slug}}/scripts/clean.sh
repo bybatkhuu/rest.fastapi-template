@@ -22,7 +22,7 @@ fi
 
 ## --- Variables --- ##
 # Load from envrionment variables:
-PROJECT_SLUG="${PROJECT_SLUG:-rest.fastapi-template}"
+PROJECT_SLUG="${PROJECT_SLUG:-{{cookiecutter.project_slug}}}"
 
 # Flags:
 _IS_ALL=false
