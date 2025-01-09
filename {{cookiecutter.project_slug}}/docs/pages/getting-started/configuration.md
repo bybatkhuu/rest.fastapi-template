@@ -22,12 +22,6 @@ DEBUG=false
 # {{cookiecutter.env_prefix}}API_DOCS_OPENAPI_URL="{api_prefix}/openapi.json"
 # {{cookiecutter.env_prefix}}API_DOCS_DOCS_URL="{api_prefix}/docs"
 # {{cookiecutter.env_prefix}}API_DOCS_REDOC_URL="{api_prefix}/redoc"
-
-
-
-## -- Docker build args -- ##
-# HASH_PASSWORD="\$5\$UN1S7dZEa/qDoijJ\$hJ5o.Wpp5aP2kp.46Y7lWgcsRE8/oRLVswU6Swi13fB"
-# IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
 ```
 
 ## 🔧 Command arguments
