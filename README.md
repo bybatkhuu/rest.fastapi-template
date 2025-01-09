@@ -342,12 +342,6 @@ FT_API_DATA_DIR="/var/lib/rest.fastapi-template"
 # FT_API_DOCS_OPENAPI_URL="{api_prefix}/openapi.json"
 # FT_API_DOCS_DOCS_URL="{api_prefix}/docs"
 # FT_API_DOCS_REDOC_URL="{api_prefix}/redoc"
-
-
-
-## -- Docker build args -- ##
-# HASH_PASSWORD="\$5\$UN1S7dZEa/qDoijJ\$hJ5o.Wpp5aP2kp.46Y7lWgcsRE8/oRLVswU6Swi13fB" # !!! CHANGE THIS TO REAL HASHED PASSWORD !!!
-# IMG_ARGS="--build-arg HASH_PASSWORD=${HASH_PASSWORD}"
 ```
 
 ### 🔧 Command arguments
