@@ -16,7 +16,12 @@ logger = logging.getLogger(__name__)
 
 
 async def main() -> None:
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=logging.INFO,
+        datefmt="%Y-%m-%d %H:%M:%S %z",
+        format="[%(asctime)s | %(levelname)s | %(filename)s:%(lineno)d]: %(message)s",
+    )
 
     _base_url = "http://localhost:8000"
     _api_prefix = "/api/v1"
