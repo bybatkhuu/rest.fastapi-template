@@ -13,7 +13,7 @@
 	"author_email": "user@{{cookiecutter.domain}}",
 	"author_fullname": "Full Name",
 	"python_version": "3.9",
-	"version": "0.0.0-241201",
+	"version": "0.0.0-250101",
 	"timezone": "UTC",
 	"language": "en",
 	"copyright_year": "2025",
