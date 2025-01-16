@@ -15,7 +15,7 @@ _doStart()
 main()
 {
 	umask 0002 || exit 2
-	find "${FT_HOME_DIR}" "${FT_API_DATA_DIR}" "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" -path "*/modules" -prune -o -print0 | sudo xargs -0 chown -c "${USER}:${GROUP}" || exit 2
+	find "${FT_HOME_DIR}" "${FT_API_DATA_DIR}" "${FT_API_LOGS_DIR}" "${FT_API_TMP_DIR}" -path "*/modules" -prune -o -name ".env" -o -print0 | sudo xargs -0 chown -c "${USER}:${GROUP}" || exit 2
 	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type d  -not -path "*/modules/*" -exec chmod 770 {} + || exit 2
 	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type f  -not -path "*/modules/*" -exec chmod 660 {} + || exit 2
 	find "${FT_API_DIR}" "${FT_API_DATA_DIR}" -type d  -not -path "*/modules/*" -exec chmod ug+s {} + || exit 2
