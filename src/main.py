@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 
 ## Internal modules
-from api.server import app, run_server
+from api.bootstrap import create_app
+from api import server
 from api.logger import logger
+
+
+app = create_app()
 
 
 if __name__ == "__main__":
     logger.info(f"Starting server from 'main.py'...")
-    run_server()
+    server.run(app="main:app")
 
 
 __all__ = ["app"]

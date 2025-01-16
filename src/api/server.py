@@ -6,41 +6,19 @@ from typing import Union
 
 ## Third-party libraries
 import uvicorn
+from uvicorn._types import ASGIApplication
 from pydantic import validate_call
-from fastapi import FastAPI
 
 ## Internal modules
-from .config import config
-from .lifespan import lifespan, pre_check
-from .middleware import add_middlewares
-from .router import add_routers
-from .mount import add_mounts
-from .exception import add_exception_handlers
-from .core.responses import BaseResponse
+from api.config import config
 
 
-pre_check()
-
-app = FastAPI(
-    title=config.api.name,
-    version=config.version,
-    lifespan=lifespan,
-    default_response_class=BaseResponse,
-    **config.api.docs.model_dump(exclude={"enabled"}),
-)
-
-add_middlewares(app=app)
-add_routers(app=app)
-add_mounts(app=app)
-add_exception_handlers(app=app)
-
-
-@validate_call
-def run_server(app: str = "main:app") -> None:
+@validate_call(config={"arbitrary_types_allowed": True})
+def run(app: Union[ASGIApplication, str] = "main:app") -> None:
     """Run uvicorn server.
 
     Args:
-        app (str, optional): Application instance. Defaults to "main:app".
+        app (Union[ASGIApplication, str], optional): ASGI application instance or module path.
     """
 
     _ssl_keyfile: Union[str, None] = None
@@ -70,4 +48,4 @@ def run_server(app: str = "main:app") -> None:
     return
 
 
-__all__ = ["app", "run_server"]
+__all__ = ["run"]

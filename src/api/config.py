@@ -3,7 +3,7 @@
 from onion_config import ConfigLoader
 from beans_logging import logger
 
-from .core.configs import MainConfig
+from api.core.configs import MainConfig
 
 
 config: MainConfig
