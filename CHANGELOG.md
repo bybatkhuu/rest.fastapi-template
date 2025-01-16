@@ -1,5 +1,16 @@
 # Changelog
 
+## v7.1.3-250116 (2025-01-16)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Update FastAPI structure and Docker compatibility by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/53
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.2-250108...v7.1.3-250116
+
 ## v7.1.2-250108 (2025-01-08)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
