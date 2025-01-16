@@ -12,15 +12,15 @@
 # Run build script:
 ./scripts/build.sh
 
-# -p=PLATFORM, --platform=PLATFORM          Build image type [amd64 | arm64]. Default is current platform.
-# -u, --push-images                         Enable pushing built images to Docker Registry.
-# -c, --clean-images                        Enable clearning leftover images.
-# -x, --cross-compile                       Enable cross compiling.
-# -b=BASE_IMAGE, --base-image=BASE_IMAGE    Base image name. Default is "ubuntu:22.04".
-# -g=REGISTRY, --registry=REGISTRY          Docker image registry (docker registry and username). Default is "{{cookiecutter.docker_registry}}".
-# -r=REPO, --repo=REPO                      Docker image repository. Default is "{{cookiecutter.docker_repo_name}}".
-# -v=VERSION, --version=VERSION             Docker image version. Default read from "./src/api/__version__.py" file.
-# -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".
+# -p=PLATFORM, --platform=PLATFORM              Build image type [amd64 | arm64]. Default is current platform.
+# -u, --push-images                             Enable pushing built images to Docker Registry.
+# -c, --clean-images                            Enable clearning leftover images.
+# -x, --cross-compile                           Enable cross compiling.
+# -b=BASE_IMAGE, --base-image=BASE_IMAGE        Base image name. Default is "ubuntu:22.04".
+# -g=REGISTRY, --registry=REGISTRY              Docker image registry (docker registry and username). Default is "{{cookiecutter.docker_registry}}".
+# -r=REPO, --repo=REPO                          Docker image repository. Default is "{{cookiecutter.docker_repo_name}}".
+# -v=VERSION, --version=VERSION                 Docker image version. Default read from "./src/api/__version__.py" file.
+# -s=SUBTAG, --subtag=SUBTAG                    Docker image subtag. Default is "".
 # -d=DOCKERFILE, --dockerfile=DOCKERFILE        Dockerfile path. Default is "./Dockerfile".
 # -t=CONTEXT_PATH, --context-path=CONTEXT_PATH  Docker build context path. Default is ".".
 
