@@ -9,7 +9,7 @@
 			"url": "https://example.com/contact",
 			"email": "support@example.com"
 		},
-		"version": "7.1.0-241224"
+		"version": "7.1.5-250116"
 	},
 	"paths": {
 		"/api/v1/": {
@@ -301,7 +301,7 @@
 						]
 					}
 				},
-				"additionalProperties": true,
+				"additionalProperties": false,
 				"type": "object",
 				"title": "LinksResPM"
 			},
@@ -373,13 +373,13 @@
 						"minLength": 5,
 						"title": "Version",
 						"description": "Current system version.",
-						"default": "7.1.0-241224",
+						"default": "7.1.5-250116",
 						"examples": [
-							"7.1.0-241224"
+							"7.1.5-250116"
 						]
 					}
 				},
-				"additionalProperties": true,
+				"additionalProperties": false,
 				"type": "object",
 				"title": "MetaResPM"
 			},
