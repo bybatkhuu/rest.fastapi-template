@@ -44,5 +44,7 @@ def add_middlewares(app: FastAPI) -> None:
     app.add_middleware(RequestIdMiddleware)
     app.add_middleware(ProcessTimeMiddleware)
 
+    return
+
 
 __all__ = ["add_middlewares"]
