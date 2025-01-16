@@ -3,9 +3,9 @@
 from pydantic import validate_call
 from fastapi import FastAPI, APIRouter
 
-from .config import config
-from .core.routers.utils import router as utils_router
-from .core.routers.default import router as default_router
+from api.config import config
+from api.core.routers.utils import router as utils_router
+from api.core.routers.default import router as default_router
 
 
 @validate_call(config={"arbitrary_types_allowed": True})

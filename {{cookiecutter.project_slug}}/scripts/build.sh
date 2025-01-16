@@ -30,6 +30,8 @@ IMG_REPO=${PROJECT_SLUG:-{{cookiecutter.docker_repo_name}}}
 IMG_VERSION=${IMG_VERSION:-$(./scripts/get-version.sh)}
 IMG_SUBTAG=${IMG_SUBTAG:-}
 IMG_PLATFORM=${IMG_PLATFORM:-$(uname -m)}
+DOCKERFILE_PATH=${DOCKERFILE_PATH:-./Dockerfile}
+CONTEXT_PATH=${CONTEXT_PATH:-.}
 
 IMG_ARGS="${IMG_ARGS:-}"
 
@@ -63,7 +65,8 @@ _buildImages()
 		-t "${_IMG_LATEST_FULLNAME}" \
 		-t "${_IMG_FULLNAME}-${IMG_PLATFORM#linux/*}" \
 		-t "${_IMG_LATEST_FULLNAME}-${IMG_PLATFORM#linux/*}" \
-		. || exit 2
+		-f "${DOCKERFILE_PATH}" \
+		"${CONTEXT_PATH}" || exit 2
 	echoOk "Done."
 }
 
@@ -85,8 +88,9 @@ _crossBuildPush()
 		--cache-to=type="registry,ref=${_IMG_NAME}:cache-latest,mode=max" \
 		-t "${_IMG_FULLNAME}" \
 		-t "${_IMG_LATEST_FULLNAME}" \
+		-f "${DOCKERFILE_PATH}" \
 		--push \
-		. || exit 2
+		"${CONTEXT_PATH}" || exit 2
 	echoOk "Done."
 
 	echoInfo "Removing new builder..."
@@ -158,9 +162,15 @@ main()
 				-s=* | --subtag=*)
 					IMG_SUBTAG="${_input#*=}"
 					shift;;
+				-d=* | --dockerfile=*)
+					DOCKERFILE_PATH="${_input#*=}"
+					shift;;
+				-t=* | --context=*)
+					CONTEXT_PATH="${_input#*=}"
+					shift;;
 				*)
 					echoError "Failed to parsing input -> ${_input}"
-					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -g=*, --registry=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=*"
+					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -g=*, --registry=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=* | -d=*, --dockerfile=* | -t=*, --context=*"
 					exit 1;;
 			esac
 		done

@@ -38,7 +38,7 @@ class BaseResponse(JSONResponse):
         meta: Optional[Dict[str, Any]] = None,
         error: Any = None,
         response_schema: Optional[Type[BaseResPM]] = BaseResPM,
-    ):
+    ) -> None:
         """Constructor method for BaseResponse class.
         This will prepare the most response data and pass it to `JSONResponse` parent class constructor.
 
@@ -114,10 +114,10 @@ class BaseResponse(JSONResponse):
             if (status_code == 503) and ("Retry-After" not in headers):
                 headers["Retry-After"] = "1800"
 
-        response_pm = response_schema(
+        _response_pm = response_schema(
             message=message, data=content, links=links, meta=meta, error=error
         )
-        _content = jsonable_encoder(obj=response_pm, by_alias=True)
+        _content = jsonable_encoder(obj=_response_pm, by_alias=True)
 
         super().__init__(
             content=_content,
@@ -126,6 +126,7 @@ class BaseResponse(JSONResponse):
             media_type=media_type,
             background=background,
         )
+        return
 
 
 __all__ = ["BaseResponse"]

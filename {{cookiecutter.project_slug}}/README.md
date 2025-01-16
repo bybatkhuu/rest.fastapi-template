@@ -247,12 +247,12 @@ uvicorn main:app --host="0.0.0.0" --port=8000 --no-access-log --no-server-header
 **OPTION F.** Run with **fastapi** cli:
 
 ```sh
-fastpi run src --host=[BIND_HOST] --port=[PORT]
+fastpi run src/main.py --host=[BIND_HOST] --port=[PORT]
 # For example:
-fastapi run src --port=8000
+fastapi run src/main.py --port=8000
 
 # For DEVELOPMENT:
-fastapi dev src --host="0.0.0.0" --port=8000
+fastapi dev src/main.py --host="0.0.0.0" --port=8000
 
 
 # Or:

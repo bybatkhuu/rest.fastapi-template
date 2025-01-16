@@ -13,6 +13,7 @@ def add_mounts(app: FastAPI) -> None:
     """
 
     ## Add mounts here
+
     return
 
 

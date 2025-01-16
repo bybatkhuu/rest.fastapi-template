@@ -30,14 +30,16 @@ RUN --mount=type=cache,target=/opt/conda/pkgs,sharing=private \
 		ca-certificates \
 		build-essential \
 		wget && \
+	_MINICONDA_VERSION=py39_24.11.1-0 && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
-		export _MINICONDA_FILENAME=Miniconda3-py39_24.9.2-0-Linux-x86_64.sh; \
+		_MINICONDA_FILENAME=Miniconda3-${_MINICONDA_VERSION}-Linux-x86_64.sh && \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/${_MINICONDA_FILENAME}; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
-		export _MINICONDA_FILENAME=Miniconda3-py39_24.9.2-0-Linux-aarch64.sh; \
+		_MINICONDA_FILENAME=Miniconda3-${_MINICONDA_VERSION}-Linux-aarch64.sh && \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/${_MINICONDA_FILENAME}; \
-		# export _MINICONDA_FILENAME=Miniforge3-24.9.2-0-Linux-aarch64.sh; \
-		# export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/download/24.9.2-0/${_MINICONDA_FILENAME}; \
+		# _MINIFORGE_VERSION=24.11.2-1 && \
+		# _MINICONDA_FILENAME=Miniforge3-${_MINIFORGE_VERSION}-Linux-aarch64.sh && \
+		# export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/download/${_MINIFORGE_VERSION}/${_MINICONDA_FILENAME}; \
 	else \
 		echo "Unsupported platform: ${_BUILD_TARGET_ARCH}" && \
 		exit 1; \
