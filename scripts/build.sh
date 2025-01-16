@@ -165,12 +165,12 @@ main()
 				-d=* | --dockerfile=*)
 					DOCKERFILE_PATH="${_input#*=}"
 					shift;;
-				-t=* | --context=*)
+				-t=* | --context-path=*)
 					CONTEXT_PATH="${_input#*=}"
 					shift;;
 				*)
 					echoError "Failed to parsing input -> ${_input}"
-					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -g=*, --registry=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=* | -d=*, --dockerfile=* | -t=*, --context=*"
+					echoInfo "USAGE: ${0}  -p=*, --platform=* [amd64 | arm64] | -u, --push-images | -c, --clean-images | -x, --cross-compile | -b=*, --base-image=* | -g=*, --registry=* | -r=*, --repo=* | -v=*, --version=* | -s=*, --subtag=* | -d=*, --dockerfile=* | -t=*, --context-path=*"
 					exit 1;;
 			esac
 		done
