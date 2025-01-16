@@ -21,6 +21,8 @@
 # -r=REPO, --repo=REPO                      Docker image repository. Default is "{{cookiecutter.docker_repo_name}}".
 # -v=VERSION, --version=VERSION             Docker image version. Default read from "./src/api/__version__.py" file.
 # -s=SUBTAG, --subtag=SUBTAG                Docker image subtag. Default is "".
+# -d=DOCKERFILE, --dockerfile=DOCKERFILE        Dockerfile path. Default is "./Dockerfile".
+# -t=CONTEXT_PATH, --context-path=CONTEXT_PATH  Docker build context path. Default is ".".
 
 
 # For example:
@@ -30,7 +32,7 @@
 ./scripts/build.sh -x
 
 # Or:
-./scripts/build.sh -p=arm64 -b=ubuntu:22.04 -n={{cookiecutter.docker_registry}} -r={{cookiecutter.docker_repo_name}} -v=1.0.0 -s=-arm64 -u -c
+./scripts/build.sh -p=arm64 -b=ubuntu:22.04 -n={{cookiecutter.docker_registry}} -r={{cookiecutter.docker_repo_name}} -v=1.0.0 -s=-arm64 -d=./Dockerfile -t=. -u -c
 ```
 
 **B.** Docker build command:
