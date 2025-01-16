@@ -6,15 +6,15 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from .core import utils
-from .config import config
-from .helpers.crypto import asymmetric as asymmetric_helper
-from .helpers.crypto import ssl as ssl_helper
-from .logger import logger
+from api.core import utils
+from api.config import config
+from api.helpers.crypto import asymmetric as asymmetric_helper
+from api.helpers.crypto import ssl as ssl_helper
+from api.logger import logger
 
 
-def pre_check() -> None:
-    """Pre-check function before creating FastAPI application."""
+def pre_init() -> None:
+    """Pre-initialization tasks before creating FastAPI application."""
 
     if config.api.security.ssl.generate:
         ssl_helper.create_ssl_certs(
@@ -93,6 +93,6 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 
 __all__ = [
-    "pre_check",
+    "pre_init",
     "lifespan",
 ]
