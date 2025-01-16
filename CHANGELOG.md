@@ -1,5 +1,13 @@
 # Changelog
 
+## v7.1.5-250116 (2025-01-16)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.4-250116...v7.1.5-250116
+
 ## v7.1.4-250116 (2025-01-16)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
