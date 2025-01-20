@@ -152,7 +152,6 @@
 	"python.languageServer": "Pylance",
 	"python.analysis.extraPaths": [
 		"${workspaceFolder}/src"
-		// "${workspaceFolder}/src/api/modules"
 	],
 	"yaml.schemas": {
 		"https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
