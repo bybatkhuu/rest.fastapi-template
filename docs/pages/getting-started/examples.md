@@ -19,6 +19,7 @@ Using python `requests` library to send request to the server:
 import sys
 import logging
 import pprint
+from typing import Dict, Any
 
 ## Third-party libraries
 import requests
@@ -27,7 +28,7 @@ import requests
 logger = logging.getLogger(__name__)
 
 
-if __name__ == "__main__":
+def main() -> None:
     logging.basicConfig(
         stream=sys.stdout,
         level=logging.INFO,
@@ -45,12 +46,19 @@ if __name__ == "__main__":
     _headers = {"Accept": "application/json"}
 
     logger.info("Sending request...")
+    _result_dict: Dict[str, Any] = {}
     response = requests.request(
         method=_method, url=_url, headers=_headers, data=_payload
     )
+    _result_dict = response.json()
     logger.info("Done!\n")
 
-    logging.info(f"\n{pprint.pformat(response.json())}")
+    logging.info(f"\n{pprint.pformat(_result_dict)}")
+    return
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## Async
@@ -101,6 +109,7 @@ async def main() -> None:
     logger.info("Done!\n")
 
     logging.info(f"\n{pprint.pformat(_result_dict)}")
+    return
 
 
 if __name__ == "__main__":

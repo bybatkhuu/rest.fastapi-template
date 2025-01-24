@@ -42,6 +42,7 @@ async def main() -> None:
     logger.info("Done!\n")
 
     logging.info(f"\n{pprint.pformat(_result_dict)}")
+    return
 
 
 if __name__ == "__main__":
