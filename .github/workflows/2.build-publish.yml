@@ -12,7 +12,7 @@ on:
       - "v*.*.*-*"
 
 env:
-  _VERSION: 0.0.0-240101
+  _VERSION: 0.0.0-250101
 
 jobs:
   build_publish:
