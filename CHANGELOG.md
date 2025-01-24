@@ -1,5 +1,16 @@
 # Changelog
 
+## v7.1.6-250124 (2025-01-24)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### 🐛 Fixes
+* Restructure main entry points and enhance logging by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/55
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.5-250116...v7.1.6-250124
+
 ## v7.1.5-250116 (2025-01-16)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
