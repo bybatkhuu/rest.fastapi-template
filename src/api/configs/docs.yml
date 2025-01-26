@@ -15,6 +15,8 @@ api:
     openapi_tags:
       - name: "Utils"
         description: "Useful utility endpoints."
+      - name: "Tasks"
+        description: "Endpoints to manage tasks."
       - name: "Default"
         description: "Redirection of default endpoints."
     swagger_ui_parameters:
