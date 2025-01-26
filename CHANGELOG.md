@@ -1,5 +1,16 @@
 # Changelog
 
+## v7.2.0-250126 (2025-01-26)
+
+<!-- Release notes generated using configuration in .github/release.yml at main -->
+
+## What's Changed
+### ✨ Features
+* Add task management endpoints and schemas by @bybatkhuu in https://github.com/bybatkhuu/rest.fastapi-template/pull/56
+
+
+**Full Changelog**: https://github.com/bybatkhuu/rest.fastapi-template/compare/v7.1.6-250124...v7.2.0-250126
+
 ## v7.1.6-250124 (2025-01-24)
 
 <!-- Release notes generated using configuration in .github/release.yml at main -->
