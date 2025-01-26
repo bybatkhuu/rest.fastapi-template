@@ -6,6 +6,7 @@ from fastapi import FastAPI, APIRouter
 from api.config import config
 from api.core.routers.utils import router as utils_router
 from api.core.routers.default import router as default_router
+from api.endpoints.task.router import router as task_router
 
 
 @validate_call(config={"arbitrary_types_allowed": True})
@@ -17,6 +18,7 @@ def add_routers(app: FastAPI) -> None:
     """
 
     _api_router = APIRouter(prefix=config.api.prefix)
+    _api_router.include_router(task_router)
     _api_router.include_router(utils_router)
     ## Add more API routers here...
 
