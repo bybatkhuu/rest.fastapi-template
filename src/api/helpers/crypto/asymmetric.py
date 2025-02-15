@@ -8,15 +8,47 @@ from typing import Tuple, Union
 import aiofiles
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric.types import (
-    PrivateKeyTypes,
-    PublicKeyTypes,
-)
+from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey
 from pydantic import validate_call
 from beans_logging import logger
 
 from api.core.constants import WarnEnum
 from api.core import utils
+
+
+@validate_call
+def gen_key_pair(
+    key_size: int,
+    as_str: bool = False,
+) -> Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]:
+    """Generate RSA key pair.
+
+    Args:
+        key_size (int , required): RSA key size.
+        as_str   (bool, optional): Return keys as strings. Defaults to False.
+
+    Returns:
+        Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]: RSA private and public keys.
+    """
+
+    _private_key: RSAPrivateKey = rsa.generate_private_key(
+        public_exponent=65537, key_size=key_size
+    )
+    _public_key: RSAPublicKey = _private_key.public_key()
+
+    if as_str:
+        _private_key: bytes = _private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption(),
+        ).decode()
+
+        _public_key: bytes = _public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        ).decode()
+
+    return _private_key, _public_key
 
 
 @validate_call
@@ -66,18 +98,19 @@ async def async_create_keys(
     elif warn_mode == WarnEnum.DEBUG:
         logger.debug(_message)
 
-    _private_key: PrivateKeyTypes
+    _private_key: RSAPrivateKey
+    _public_key: RSAPublicKey
     if await aiofiles.os.path.isfile(_private_key_path):
         if warn_mode == WarnEnum.ERROR:
             raise FileExistsError(f"'{_private_key_path}' private key already exists!")
 
-        _private_key: PrivateKeyTypes = await async_get_private_key(
+        _private_key: RSAPrivateKey = await async_get_private_key(
             private_key_path=_private_key_path
         )
+        _public_key: RSAPublicKey = _private_key.public_key()
     else:
-        _private_key: PrivateKeyTypes = rsa.generate_private_key(
-            public_exponent=65537, key_size=key_size
-        )
+        _key_pair: Tuple[RSAPrivateKey, RSAPublicKey] = gen_key_pair(key_size=key_size)
+        _private_key, _public_key = _key_pair
 
     if await aiofiles.os.path.isfile(_public_key_path):
         if warn_mode == WarnEnum.ERROR:
@@ -85,15 +118,13 @@ async def async_create_keys(
 
         await utils.async_remove_file(file_path=_public_key_path, warn_mode=warn_mode)
 
-    _public_key = _private_key.public_key()
-
-    _private_pem = _private_key.private_bytes(
+    _private_pem: bytes = _private_key.private_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption(),
     )
 
-    _public_pem = _public_key.public_bytes(
+    _public_pem: bytes = _public_key.public_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo,
     )
@@ -136,7 +167,7 @@ async def async_create_keys(
 @validate_call
 async def async_get_private_key(
     private_key_path: str, as_str: bool = False
-) -> Union[PrivateKeyTypes, str]:
+) -> Union[RSAPrivateKey, str]:
     """Async read asymmetric private key from file.
 
     Args:
@@ -147,17 +178,17 @@ async def async_get_private_key(
         FileNotFoundError: If Asymmetric private key file not found.
 
     Returns:
-        Union[PrivateKeyTypes, str]: Asymmetric private key.
+        Union[RSAPrivateKey, str]: Asymmetric private key.
     """
 
     if not await aiofiles.os.path.isfile(private_key_path):
         raise FileNotFoundError(f"Not found '{private_key_path}' private key!")
 
     logger.debug(f"Reading '{private_key_path}' private key...")
-    _private_key: PrivateKeyTypes
+    _private_key: RSAPrivateKey
     async with aiofiles.open(private_key_path, "rb") as _private_key_file:
         _private_key_bytes: bytes = await _private_key_file.read()
-        _private_key: PrivateKeyTypes = serialization.load_pem_private_key(
+        _private_key: RSAPrivateKey = serialization.load_pem_private_key(
             data=_private_key_bytes, password=None
         )
 
@@ -176,7 +207,7 @@ async def async_get_private_key(
 @validate_call
 async def async_get_public_key(
     public_key_path: str, as_str: bool = False
-) -> Union[PublicKeyTypes, str]:
+) -> Union[RSAPublicKey, str]:
     """Async read asymmetric public key from file.
 
     Args:
@@ -187,17 +218,17 @@ async def async_get_public_key(
         FileNotFoundError: If asymmetric public key file not found.
 
     Returns:
-        Union[PublicKeyTypes, str]: Asymmetric public key.
+        Union[RSAPublicKey, str]: Asymmetric public key.
     """
 
     if not await aiofiles.os.path.isfile(public_key_path):
         raise FileNotFoundError(f"Not found '{public_key_path}' public key!")
 
     logger.debug(f"Reading '{public_key_path}' public key...")
-    _public_key: PublicKeyTypes
+    _public_key: RSAPublicKey
     async with aiofiles.open(public_key_path, "rb") as _public_key_file:
         _public_key_bytes: bytes = await _public_key_file.read()
-        _public_key: PublicKeyTypes = serialization.load_pem_public_key(
+        _public_key: RSAPublicKey = serialization.load_pem_public_key(
             data=_public_key_bytes
         )
 
@@ -215,7 +246,7 @@ async def async_get_public_key(
 @validate_call
 async def async_get_keys(
     private_key_path: str, public_key_path: str, as_str: bool = False
-) -> Tuple[Union[PrivateKeyTypes, str], Union[PublicKeyTypes, str]]:
+) -> Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]:
     """Async read asymmetric keys from file.
 
     Args:
@@ -224,7 +255,7 @@ async def async_get_keys(
         as_str           (bool, optional): Return keys as strings. Defaults to False.
 
     Returns:
-        Tuple[Union[PrivateKeyTypes, str], Union[PublicKeyTypes, str]]: Private and public keys.
+        Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]: Private and public keys.
     """
 
     _private_key = await async_get_private_key(
@@ -282,18 +313,19 @@ def create_keys(
     elif warn_mode == WarnEnum.DEBUG:
         logger.debug(_message)
 
-    _private_key: PrivateKeyTypes
+    _private_key: RSAPrivateKey
+    _public_key: RSAPublicKey
     if os.path.isfile(_private_key_path):
         if warn_mode == WarnEnum.ERROR:
             raise FileExistsError(f"'{_private_key_path}' private key already exists!")
 
-        _private_key: PrivateKeyTypes = get_private_key(
+        _private_key: RSAPrivateKey = get_private_key(
             private_key_path=_private_key_path
         )
+        _public_key: RSAPublicKey = _private_key.public_key()
     else:
-        _private_key = rsa.generate_private_key(
-            public_exponent=65537, key_size=key_size
-        )
+        _key_pair: Tuple[RSAPrivateKey, RSAPublicKey] = gen_key_pair(key_size=key_size)
+        _private_key, _public_key = _key_pair
 
     if os.path.isfile(_public_key_path):
         if warn_mode == WarnEnum.ERROR:
@@ -301,15 +333,13 @@ def create_keys(
 
         utils.remove_file(file_path=_public_key_path, warn_mode=warn_mode)
 
-    _public_key = _private_key.public_key()
-
-    _private_pem = _private_key.private_bytes(
+    _private_pem: bytes = _private_key.private_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption(),
     )
 
-    _public_pem = _public_key.public_bytes(
+    _public_pem: bytes = _public_key.public_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo,
     )
@@ -352,7 +382,7 @@ def create_keys(
 @validate_call
 def get_private_key(
     private_key_path: str, as_str: bool = False
-) -> Union[PrivateKeyTypes, str]:
+) -> Union[RSAPrivateKey, str]:
     """Read asymmetric private key from file.
 
     Args:
@@ -363,17 +393,17 @@ def get_private_key(
         FileNotFoundError: If asymmetric private key file not found.
 
     Returns:
-        Union[PrivateKeyTypes, str]: Asymmetric private key as PrivateKeyTypes or str.
+        Union[RSAPrivateKey, str]: Asymmetric private key as RSAPrivateKey or str.
     """
 
     if not os.path.isfile(private_key_path):
         raise FileNotFoundError(f"Not found '{private_key_path}' private key!")
 
     logger.debug(f"Reading '{private_key_path}' private key...")
-    _private_key: PrivateKeyTypes
+    _private_key: RSAPrivateKey
     with open(private_key_path, "rb") as _private_key_file:
         _private_key_bytes: bytes = _private_key_file.read()
-        _private_key: PrivateKeyTypes = serialization.load_pem_private_key(
+        _private_key: RSAPrivateKey = serialization.load_pem_private_key(
             data=_private_key_bytes, password=None
         )
 
@@ -392,7 +422,7 @@ def get_private_key(
 @validate_call
 def get_public_key(
     public_key_path: str, as_str: bool = False
-) -> Union[PublicKeyTypes, str]:
+) -> Union[RSAPublicKey, str]:
     """Read asymmetric public key from file.
 
     Args:
@@ -403,17 +433,17 @@ def get_public_key(
         FileNotFoundError: If asymmetric public key file not found.
 
     Returns:
-        Union[PublicKeyTypes, str]: Asymmetric public key as PublicKeyTypes or str.
+        Union[RSAPublicKey, str]: Asymmetric public key as RSAPublicKey or str.
     """
 
     if not os.path.isfile(public_key_path):
         raise FileNotFoundError(f"Not found '{public_key_path}' public key!")
 
     logger.debug(f"Reading '{public_key_path}' public key...")
-    _public_key: PublicKeyTypes
+    _public_key: RSAPublicKey
     with open(public_key_path, "rb") as _public_key_file:
         _public_key_bytes: bytes = _public_key_file.read()
-        _public_key: PublicKeyTypes = serialization.load_pem_public_key(
+        _public_key: RSAPublicKey = serialization.load_pem_public_key(
             data=_public_key_bytes
         )
 
@@ -431,7 +461,7 @@ def get_public_key(
 @validate_call
 def get_keys(
     private_key_path: str, public_key_path: str, as_str: bool = False
-) -> Tuple[Union[PrivateKeyTypes, str], Union[PublicKeyTypes, str]]:
+) -> Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]:
     """Read asymmetric keys from file.
 
     Args:
@@ -440,7 +470,7 @@ def get_keys(
         as_str           (bool, optional): Return keys as strings. Defaults to False.
 
     Returns:
-        Tuple[Union[PrivateKeyTypes, str], Union[PublicKeyTypes, str]]: Private and public keys.
+        Tuple[Union[RSAPrivateKey, str], Union[RSAPublicKey, str]]: Private and public keys.
     """
 
     _private_key = get_private_key(private_key_path=private_key_path, as_str=as_str)
@@ -452,7 +482,7 @@ def get_keys(
 @validate_call(config={"arbitrary_types_allowed": True})
 def encrypt_with_public_key(
     plaintext: Union[str, bytes],
-    public_key: PublicKeyTypes,
+    public_key: RSAPublicKey,
     base64_encode: bool = False,
     as_str: bool = False,
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -461,7 +491,7 @@ def encrypt_with_public_key(
 
     Args:
         plaintext      (Union[str, bytes], required): Plaintext to encrypt.
-        public_key     (PublicKeyTypes   , required): Public key.
+        public_key     (RSAPublicKey     , required): Public key.
         base64_encode  (bool             , optional): Encode ciphertext with base64. Defaults to False.
         as_str         (bool             , optional): Return ciphertext as string or bytes. Defaults to False.
         warn_mode      (WarnEnum         , optional): Warning mode. Defaults to WarnEnum.DEBUG.
@@ -520,7 +550,7 @@ def encrypt_with_public_key(
 @validate_call(config={"arbitrary_types_allowed": True})
 def decrypt_with_private_key(
     ciphertext: Union[str, bytes],
-    private_key: PrivateKeyTypes,
+    private_key: RSAPrivateKey,
     base64_decode: bool = False,
     as_str: bool = False,
     warn_mode: WarnEnum = WarnEnum.DEBUG,
@@ -529,7 +559,7 @@ def decrypt_with_private_key(
 
     Args:
         ciphertext    (Union[str, bytes], required): Ciphertext to decrypt.
-        private_key   (PrivateKeyTypes  , required): Private key.
+        private_key   (RSAPrivateKey    , required): Private key.
         base64_decode (bool             , optional): Decode ciphertext with base64. Defaults to False.
         as_str        (bool             , optional): Return plaintext as string or bytes. Defaults to False.
         warn_mode     (WarnEnum         , optional): Warning mode. Defaults to WarnEnum.DEBUG.
@@ -586,6 +616,7 @@ def decrypt_with_private_key(
 
 
 __all__ = [
+    "gen_key_pair",
     "async_create_keys",
     "async_get_private_key",
     "async_get_public_key",
