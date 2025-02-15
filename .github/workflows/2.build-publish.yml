@@ -27,8 +27,8 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          # Latest version causes segfault:
-          # https://github.com/docker/setup-qemu-action/issues/198
+          ## Latest version causes segfault:
+          ## https://github.com/docker/setup-qemu-action/issues/198
           image: tonistiigi/binfmt:qemu-v7.0.0-28
       - name: Set up docker buildx
         uses: docker/setup-buildx-action@v3
