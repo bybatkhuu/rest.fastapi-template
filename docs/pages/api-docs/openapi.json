@@ -9,7 +9,7 @@
 			"url": "https://example.com/contact",
 			"email": "support@example.com"
 		},
-		"version": "7.2.0-250126"
+		"version": "7.3.0-250215"
 	},
 	"paths": {
 		"/api/v1/tasks/": {
@@ -620,9 +620,9 @@
 						"minLength": 5,
 						"title": "Version",
 						"description": "Current system version.",
-						"default": "7.2.0-250126",
+						"default": "7.3.0-250215",
 						"examples": [
-							"7.2.0-250126"
+							"7.3.0-250215"
 						]
 					}
 				},
