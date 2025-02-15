@@ -46,7 +46,7 @@ class FrozenDocsConfig(DocsConfig):
     @classmethod
     def _check_description(cls, val: str) -> str:
         _src_dir = pathlib.Path(__file__).parent.parent.parent.parent.resolve()
-        _description_path = str(_src_dir / "./assets/docs/description.md")
+        _description_path = str(_src_dir / "./api/configs/docs/description.md")
         if (not val) and os.path.isfile(_description_path):
             with open(_description_path, "r") as _file:
                 val = _file.read()

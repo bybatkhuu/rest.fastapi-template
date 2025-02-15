@@ -30,14 +30,14 @@ RUN --mount=type=cache,target=/opt/conda/pkgs,sharing=private \
 		ca-certificates \
 		build-essential \
 		wget && \
-	_MINICONDA_VERSION=py39_24.11.1-0 && \
+	_MINICONDA_VERSION=py39_25.1.1-2 && \
 	if [ "${_BUILD_TARGET_ARCH}" == "x86_64" ]; then \
 		_MINICONDA_FILENAME=Miniconda3-${_MINICONDA_VERSION}-Linux-x86_64.sh && \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/${_MINICONDA_FILENAME}; \
 	elif [ "${_BUILD_TARGET_ARCH}" == "aarch64" ]; then \
 		_MINICONDA_FILENAME=Miniconda3-${_MINICONDA_VERSION}-Linux-aarch64.sh && \
 		export _MINICONDA_URL=https://repo.anaconda.com/miniconda/${_MINICONDA_FILENAME}; \
-		# _MINIFORGE_VERSION=24.11.2-1 && \
+		# _MINIFORGE_VERSION=24.11.3-0 && \
 		# _MINICONDA_FILENAME=Miniforge3-${_MINIFORGE_VERSION}-Linux-aarch64.sh && \
 		# export _MINICONDA_URL=https://github.com/conda-forge/miniforge/releases/download/${_MINIFORGE_VERSION}/${_MINICONDA_FILENAME}; \
 	else \
