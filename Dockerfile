@@ -121,7 +121,7 @@ RUN rm -rfv /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /root/.cache/*
 		tzdata \
 		procps \
 		iputils-ping \
-		net-tools \
+		iproute2 \
 		curl \
 		nano && \
 	apt-get clean -y && \
