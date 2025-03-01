@@ -13,8 +13,8 @@ DEBUG=false
 
 ## -- API configs -- ##
 {{cookiecutter.env_prefix}}API_PORT=8000
-{{cookiecutter.env_prefix}}API_LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
-{{cookiecutter.env_prefix}}API_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
+# {{cookiecutter.env_prefix}}API_LOGS_DIR="/var/log/{{cookiecutter.project_slug}}"
+# {{cookiecutter.env_prefix}}API_DATA_DIR="/var/lib/{{cookiecutter.project_slug}}"
 
 # {{cookiecutter.env_prefix}}API_VERSION="1"
 # {{cookiecutter.env_prefix}}API_PREFIX="/api/v{api_version}"

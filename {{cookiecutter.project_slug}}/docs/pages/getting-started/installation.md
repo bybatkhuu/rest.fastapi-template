@@ -36,8 +36,7 @@ git clone git@github.com:{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}.
 
 ## 2. 📦 Install dependencies
 
-> [!TIP]
-> Skip this step, if you're going to use **docker** runtime
+[TIP] Skip this step, if you're going to use **docker** runtime
 
 <!-- #### 3.1. Install base/common dependencies -->
 
