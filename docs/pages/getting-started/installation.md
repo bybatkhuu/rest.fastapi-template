@@ -36,8 +36,7 @@ git clone git@github.com:bybatkhuu/rest.fastapi-template.git && \
 
 ## 2. 📦 Install dependencies
 
-> [!TIP]
-> Skip this step, if you're going to use **docker** runtime
+[TIP] Skip this step, if you're going to use **docker** runtime
 
 <!-- #### 3.1. Install base/common dependencies -->
 

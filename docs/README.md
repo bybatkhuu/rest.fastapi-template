@@ -41,5 +41,5 @@ This is a template repo for FastAPI web service projects.
     pip install cookiecutter
 
     # Generate a new project from the cookiecutter template:
-    cookiecutter -f .
+    cookiecutter -f ./rest.fastapi-template
     ```
