@@ -7,14 +7,14 @@
 [RECOMMENDED] For **docker** runtime:
 
 - Install [**docker** and **docker compose**](https://docs.docker.com/engine/install)
-    - Docker image: [**{{cookiecutter.docker_registry}}/{{cookiecutter.docker_repo_name}}**](https://hub.docker.com/repository/docker/{{cookiecutter.repo_owner}}/{{cookiecutter.docker_repo_name}})
+    - Docker image: [**{{cookiecutter.docker_registry}}/{{cookiecutter.docker_repo_name}}**](https://hub.docker.com/r/{{cookiecutter.repo_owner}}/{{cookiecutter.docker_repo_name}})
 <!-- - *[OPTIONAL]* For **GPU (NVIDIA)**:
     - Install **[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) (>= v1)** -->
 
 For **standalone** runtime:
 
 - Install **Python (>= v{{cookiecutter.python_version}})** and **pip (>= 23)**:
-    - **[RECOMMENDED]  [Miniconda (v3)](https://docs.anaconda.com/miniconda)**
+    - **[RECOMMENDED] [Miniconda (v3)](https://www.anaconda.com/docs/getting-started/miniconda/install)**
     - *[arm64/aarch64]  [Miniforge (v3)](https://github.com/conda-forge/miniforge)*
     - *[Python virutal environment]  [venv](https://docs.python.org/3/library/venv.html)*
 <!-- - *[OPTIONAL]* For **GPU (NVIDIA)**:
