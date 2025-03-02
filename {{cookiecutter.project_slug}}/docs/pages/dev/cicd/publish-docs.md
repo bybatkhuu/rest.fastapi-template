@@ -30,7 +30,7 @@ This job builds and deploys the MkDocs site to GitHub Pages.
     - `contents: write`
 - **Steps:**
   1. **Checkout the repository** (with full history)
-  2. **Set up Python 3.9**
+  2. **Set up Python {{cookiecutter.python_version}}**
   3. **Install dependencies** (from `requirements/requirements.docs.txt`)
   4. **Publish documentation** using `mkdocs gh-deploy`
 
