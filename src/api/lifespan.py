@@ -16,6 +16,8 @@ from api.logger import logger
 def pre_init() -> None:
     """Pre-initialization tasks before creating FastAPI application."""
 
+    logger.info("Preparing to pre-initialize...")
+
     if config.api.security.ssl.generate:
         ssl_helper.create_ssl_certs(
             ssl_dir=config.api.paths.ssl_dir,
